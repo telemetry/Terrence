@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=Bebas+Neue" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />   -->
+<title>The personal website of Terry Gillespie</title>
+<style>
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+::-moz-selection { /* Code for Firefox */
+  color: lightpink;
+  background: black;
+}
+
+::selection {
+  color: lightpink;
+  background: black;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  
+  min-height: 100vh;
+  /* text-rendering: optimizeSpeed; */
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+    
+  body{
+  font-family: 'Space Grotesk', sans-serif;
+  color:#0a131d;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  }
+
+  header, footer{
+    padding: 24px 0;
+    grid-column: 1 / 3;
+  }
+
+  section{
+    padding: 24px 0 12px 0 ;
+    border-bottom:1px dashed lightpink;
+  }
+
+
+
+  .highlight{
+    background-color: lightpink;
+    padding: 2px 16px;
+  }
+
+
+  .fullwidth{
+    grid-column: 1 / 3;
+  }
+
+  h1{
+    font-weight: 100;
+    font-size: 72px;
+    line-height: 64px;
+    margin-bottom: 40px;;
+
+  }
+
+  h2{
+    font-size: 36px;
+    line-height: 42px;
+    margin-bottom: 24px; 
+    color:#0a131d;
+    font-weight: 100;
+  }
+  h4{
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    
+  }
+
+  a{
+    color:#0a131d;
+  }
+
+  a:hover {
+  background-color: lightpink;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+body{
+  padding:16px;
+}
+
+header{
+  text-align: center;
+  width: 100%;
+}
+section { 
+grid-column: 1 / 3;
+}
+
+
+
+}
+
+</style>
+</head>
+<body>
+  <header><span class="highlight">Digital Presence, Since 1998</span></header>
+  <section class="fullwidth">
+      <h4>Designer & Engineer</span></h4>
+    <h1>Terry Gillespie</h1>
+    </section>
+  <section>
+    <h4>Work</h4>
+    <h2>Engineer @ Westpac</h2>
+  </section>
+  <section>
+    <h4>Study</h4>
+    <h2>Apple Developer Academy</h2>
+  </section>
+  <section>
+    <h4>Building</h4>
+    <h2><a href="#">Duodecimal &trade; </a></h2>
+    <h2><a href="https://recently.co/">Recently &trade;</a></h2>
+    <h2><a href="https://www.sloooow.app/">Sloooow</a></h2>
+    <h2><a href="#">Crouton</a></h2>
+    <pre>// TODO: Launch website and beta</pre>
+  </section>
+  <section>
+    <h4>Reading</h4>
+    <h2><a href="https://bookshop.org/a/14909/9780307389831">What I Talk about When I Talk about Running: A Memoir</a></h2>
+    <h2><a href="https://bookshop.org/a/14909/9780374279752">User Friendly</a></h2>
+    <h2><a href="https://bookshop.org/a/14909/9780143789529">Perfect Motion</a></h2>
+    <h2><a href="https://bookshop.org/a/14909/9780399564420">How to Speak Machine</a></h2>
+  </section>
+  <section class="fullwidth">
+    <h4>Recently</h4>
+    <pre>// TODO: Embed app widget here</pre>
+  </section>
+  <section>
+    <h4>Image Taking</h4>
+    <h2><a href="http://smallvictories.com.au/">Small Victories</a></h2>
+    <h2><a href="https://www.instagram.com/tezjnr/">@tezjnr</a></h2>
+  </section>
+  <section>
+    <h4>Image Collecting</h4>
+    <h2><a href="https://radiopictures.com.au/">Radio Pictures</a></h2>
+  </section>
+  <section>
+    <h4>Image Displaying</h4>
+    <h2><a href="#">Domani -  Pictures from Napoli </a></h2>
+    <pre>// Details coming in May 2022</pre>    
+  </section>
+
+  <footer>
+  <p>You can also find me on <a href="https://dribbble.com/tezjnr">Dribbble</a>, <a href="https://twitter.com/tezjnr">Twitter</a> & <a href="https://www.linkedin.com/in/tezjnr/">LinkedIn</a>.</p>
+  </footer>
+
+</body>
+</html>
