@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap&family=Space+Grotesk:wght@300"
+    rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />   -->
+  <title>Creative Selection</title>
+  <style>
+    /* Box sizing rules */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+
+    ::-moz-selection {
+      /* Code for Firefox */
+      color: whitesmoke;
+      background: yellow;
+    }
+
+    ::selection {
+      /* color: whitesmoke; */
+      background: yellow;
+    }
+
+    pre {
+      color: gray;
+      background: white;
+      width: auto;
+      padding: 5px;
+      border-radius: 5px;
+      display: inline;
+      margin-bottom: 16px;
+    }
+
+    /* Remove default margin */
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    figure,
+    blockquote,
+    dl,
+    dd {
+      margin: 0;
+    }
+
+    /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+    ul[role="list"],
+    ol[role="list"] {
+      list-style: none;
+    }
+
+    /* Set core root defaults */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Set core body defaults */
+    body {
+      min-height: 100vh;
+      /* text-rendering: optimizeSpeed; */
+      line-height: 1.5;
+      background-image:
+        linear-gradient(to bottom, rgb(255, 255, 255) 0px, rgba(255, 255, 255, 0) 100%),
+        linear-gradient(to right, rgba(105, 0, 243, 0.08) 0px, rgba(28, 248, 116, 0.08) 100%);
+      ;
+    }
+
+    /* A elements that don't have a class get default styles */
+    a:not([class]) {
+      text-decoration-skip-ink: auto;
+    }
+
+    /* Make images easier to work with */
+    img,
+    picture {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Inherit fonts for inputs and buttons */
+    input,
+    button,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    /* Remove all animations and transitions for people that prefer not to see them */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+      color: #0a131d;
+      padding: 50px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: white;
+
+    }
+
+    header,
+    footer {
+      padding: 24px 0;
+      grid-column: 1 / 3;
+    }
+
+    footer p{
+     margin: 0 36px 36px 0;
+    }
+
+    section {
+      padding: 24px 0 12px 0;
+      border-bottom: 1px dashed slategray;
+    }
+
+    .highlight {
+      color: whitesmoke;
+      background-image: linear-gradient(to right, #5c5ef2 0%, #da8bd0 100%);
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-size: 14px;
+    }
+
+    .headingHighlight {
+      background-color: #0a131d;
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+
+    .nextHeading {
+      margin-top: 24px;
+    }
+
+
+    .fullwidth {
+      grid-column: 1 / 3;
+    }
+
+    h1 {
+      font-weight: 100;
+      font-size: 72px;
+      line-height: 64px;
+      margin-bottom: 40px;
+      ;
+
+    }
+
+    h2 {
+      font-size: 36px;
+      line-height: 42px;
+      margin-bottom: 16px;
+      margin-top: 24px;
+      color: #0a131d;
+      font-weight: 100;
+    }
+
+    h4 {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 24px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      color: whitesmoke;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #0a131d;
+    }
+
+    a:hover {
+      background-color: white;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+      body {
+        padding: 16px;
+      }
+
+      header,
+      footer {
+        text-align: center;
+        width: 100%;
+      }
+
+      section {
+        grid-column: 1 / 3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <section class="fullwidth">
+      <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Creative Selection</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-11-06T12:49:00+10:00" itemprop="datePublished">Nov 6, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    
+
+  </div><a class="u-url" href="/reading/2023/11/06/creative-selection.html" hidden></a>
+</article>
+
+    </section>
+  </header>
+  <section>
+    <h4><span class="headingHighlight">Work</span></h4>
+    <h2></h2>
+  </section>
+  <section>
+    <h4><span class="headingHighlight">Graduate</span></h4>
+    <h2></h2>
+  </section>
+  <section>
+    <h4><span class="headingHighlight">Building</span></h4>
+    <h2><a href="https://recently.co/">Recently &trade;</a></h2>
+    <h2><a href="https://www.sloooow.app/">Sloooow</a></h2>
+    <h2><a href="https://duodecimal.co/">Duodecimal &trade;</a></h2>
+    <h2>Crouton</h2>
+    <pre>// TODO: Launch website and beta</pre>
+  </section>
+  <section>
+    <h4><span class="headingHighlight">Reading</span></h4>
+        
+            <h2><a href="https://independent-photo.com/news/stephen-shore-uncommon-places/">Uncommon Places</a></h2>
+        
+            <h2><a href="http://www.chloedewemathews.com/thames-log/">Thames Log</a></h2>
+        
+            <h2><a href="https://stevejobsarchive.com/book">Make Something Wonderful</a></h2>
+        
+            <h2><a href="http://creativeselection.io/">Creative Selection</a></h2>
+        
+            <h2><a href="https://bookshop.org/a/14909/9780399564420">How to Speak Machine</a></h2>
+        
+  </section>
+  <section>
+    <h4><span class="headingHighlight">Image Taking</span></h4>
+    <h2><a href="https://www.smallvictories.com.au/">Small Victories</a></h2>
+    <pre>// Temporary tumblr thing here for now</pre>
+    <h2><a href="https://www.instagram.com/tezjnr/">@tezjnr</a></h2>
+    <pre>// The ol' instagram</pre>
+    <h4 class="nextHeading"><span class="headingHighlight">Image Collecting</span></h4>
+    <h2><a href="https://www.radiopictures.com.au/">Radio Pictures</a></h2>    
+  </section>
+  <section>
+    <h4><span class="headingHighlight">Watching</span></h4>
+    
+    <h2><a href="https://youtu.be/lPjUHzORQSg?feature=shared">Artist Hugh Hayden</a></h2>
+    
+    <h2><a href="https://www.youtube.com/watch?v=kVD-sjtFoEI">I Pressed ⌘B</a></h2>
+    
+    <h2><a href="https://vimeo.com/88318922">Font Men</a></h2>
+    
+    <h2><a href="https://cult.honeypot.io/originals/vue-js-the-documentary/">Vue.js - The Documentary</a></h2>
+    
+    <h2><a href="https://appdocumentary.com/">app: the human story</a></h2>
+        
+  </section>
+  <section>
+    <h4><span class="headingHighlight">Image Displaying</span></h4>
+    <h2>Du Rietz Art Awards - 2022</h2>
+    <h2>Domani - Pictures from Napoli</h2>
+  </section>
+  <footer>
+    <p>You can also find me on <a href="https://dribbble.com/tezjnr">Dribbble</a>, <a
+        href="https://twitter.com/tezjnr">X</a> &amp; <a href="https://www.linkedin.com/in/tezjnr/">LinkedIn</a>
+    </p>
+    <p>
+    <span class="highlight nextHeading">Digital Presence &mdash; Since 1998</span>
+  </p>
+  </footer>
+</body>
+</html>
