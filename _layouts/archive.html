@@ -131,7 +131,7 @@
     }
 
     footer p {
-      margin: 0 0 24px 0;
+      margin: 0 36px 36px 0;
     }
 
     section {
@@ -145,7 +145,6 @@
       padding: 10px 15px;
       border-radius: 25px;
       font-size: 14px;
-      margin: 0 36px 36px 0;
     }
 
     .headingHighlight {
@@ -227,90 +226,28 @@
 <body>
   <header>
     <section class="fullwidth">
-      <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Rams</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2023-11-04T12:00:00+10:00" itemprop="datePublished">Nov 4, 2023
-      </time></p>
-  </header>
-
-  <div class="post-content e-content" itemprop="articleBody">
-    
-
-  </div><a class="u-url" href="/watching/2023/11/04/rams.html" hidden></a>
-</article>
-
+      {{content}}
+      <p>This is the links archive. <a href="/">Return home</a>.</p>
     </section>
   </header>
-  <section>
-    <h4><span class="headingHighlight">Work</span></h4>
-    <h2></h2>
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Graduate</span></h4>
-    <h2></h2>
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Building</span></h4>
-    <h2><a href="https://recently.co/">Recently &trade;</a></h2>
-    <h2><a href="https://www.sloooow.app/">Sloooow</a></h2>
-    <h2><a href="https://duodecimal.co/">Duodecimal &trade;</a></h2>
-    <h2>Addend</h2>
-    <pre>// MARK: Daily Accountability Tool</pre>
-  </section>
+
   <section>
     <h4><span class="headingHighlight">Reading</span></h4>
-    
-    <h2><a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a></h2>
-    
-    <h2><a href="http://www.gregoryhalpern.com/zzyzx.html">zzyzx</a></h2>
-    
-    <h2><a href="https://independent-photo.com/news/stephen-shore-uncommon-places/">Uncommon Places</a></h2>
-    
-    <h2><a href="http://www.chloedewemathews.com/thames-log/">Thames Log</a></h2>
-    
-    <h2><a href="https://stevejobsarchive.com/book">Make Something Wonderful</a></h2>
-    
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Image Taking</span></h4>
-    <h2><a href="https://smallvictories.com.au/">Small Victories</a></h2>
-    <pre>// Recently updated 2024</pre>
-    <h2><a href="https://www.instagram.com/tezjnr/">@tezjnr</a></h2>
-    <pre>// The ol' instagram</pre>
-    <h4 class="nextHeading"><span class="headingHighlight">Image Collecting</span></h4>
-    <h2><a href="https://www.radiopictures.com.au/">Radio Pictures</a></h2>
+    {% for post in site.categories.reading%}
+    <h2><a href="{{ post.external_url }}">{{ post.title }}</a></h2>
+    {% endfor %}
   </section>
   <section>
     <h4><span class="headingHighlight">Watching</span></h4>
-    
-    <h2><a href="https://youtu.be/s5t427SRkvk?si=x3BQQSroRCZnFHJi">Jay Graber Interview</a></h2>
-    
-    <h2><a href="https://www.youtube.com/watch?v=Df_K7pIsfvg">Cabel Sasser - XOXO 2024</a></h2>
-    
-    <h2><a href="https://cult.honeypot.io/originals/node-js-the-documentary/">Node.js The Documentary</a></h2>
-    
-    <h2><a href="https://vimeo.com/705760188">No Predicted End</a></h2>
-    
-    <h2><a href="https://youtu.be/lPjUHzORQSg?feature=shared">Artist Hugh Hayden</a></h2>
-    
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Image Displaying</span></h4>
-    <h2>Du Rietz Art Awards Finalist - 2022, 2024</h2>
-    <h2><a href="https://www.museumofbrisbane.com.au/whats-on/viewfinders/">Viewfinders @ MOB</a></h2>
+    {% for post in site.categories.watching%}
+    <h2><a href="{{ post.external_url }}">{{ post.title }}</a></h2>
+    {% endfor %}
   </section>
   <footer>
-    <p>Visit the <a href="/archive">Reading &amp; Watching archive</a>. </p>
-    <p>You can also find me on <a href="https://github.com/telemetry">Github</a>, <a
-        href="https://bsky.app/profile/tezjnr.bsky.social">bsky</a>
-      &amp; <a href="https://www.linkedin.com/in/tezjnr/">LinkedIn</a>
-    </p>
-    <p>
-      <span class="highlight nextHeading">Digital Presence &mdash; Since 1998</span>
-    </p>
+    <section>
+      <p>This is the links archive. <a href="/">Return home</a>.</p>
+      <p><span class="highlight nextHeading">Digital Presence &mdash; Since 1998</span></p>
+    </section>
   </footer>
 </body>
 
