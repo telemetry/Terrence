@@ -224,16 +224,30 @@
 <body>
   <header>
     <section class="fullwidth">
-      {{content}}
+      <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Machines of Loving Grace</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-12-16T19:44:00+10:00" itemprop="datePublished">Dec 16, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    
+
+  </div><a class="u-url" href="/reading/2024/12/16/machines-of-loving-grace.html" hidden></a>
+</article>
+
     </section>
   </header>
   <section>
     <h4><span class="headingHighlight">Work</span></h4>
-    <h2>{{page.work}}</h2>
+    <h2></h2>
   </section>
   <section>
     <h4><span class="headingHighlight">Graduate</span></h4>
-    <h2>{{page.education}}</h2>
+    <h2></h2>
   </section>
   <section>
     <h4><span class="headingHighlight">Building</span></h4>
@@ -245,9 +259,17 @@
   </section>
   <section>
     <h4><span class="headingHighlight">Reading</span></h4>
-    {% for post in site.categories.reading limit:5 %}
-    <h2><a href="{{ post.external_url }}">{{ post.title }}</a></h2>
-    {% endfor %}
+    
+    <h2><a href="https://darioamodei.com/machines-of-loving-grace">Machines of Loving Grace</a></h2>
+    
+    <h2><a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a></h2>
+    
+    <h2><a href="http://www.gregoryhalpern.com/zzyzx.html">zzyzx</a></h2>
+    
+    <h2><a href="https://independent-photo.com/news/stephen-shore-uncommon-places/">Uncommon Places</a></h2>
+    
+    <h2><a href="http://www.chloedewemathews.com/thames-log/">Thames Log</a></h2>
+    
   </section>
   <section>
     <h4><span class="headingHighlight">Image Taking</span></h4>
@@ -260,9 +282,17 @@
   </section>
   <section>
     <h4><span class="headingHighlight">Watching</span></h4>
-    {% for post in site.categories.watching limit:5 %}
-    <h2><a href="{{ post.external_url }}">{{ post.title }}</a></h2>
-    {% endfor %}
+    
+    <h2><a href="https://youtu.be/s5t427SRkvk?si=x3BQQSroRCZnFHJi">Jay Graber Interview</a></h2>
+    
+    <h2><a href="https://www.youtube.com/watch?v=Df_K7pIsfvg">Cabel Sasser - XOXO 2024</a></h2>
+    
+    <h2><a href="https://cult.honeypot.io/originals/node-js-the-documentary/">Node.js The Documentary</a></h2>
+    
+    <h2><a href="https://vimeo.com/705760188">No Predicted End</a></h2>
+    
+    <h2><a href="https://youtu.be/lPjUHzORQSg?feature=shared">Artist Hugh Hayden</a></h2>
+    
   </section>
   <section>
     <h4><span class="headingHighlight">Image Displaying</span></h4>
