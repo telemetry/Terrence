@@ -11,5 +11,5 @@ education: Apple Developer Academy
 
 Building interfaces, interactions & digital experiences
 
-This is my link lists
+This is my link list
 
