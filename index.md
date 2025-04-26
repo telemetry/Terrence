@@ -2,7 +2,8 @@
 title: Terry Gillespie
 layout: default
 work: Principal Engineer @ Westpac
-education: Apple Developer Academy
+education: TypeParis 25
+graduate: Apple Developer Academy
 ---
 
 # {{ page.title }}
