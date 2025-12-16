@@ -8,9 +8,7 @@ graduate: Apple Developer Academy
 
 # {{ page.title }}
 
-**Design Engineer** 
+**Design Engineer, Photographer &amp; Junior Typographer**
 
-Building interfaces, interactions & digital experiences
-
-This is my link list
+Building interfaces, interactions & digital experiences.
 

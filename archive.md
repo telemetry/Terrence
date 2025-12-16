@@ -7,4 +7,4 @@ education: Apple Developer Academy
 
 # {{ page.title }}
 
-**Design Engineer**
+**Design Engineer, Photographer &amp; Junior Typographer**
