@@ -138,7 +138,7 @@
 
     .highlight {
       color: whitesmoke;
-      background-image: linear-gradient(to right, #5c5ef2 0%, #da8bd0 100%);
+      background-image: linear-gradient(to right, #061700 0%, #52c234 100%);
       padding: 10px 15px;
       border-radius: 25px;
       font-size: 14px;
@@ -178,6 +178,16 @@
       color: #0a131d;
       font-weight: 200;
     }
+
+    /* Optionally reduce the h2 margin instead */
+    h2:has(+ pre) {
+      margin-bottom: 8px;
+    }
+
+    /* When an h2 comes immediately after a pre */
+pre + h2 {
+  margin-top:24px;
+}
 
     h4 {
       font-size: 14px;
@@ -308,7 +318,7 @@
       &amp; <a href="https://www.linkedin.com/in/tezjnr/">LinkedIn</a>
     </p>
     <p>
-      <span class="highlight nextHeading">Digital Presence &mdash; Since 1998</span>
+      <span class="nextHeading">Digital Presence &mdash; Since 1998</span>
     </p>
   </footer>
 </body>
