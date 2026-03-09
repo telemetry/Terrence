@@ -13,7 +13,7 @@
     '#af52de', '#8e8e93',
   ];
 
-  let currentFlavour = 1;
+  let currentFlavour = Math.floor(Math.random() * flavours.length);
 
   function getDayOfYear() {
     const now = new Date();
