@@ -168,6 +168,13 @@ body {
   overflow: hidden;
 }
 
+.tile-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Tile info bar */
 .tile-info {
   padding: 16px 20px;
@@ -319,6 +326,24 @@ body {
   background: rgba(227, 58, 58, 0.15);
   border-color: var(--accent);
   color: var(--accent);
+  padding-left: 12px;
+}
+
+.concentric-toggle.active::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
 }
 
 .concentric-toggle.active-cyan {
