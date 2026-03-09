@@ -44,7 +44,7 @@
       </div>
     </article>
 
-    <article class="tile tile--2x1" data-project="roadie">
+    <article class="tile tile--2x1" data-project="roadie" data-img="assets/roadie.png" data-img-full="assets/roadie-full.png" data-detail="">
       <div class="tile-preview"><img src="assets/roadie.png" alt="Roadie app screenshot" width="400" height="300"></div>
       <div class="tile-info">
         <h2 class="tile-name">Roadie</h2>
@@ -53,7 +53,7 @@
       </div>
     </article>
 
-    <article class="tile tile--2x1" data-project="recently">
+    <article class="tile tile--2x1" data-project="recently" data-img="assets/recently01.png" data-img-full="assets/recently01-full.png" data-detail="">
       <div class="tile-preview"><img src="assets/recently01.png" alt="Recently app screenshot" width="400" height="300"></div>
       <div class="tile-info">
         <h2 class="tile-name">Recently</h2>
@@ -62,11 +62,11 @@
       </div>
     </article>
 
-    <article class="tile tile--2x2" data-project="texasstackem">
+    <article class="tile tile--2x2" data-project="texasstackem" data-img="assets/stackem.png" data-img-full="assets/stackem-full.png" data-detail="">
       <div class="tile-preview"><img src="assets/stackem.png" alt="TexasStackEm screenshot" width="400" height="400"></div>
       <div class="tile-info">
         <h2 class="tile-name">TexasStackEm</h2>
-        <p class="tile-desc">Poker &times; Tetris &times; Candy Crush</p>
+        <p class="tile-desc">Texas hold'em meets match three mechanic</p>
         <span class="tile-stack">Swift</span>
       </div>
     </article>
@@ -80,8 +80,8 @@
       </div>
     </article>
 
-    <article class="tile tile--1x1" data-project="duodecimal">
-      <div class="tile-preview"></div>
+    <article class="tile tile--2x1" data-project="duodecimal" data-img="assets/duodecimal.png" data-img-full="assets/duodecimal-full.png" data-detail="">
+      <div class="tile-preview"><img src="assets/duodecimal.png" alt="Duodecimal screenshot" width="200" height="200"></div>
       <div class="tile-info">
         <h2 class="tile-name">Duodecimal</h2>
         <p class="tile-desc">Interactive dots</p>
@@ -89,8 +89,8 @@
       </div>
     </article>
 
-    <article class="tile tile--1x1" data-project="addend">
-      <div class="tile-preview"></div>
+    <article class="tile tile--2x1" data-project="addend" data-img="assets/addend.png" data-img-full="assets/addend-full.png" data-detail="">
+      <div class="tile-preview"><img src="assets/addend.png" alt="Addend app screenshot" width="400" height="300"></div>
       <div class="tile-info">
         <h2 class="tile-name">Addend</h2>
         <p class="tile-desc">Accountability menu bar app</p>
@@ -98,8 +98,17 @@
       </div>
     </article>
 
-    <article class="tile tile--1x1" data-project="bioscharts">
-      <div class="tile-preview"></div>
+    <article class="tile tile--2x1" data-project="typeparis" data-img="assets/airlie.png" data-img-full="assets/airlie-full.png" data-detail="">
+      <div class="tile-preview"><img src="assets/airlie.png" alt="Airlie typeface" width="400" height="300"></div>
+      <div class="tile-info">
+        <h2 class="tile-name">Type Paris</h2>
+        <p class="tile-desc">TypeParis25 &mdash; Distinction</p>
+        <span class="tile-stack">Airlie &middot; 15 weights</span>
+      </div>
+    </article>
+
+    <article class="tile tile--2x1" data-project="bioscharts" data-img="assets/bios.png" data-img-full="assets/bios-full.png" data-detail="">
+      <div class="tile-preview"><img src="assets/bios.png" alt="BiOSCharts screenshot" width="400" height="300"></div>
       <div class="tile-info">
         <h2 class="tile-name">BiOSCharts</h2>
         <p class="tile-desc">Biorhythms</p>
@@ -107,13 +116,29 @@
       </div>
     </article>
 
-    <article class="tile tile--1x1 tile--placeholder">
+    <article class="tile tile--2x1 tile--placeholder tile--about">
       <div class="tile-info">
-        <span class="tile-placeholder-text">More coming</span>
+        <p class="tile-about-text">Put together over a weekend to showcase side projects &mdash; apps, widgets, clocks, typography, and system-level UI. Professional work available on request.</p>
+        <p class="tile-about-text"><a href="https://terrygillespie.com" class="tile-about-link">terrygillespie.com</a></p>
       </div>
     </article>
 
   </main>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <div class="lightbox-image">
+        <img id="lightbox-img" src="" alt="">
+      </div>
+      <div class="lightbox-details">
+        <h2 class="lightbox-title" id="lightbox-title"></h2>
+        <p class="lightbox-desc" id="lightbox-desc"></p>
+        <span class="lightbox-stack" id="lightbox-stack"></span>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
