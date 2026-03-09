@@ -34,18 +34,33 @@
   const btnLive = document.getElementById('concentric-toggle');
   const btnWarp = document.getElementById('concentric-toggle-warp');
 
+  const watchEl = container.querySelector('.concentric-watch');
+
   function setMode(isDemo) {
     demo = isDemo;
     btnLive.classList.toggle('active', !demo);
     btnWarp.classList.toggle('active-cyan', demo);
+
+    // Kill transitions for the mode switch so the angle jump is instant
+    watchEl.classList.add('no-transition');
+    watchEl.classList.toggle('timewarp', demo);
+
     clearInterval(intervalId);
     if (demo) {
       const now = new Date();
       demoTick = now.getHours() * 60 + now.getMinutes();
+      update();
+      // Re-enable transitions after the instant jump
+      requestAnimationFrame(() => {
+        watchEl.classList.remove('no-transition');
+      });
       intervalId = setInterval(update, 200);
     } else {
-      intervalId = setInterval(update, 1000);
       update();
+      requestAnimationFrame(() => {
+        watchEl.classList.remove('no-transition');
+      });
+      intervalId = setInterval(update, 1000);
     }
   }
 
