@@ -1,0 +1,188 @@
+<!-- Copyright © 2026 Terrence Gillespie. All rights reserved.
+     All ideas and prototypes remain the intellectual property of Terrence Gillespie. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sloooow</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: -apple-system, system-ui, sans-serif;
+    }
+
+    .frame {
+      background: #0a0a14;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 32px;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .watch {
+      width: 280px;
+      height: 280px;
+      border-radius: 56px;
+      overflow: hidden;
+    }
+
+    .clock {
+      width: 100%;
+      height: 100%;
+    }
+
+    .info {
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      font-family: 'SF Mono', monospace;
+      width: 280px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .flavours {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      width: 280px;
+      justify-items: center;
+    }
+
+    .flavour-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .flavour-dot:hover {
+      transform: scale(1.3);
+    }
+
+    .flavour-dot.active {
+      border: 2px solid white;
+    }
+
+    .url {
+      width: 280px;
+      margin-top: 4px;
+    }
+
+    .url a {
+      color: rgba(255,255,255,0.25);
+      font-size: 10px;
+      font-family: 'SF Mono', monospace;
+      text-decoration: none;
+    }
+
+    .url a:hover {
+      color: rgba(255,255,255,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+  <div class="wrapper">
+    <div class="watch">
+      <div class="clock" id="clock"></div>
+    </div>
+    <div class="info" id="info"></div>
+    <div class="flavours" id="flavours"></div>
+    <div class="url"><a href="https://sloooow.app" target="_blank">sloooow.app</a></div>
+  </div>
+  </div>
+
+  <script>
+    const flavours = [
+      { name: 'white',    hex: '#ffffff' },
+      { name: 'teal',     hex: '#6ac4dc' },
+      { name: 'brown',    hex: '#ac8e68' },
+      { name: 'mint',     hex: '#66d4cf' },
+      { name: 'slowPink', hex: '#ff8ff3' },
+      { name: 'pink',     hex: '#ff6b95' },
+      { name: 'red',      hex: '#ff3b30' },
+      { name: 'orange',   hex: '#ff9500' },
+      { name: 'yellow',   hex: '#ffcc00' },
+      { name: 'green',    hex: '#34c759' },
+      { name: 'cyan',     hex: '#5ac8fa' },
+      { name: 'blue',     hex: '#007aff' },
+      { name: 'purple',   hex: '#af52de' },
+      { name: 'gray',     hex: '#8e8e93' },
+    ];
+
+    let currentFlavour = 1;
+
+    function getDayOfYear() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      return Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    }
+
+    function getTotalDays() {
+      const y = new Date().getFullYear();
+      return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0 ? 366 : 365;
+    }
+
+    function render() {
+      const day = getDayOfYear();
+      const total = getTotalDays();
+      const angle = (day / total) * 360;
+      const colour = flavours[currentFlavour].hex;
+
+      document.getElementById('clock').style.background =
+        `conic-gradient(from ${angle}deg, ${colour}, #000000)`;
+
+      document.getElementById('info').textContent =
+        `Day ${day} of ${total}  ·  ${((day / total) * 100).toFixed(1)}%  ·  ${angle.toFixed(1)}°`;
+    }
+
+    const picker = document.getElementById('flavours');
+    flavours.forEach((f, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'flavour-dot' + (i === currentFlavour ? ' active' : '');
+      dot.style.background = f.hex;
+      dot.title = f.name;
+      dot.addEventListener('click', () => {
+        currentFlavour = i;
+        document.querySelectorAll('.flavour-dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+        render();
+      });
+      picker.appendChild(dot);
+    });
+
+    // Scroll on watch cycles through flavours at half rate
+    let scrollAcc = 0;
+    document.querySelector('.watch').addEventListener('wheel', (e) => {
+      e.preventDefault();
+      scrollAcc += e.deltaY;
+      if (Math.abs(scrollAcc) < 50) return;
+      const dir = scrollAcc > 0 ? 1 : -1;
+      scrollAcc = 0;
+      currentFlavour = (currentFlavour + dir + flavours.length) % flavours.length;
+      document.querySelectorAll('.flavour-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentFlavour);
+      });
+      render();
+    }, { passive: false });
+
+    render();
+    setInterval(render, 60000);
+  </script>
+</body>
+</html>

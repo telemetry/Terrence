@@ -1,0 +1,569 @@
+/* Copyright © 2026 Terrence Gillespie. All rights reserved.
+   All ideas and prototypes remain the intellectual property of Terrence Gillespie. */
+
+/* ——————————————————————————————————————
+   Nothing Portfolio — v1.0-beta
+   Dark navy card system
+   —————————————————————————————————————— */
+
+/* Tokens */
+:root {
+  --accent: #E33A3A;
+  --radius: 24px;
+  --gap: 12px;
+  --cols: 4;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  --container-max: 880px;
+  --container-pad: 32px;
+  --transition-fast: 0.15s ease;
+  --transition: 0.3s ease;
+
+  /* Dark navy palette */
+  --bg: #000000;
+  --bg-tile: #0a0a14;
+  --text-primary: rgba(255, 255, 255, 0.85);
+  --text-secondary: rgba(255, 255, 255, 0.4);
+  --text-tertiary: rgba(255, 255, 255, 0.2);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+}
+
+/* Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* Header */
+.site-header {
+  padding: 48px 0 32px;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.site-subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.version-badge {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+}
+
+/* Tiles — dark navy cards */
+.tile {
+  background: var(--bg-tile);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+    border-color var(--transition-fast),
+    box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
+  cursor: default;
+}
+
+.tile:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Tile sizes */
+.tile--2x2 {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 380px;
+}
+
+.tile--1x2 {
+  grid-column: span 1;
+  grid-row: span 2;
+  min-height: 380px;
+}
+
+.tile--2x1 {
+  grid-column: span 2;
+  grid-row: span 1;
+  min-height: 190px;
+}
+
+.tile--1x1 {
+  grid-column: span 1;
+  grid-row: span 1;
+  min-height: 190px;
+}
+
+/* Tile preview area */
+.tile-preview {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tile info bar */
+.tile-info {
+  padding: 16px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tile-name {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.tile-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  flex: 1;
+}
+
+.tile-stack {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* Concentric clock component — 4-layer rotation matching SwiftUI */
+.concentric-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 32px;
+}
+
+.concentric-watch {
+  width: 280px;
+  height: 280px;
+  border-radius: 56px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ContentView: outer rotates +angle from TOP-CENTRE anchor.
+   Positioned so ring centre starts offset down (like SwiftUI offset y:100).
+   312x312 ring, top-left at (-16, 124) puts ring centre at (140, 280) = bottom of watch. */
+.concentric-outer {
+  width: 560px;
+  height: 560px;
+  position: absolute;
+  top: 140px;
+  left: -140px;
+  transform-origin: 280px 0px;
+  transition: transform 0.5s ease-out;
+}
+
+/* WatchView ZStack: rotates -angle from centre */
+.concentric-inner {
+  width: 560px;
+  height: 560px;
+  position: relative;
+  transform-origin: 280px 280px;
+  transition: transform 0.5s ease-out;
+}
+
+.concentric-svg {
+  width: 560px;
+  height: 560px;
+}
+
+/* Dot at 12 o'clock: offset 250px above ring centre (280,280).
+   Dot centre at (280, 30). Dot 72px → top=-6, left=244.
+   Rotates around ring centre. */
+.concentric-dot {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 59, 48, 0.9);
+  border-radius: 50%;
+  top: -15px;
+  left: 235px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 45px 295px;
+  transition: transform 0.5s ease-out;
+}
+
+.concentric-hour {
+  color: white;
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  transition: transform 0.5s ease-out;
+}
+
+.concentric-controls {
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.concentric-toggle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 6px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
+}
+
+.concentric-toggle:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+}
+
+.concentric-toggle.active {
+  background: rgba(227, 58, 58, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.concentric-toggle.active-cyan {
+  background: rgba(90, 200, 250, 0.12);
+  border-color: #5ac8fa;
+  color: #5ac8fa;
+}
+
+/* Sloooow clock component */
+.sloooow-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px;
+}
+
+.sloooow-watch {
+  width: 280px;
+  height: 280px;
+  border-radius: 56px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sloooow-face {
+  width: 100%;
+  height: 100%;
+}
+
+.sloooow-info {
+  color: rgba(255,255,255,0.4);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  width: 280px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.sloooow-flavours {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  width: 280px;
+  justify-items: center;
+}
+
+.sloooow-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.sloooow-dot:hover {
+  transform: scale(1.3);
+}
+
+.sloooow-dot.active {
+  border: 2px solid white;
+}
+
+.sloooow-url {
+  width: 280px;
+  margin-top: 4px;
+}
+
+.sloooow-url a {
+  color: rgba(255,255,255,0.25);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-decoration: none;
+}
+
+.sloooow-url a:hover {
+  color: rgba(255,255,255,0.5);
+}
+
+/* AnyTwo hand generator — Midnight theme */
+.anytwo-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 32px;
+}
+
+.anytwo-widget {
+  width: 280px;
+  height: 280px;
+  border-radius: 56px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.anytwo-hand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.anytwo-card {
+  width: 100px;
+  height: 134px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: -4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+              opacity 0.15s ease;
+}
+
+.anytwo-rank {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.anytwo-suit {
+  font-size: 24px;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.anytwo-deal {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #00b44c;
+  background: rgba(0, 180, 76, 0.12);
+  border: 1px solid #00b44c;
+  padding: 6px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
+}
+
+.anytwo-deal:hover {
+  background: rgba(0, 180, 76, 0.2);
+  border-color: #00b44c;
+  color: #00b44c;
+}
+
+.anytwo-deal:active {
+  transform: scale(0.95);
+}
+
+/* Placeholder tile */
+.tile--placeholder {
+  border-style: dashed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.tile--placeholder .tile-info {
+  justify-content: center;
+}
+
+.tile-placeholder-text {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-weight: 300;
+}
+
+/* Footer */
+.site-footer {
+  padding: 32px 0 48px;
+}
+
+.site-footer .container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.footer-note {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-weight: 300;
+}
+
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.03em;
+}
+
+.footer-copyright {
+  font-size: 0.625rem;
+  color: var(--text-tertiary);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  :root {
+    --cols: 2;
+    --container-pad: 20px;
+    --radius: 20px;
+  }
+
+  .site-header {
+    padding: 32px 0 24px;
+  }
+
+  .tile--2x2 {
+    min-height: 280px;
+  }
+
+  .tile--2x1,
+  .tile--1x1 {
+    min-height: 160px;
+  }
+
+  .site-header .container {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --gap: 8px;
+    --radius: 16px;
+  }
+
+  .tile-info {
+    padding: 12px 16px;
+  }
+}
