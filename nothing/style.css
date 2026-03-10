@@ -771,6 +771,24 @@ body {
   margin-top: 4px;
 }
 
+.lightbox-link {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+  transition: color var(--transition-fast);
+}
+
+.lightbox-link::after {
+  content: ' \2197';
+}
+
+.lightbox-link:hover {
+  color: white;
+}
+
 /* Responsive */
 @media (max-width: 720px) {
   :root {
