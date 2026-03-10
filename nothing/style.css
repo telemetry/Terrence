@@ -663,12 +663,14 @@ body {
 
 .lightbox-content {
   position: relative;
-  max-width: 720px;
-  width: 90%;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: fit-content;
   background: var(--bg-tile);
   border: 1px solid var(--border-hover);
   border-radius: var(--radius);
   overflow: hidden;
+  overflow-y: auto;
   transform: scale(0.95) translateY(10px);
   transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
 }
@@ -703,14 +705,11 @@ body {
 
 .lightbox-image {
   width: 100%;
-  max-height: 480px;
   overflow: hidden;
 }
 
 .lightbox-image img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
   display: block;
   background: #000;
 }
