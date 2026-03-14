@@ -1,0 +1,683 @@
+---
+layout: null
+permalink: /admin/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Admin / Terry Gillespie</title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TG Admin">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F9F6EE;
+      --text: #0a131d;
+      --border: slategray;
+      --accent: #3da12a;
+      --accent-gradient: linear-gradient(to right, #061700, #52c234);
+      --danger: #c0392b;
+      --radius: 8px;
+      --gap: 16px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      padding: env(safe-area-inset-top) var(--gap) var(--gap);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .container {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: var(--gap);
+    }
+
+    /* Header */
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap) 0;
+      border-bottom: 1px dashed var(--border);
+      margin-bottom: 24px;
+    }
+
+    .admin-header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .admin-header a {
+      font-size: 14px;
+      color: var(--border);
+      text-decoration: none;
+    }
+
+    /* Setup screen */
+    .setup-note {
+      font-size: 13px;
+      color: var(--border);
+      line-height: 1.5;
+      margin-bottom: var(--gap);
+    }
+
+    .setup-note a {
+      color: var(--text);
+    }
+
+    .setup-note code {
+      background: rgba(0,0,0,0.06);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* Form elements */
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--border);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="password"],
+    input[type="datetime-local"],
+    select {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px; /* prevents iOS zoom */
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      background: white;
+      color: var(--text);
+      -webkit-appearance: none;
+      appearance: none;
+      margin-bottom: var(--gap);
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px dashed var(--border);
+      margin-top: 12px;
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      margin-top: 12px;
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--border);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab.active {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Post list */
+    .post-list {
+      list-style: none;
+    }
+
+    .post-item {
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .post-item:last-child {
+      border-bottom: none;
+    }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .post-title a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .post-meta {
+      font-size: 12px;
+      color: var(--border);
+    }
+
+    .post-category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.06);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text);
+      color: var(--bg);
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.error {
+      background: var(--danger);
+      color: white;
+    }
+
+    /* Views */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* Empty state */
+    .empty {
+      text-align: center;
+      padding: 48px var(--gap);
+      color: var(--border);
+      font-size: 14px;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Responsive */
+    @media (min-width: 600px) {
+      .container { padding: 24px; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a131d;
+        --text: #F9F6EE;
+        --border: #667;
+      }
+
+      input[type="text"],
+      input[type="url"],
+      input[type="password"],
+      input[type="datetime-local"],
+      select {
+        background: #161f2b;
+        border-color: #2a3545;
+        color: var(--text);
+      }
+
+      .post-item { border-bottom-color: #1e2a38; }
+      .post-category { background: rgba(255,255,255,0.08); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SETUP VIEW -->
+  <div id="view-setup" class="view">
+    <div class="admin-header">
+      <h1>Setup</h1>
+    </div>
+    <p class="setup-note">
+      Create a <a href="https://github.com/settings/tokens/new" target="_blank">GitHub Personal Access Token</a>
+      with <code>repo</code> scope. It's stored in your browser only &mdash; never sent anywhere except GitHub's API.
+    </p>
+    <label for="token-input">GitHub Token</label>
+    <input type="password" id="token-input" placeholder="ghp_...">
+    <button class="btn btn-primary" onclick="saveToken()">Connect</button>
+  </div>
+
+  <!-- MAIN VIEW -->
+  <div id="view-main" class="view">
+    <div class="admin-header">
+      <h1>Posts</h1>
+      <a href="/" target="_blank">View site &rarr;</a>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-filter="all" onclick="filterPosts('all', this)">All</button>
+      <button class="tab" data-filter="reading" onclick="filterPosts('reading', this)">Reading</button>
+      <button class="tab" data-filter="watching" onclick="filterPosts('watching', this)">Watching</button>
+    </div>
+
+    <ul class="post-list" id="post-list"></ul>
+    <div class="empty" id="empty-state" style="display:none">No posts yet</div>
+
+    <button class="btn btn-primary" onclick="showView('view-new')" style="margin-top: 24px">+ New Post</button>
+    <button class="btn btn-secondary" onclick="showView('view-settings')">Settings</button>
+  </div>
+
+  <!-- NEW POST VIEW -->
+  <div id="view-new" class="view">
+    <div class="admin-header">
+      <h1>New Post</h1>
+      <a href="#" onclick="showView('view-main'); return false;">&larr; Back</a>
+    </div>
+
+    <label for="post-title">Title</label>
+    <input type="text" id="post-title" placeholder="The title of what you read or watched" autocapitalize="words">
+
+    <label for="post-url">URL</label>
+    <input type="url" id="post-url" placeholder="https://" inputmode="url">
+
+    <label for="post-category">Category</label>
+    <select id="post-category">
+      <option value="reading">Reading</option>
+      <option value="watching">Watching</option>
+    </select>
+
+    <label for="post-date">Date</label>
+    <input type="datetime-local" id="post-date">
+
+    <button class="btn btn-primary" id="publish-btn" onclick="publishPost()">Publish</button>
+  </div>
+
+  <!-- SETTINGS VIEW -->
+  <div id="view-settings" class="view">
+    <div class="admin-header">
+      <h1>Settings</h1>
+      <a href="#" onclick="showView('view-main'); return false;">&larr; Back</a>
+    </div>
+
+    <label>GitHub Token</label>
+    <input type="password" id="settings-token" placeholder="ghp_...">
+    <button class="btn btn-primary" onclick="updateToken()">Update Token</button>
+    <button class="btn btn-danger" onclick="disconnect()">Disconnect</button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = 'telemetry/Terrence';
+const BRANCH = 'main';
+const API = 'https://api.github.com';
+
+let posts = [];
+let currentFilter = 'all';
+
+// ---- Init ----
+
+function init() {
+  const token = localStorage.getItem('tg_admin_token');
+  if (!token) {
+    showView('view-setup');
+  } else {
+    showView('view-main');
+    loadPosts();
+  }
+}
+
+// ---- Views ----
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  if (id === 'view-new') {
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-url').value = '';
+    document.getElementById('post-category').value = 'reading';
+    setDefaultDate();
+    document.getElementById('publish-btn').disabled = false;
+    document.getElementById('publish-btn').innerHTML = 'Publish';
+  }
+
+  if (id === 'view-settings') {
+    document.getElementById('settings-token').value = localStorage.getItem('tg_admin_token') || '';
+  }
+}
+
+// ---- Token ----
+
+function saveToken() {
+  const token = document.getElementById('token-input').value.trim();
+  if (!token) return;
+  localStorage.setItem('tg_admin_token', token);
+  showView('view-main');
+  loadPosts();
+}
+
+function updateToken() {
+  const token = document.getElementById('settings-token').value.trim();
+  if (!token) return;
+  localStorage.setItem('tg_admin_token', token);
+  toast('Token updated');
+  showView('view-main');
+  loadPosts();
+}
+
+function disconnect() {
+  localStorage.removeItem('tg_admin_token');
+  showView('view-setup');
+  toast('Disconnected');
+}
+
+function getToken() {
+  return localStorage.getItem('tg_admin_token');
+}
+
+// ---- Load Posts ----
+
+async function loadPosts() {
+  try {
+    const res = await fetch(`${API}/repos/${REPO}/contents/_posts?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${getToken()}` }
+    });
+
+    if (res.status === 401) {
+      toast('Invalid token', true);
+      showView('view-setup');
+      return;
+    }
+
+    const files = await res.json();
+    posts = [];
+
+    // Parse each file's front matter from filename
+    for (const file of files) {
+      if (file.name === 'default.md') continue;
+      const parsed = parseFilename(file.name);
+      if (parsed) posts.push(parsed);
+    }
+
+    // Sort by date descending
+    posts.sort((a, b) => b.date.localeCompare(a.date));
+    renderPosts();
+  } catch (err) {
+    toast('Failed to load posts', true);
+  }
+}
+
+function parseFilename(filename) {
+  // e.g. 2024-10-17-Cabel-Sasser-XOXO.md
+  const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(md|markdown)$/);
+  if (!match) return null;
+  return {
+    date: match[1],
+    slug: match[2],
+    filename: filename
+  };
+}
+
+async function loadPostDetails(post) {
+  const res = await fetch(`${API}/repos/${REPO}/contents/_posts/${post.filename}?ref=${BRANCH}`, {
+    headers: { Authorization: `token ${getToken()}` }
+  });
+  const data = await res.json();
+  const content = atob(data.content);
+  const fm = parseFrontMatter(content);
+  return { ...post, ...fm, sha: data.sha };
+}
+
+function parseFrontMatter(content) {
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  const fm = {};
+  match[1].split('\n').forEach(line => {
+    const idx = line.indexOf(':');
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    let val = line.slice(idx + 1).trim();
+    // Remove surrounding quotes
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
+    }
+    fm[key] = val;
+  });
+  return fm;
+}
+
+// ---- Render ----
+
+function renderPosts() {
+  const list = document.getElementById('post-list');
+  const empty = document.getElementById('empty-state');
+
+  // Hydrate posts that need details
+  const visible = currentFilter === 'all' ? posts : posts.filter(p => p.categories === currentFilter);
+
+  // Load details for all posts if not already loaded
+  const needsDetail = posts.filter(p => !p.title);
+  if (needsDetail.length > 0) {
+    Promise.all(needsDetail.map(p => loadPostDetails(p).then(detail => Object.assign(p, detail))))
+      .then(() => renderPosts());
+
+    list.innerHTML = '<li class="empty">Loading...</li>';
+    return;
+  }
+
+  const filtered = currentFilter === 'all' ? posts : posts.filter(p => p.categories === currentFilter);
+
+  if (filtered.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  list.innerHTML = filtered.map(p => `
+    <li class="post-item">
+      <div class="post-title"><a href="${p.external_url || '#'}" target="_blank">${p.title || p.slug}</a></div>
+      <div class="post-meta">
+        <span class="post-category">${p.categories || '?'}</span>
+        &nbsp; ${p.date}
+      </div>
+    </li>
+  `).join('');
+}
+
+function filterPosts(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderPosts();
+}
+
+// ---- Publish ----
+
+async function publishPost() {
+  const title = document.getElementById('post-title').value.trim();
+  const url = document.getElementById('post-url').value.trim();
+  const category = document.getElementById('post-category').value;
+  const dateInput = document.getElementById('post-date').value;
+
+  if (!title) { toast('Title is required', true); return; }
+  if (!url) { toast('URL is required', true); return; }
+
+  const btn = document.getElementById('publish-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Publishing...';
+
+  const date = new Date(dateInput);
+  const dateStr = date.toISOString().slice(0, 10);
+  const timeStr = `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')} +1000`;
+
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
+  const filename = `${dateStr}-${slug}.md`;
+
+  const content = [
+    '---',
+    'layout: post',
+    `title: "${title}"`,
+    `date: ${dateStr} ${timeStr}`,
+    `categories: ${category}`,
+    `external_url: ${url}`,
+    '---',
+    ''
+  ].join('\n');
+
+  try {
+    const res = await fetch(`${API}/repos/${REPO}/contents/_posts/${filename}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Add ${category}: ${title}`,
+        content: btoa(unescape(encodeURIComponent(content))),
+        branch: BRANCH
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Failed to publish');
+    }
+
+    toast('Published!');
+    showView('view-main');
+    loadPosts();
+  } catch (err) {
+    toast(err.message, true);
+    btn.disabled = false;
+    btn.innerHTML = 'Publish';
+  }
+}
+
+// ---- Date helper ----
+
+function setDefaultDate() {
+  const now = new Date();
+  // Offset to local time for the input
+  const offset = now.getTimezoneOffset() * 60000;
+  const local = new Date(now - offset);
+  document.getElementById('post-date').value = local.toISOString().slice(0, 16);
+}
+
+// ---- Toast ----
+
+function toast(msg, isError) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => el.className = 'toast', 2500);
+}
+
+// ---- Start ----
+
+init();
+</script>
+
+</body>
+</html>
