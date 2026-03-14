@@ -791,7 +791,7 @@ async function openSection(key) {
 
     const data = await res.json();
     sectionSha = data.sha;
-    const yaml = decodeURIComponent(escape(atob(data.content)));
+    const yaml = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
     sectionItems = parseYaml(yaml);
     renderSectionItems();
   } catch (err) {
@@ -881,6 +881,15 @@ async function saveSection() {
   const yaml = itemsToYaml(sectionItems);
 
   try {
+    // Always fetch latest SHA before saving to avoid mismatch
+    const shaRes = await fetch(`${API}/repos/${REPO}/contents/${currentSection.file}?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${getToken()}` }
+    });
+    if (shaRes.ok) {
+      const shaData = await shaRes.json();
+      sectionSha = shaData.sha;
+    }
+
     const body = {
       message: `Update ${currentSection.label}`,
       content: btoa(unescape(encodeURIComponent(yaml))),
