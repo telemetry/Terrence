@@ -43,7 +43,6 @@ permalink: /admin/
       padding: var(--gap);
     }
 
-    /* Header */
     .admin-header {
       display: flex;
       align-items: center;
@@ -65,7 +64,6 @@ permalink: /admin/
       text-decoration: none;
     }
 
-    /* Setup screen */
     .setup-note {
       font-size: 13px;
       color: var(--border);
@@ -73,9 +71,7 @@ permalink: /admin/
       margin-bottom: var(--gap);
     }
 
-    .setup-note a {
-      color: var(--text);
-    }
+    .setup-note a { color: var(--text); }
 
     .setup-note code {
       background: rgba(0,0,0,0.06);
@@ -84,7 +80,6 @@ permalink: /admin/
       font-size: 12px;
     }
 
-    /* Form elements */
     label {
       display: block;
       font-size: 11px;
@@ -102,7 +97,7 @@ permalink: /admin/
     select {
       width: 100%;
       padding: 12px;
-      font-size: 16px; /* prevents iOS zoom */
+      font-size: 16px;
       border: 1px solid #ddd;
       border-radius: var(--radius);
       background: white;
@@ -125,7 +120,6 @@ permalink: /admin/
       padding-right: 36px;
     }
 
-    /* Buttons */
     .btn {
       display: block;
       width: 100%;
@@ -139,27 +133,15 @@ permalink: /admin/
       -webkit-tap-highlight-color: transparent;
     }
 
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .btn:disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    .btn-primary {
-      background: var(--accent-gradient);
-      color: white;
-    }
-
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.5; pointer-events: none; }
+    .btn-primary { background: var(--accent-gradient); color: white; }
     .btn-secondary {
       background: transparent;
       color: var(--text);
       border: 1px dashed var(--border);
       margin-top: 12px;
     }
-
     .btn-danger {
       background: transparent;
       color: var(--danger);
@@ -168,8 +150,13 @@ permalink: /admin/
       font-size: 14px;
       padding: 10px;
     }
+    .btn-small {
+      display: inline-block;
+      width: auto;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
 
-    /* Tabs */
     .tabs {
       display: flex;
       gap: 0;
@@ -197,19 +184,14 @@ permalink: /admin/
       border-bottom-color: var(--accent);
     }
 
-    /* Post list */
-    .post-list {
-      list-style: none;
-    }
+    .post-list { list-style: none; }
 
     .post-item {
       padding: 14px 0;
       border-bottom: 1px solid #eee;
     }
 
-    .post-item:last-child {
-      border-bottom: none;
-    }
+    .post-item:last-child { border-bottom: none; }
 
     .post-title {
       font-size: 16px;
@@ -218,10 +200,7 @@ permalink: /admin/
       margin-bottom: 4px;
     }
 
-    .post-title a {
-      color: var(--text);
-      text-decoration: none;
-    }
+    .post-title a { color: var(--text); text-decoration: none; }
 
     .post-meta {
       font-size: 12px;
@@ -239,7 +218,78 @@ permalink: /admin/
       background: rgba(0,0,0,0.06);
     }
 
-    /* Toast */
+    /* Section list */
+    .section-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .section-item:active { opacity: 0.7; }
+
+    .section-name {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .section-count {
+      font-size: 13px;
+      color: var(--border);
+    }
+
+    .section-arrow {
+      font-size: 18px;
+      color: var(--border);
+    }
+
+    /* Section editor items */
+    .edit-item {
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+      position: relative;
+    }
+
+    .edit-item-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .edit-item-url {
+      font-size: 12px;
+      color: var(--border);
+      word-break: break-all;
+    }
+
+    .edit-item-note {
+      font-size: 12px;
+      color: var(--border);
+      font-family: monospace;
+      margin-top: 2px;
+    }
+
+    .edit-item-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .edit-item-actions button {
+      font-size: 13px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .edit-item-actions .action-delete { color: var(--danger); }
+    .edit-item-actions .action-move { color: var(--border); }
+
     .toast {
       position: fixed;
       bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
@@ -257,21 +307,12 @@ permalink: /admin/
       white-space: nowrap;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { background: var(--danger); color: white; }
 
-    .toast.error {
-      background: var(--danger);
-      color: white;
-    }
-
-    /* Views */
     .view { display: none; }
     .view.active { display: block; }
 
-    /* Empty state */
     .empty {
       text-align: center;
       padding: 48px var(--gap);
@@ -279,7 +320,6 @@ permalink: /admin/
       font-size: 14px;
     }
 
-    /* Loading spinner */
     .spinner {
       display: inline-block;
       width: 18px;
@@ -294,7 +334,6 @@ permalink: /admin/
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Responsive */
     @media (min-width: 600px) {
       .container { padding: 24px; }
     }
@@ -316,7 +355,7 @@ permalink: /admin/
         color: var(--text);
       }
 
-      .post-item { border-bottom-color: #1e2a38; }
+      .post-item, .section-item, .edit-item { border-bottom-color: #1e2a38; }
       .post-category { background: rgba(255,255,255,0.08); }
     }
   </style>
@@ -342,20 +381,34 @@ permalink: /admin/
   <!-- MAIN VIEW -->
   <div id="view-main" class="view">
     <div class="admin-header">
-      <h1>Posts</h1>
+      <h1 id="main-title">Posts</h1>
       <a href="/" target="_blank">View site &rarr;</a>
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-filter="all" onclick="filterPosts('all', this)">All</button>
-      <button class="tab" data-filter="reading" onclick="filterPosts('reading', this)">Reading</button>
-      <button class="tab" data-filter="watching" onclick="filterPosts('watching', this)">Watching</button>
+      <button class="tab active" onclick="switchMainTab('posts', this)">Posts</button>
+      <button class="tab" onclick="switchMainTab('sections', this)">Sections</button>
     </div>
 
-    <ul class="post-list" id="post-list"></ul>
-    <div class="empty" id="empty-state" style="display:none">No posts yet</div>
+    <!-- Posts panel -->
+    <div id="panel-posts">
+      <div class="tabs" style="margin-top: -8px;">
+        <button class="tab active" data-filter="all" onclick="filterPosts('all', this)">All</button>
+        <button class="tab" data-filter="reading" onclick="filterPosts('reading', this)">Reading</button>
+        <button class="tab" data-filter="watching" onclick="filterPosts('watching', this)">Watching</button>
+      </div>
 
-    <button class="btn btn-primary" onclick="showView('view-new')" style="margin-top: 24px">+ New Post</button>
+      <ul class="post-list" id="post-list"></ul>
+      <div class="empty" id="empty-state" style="display:none">No posts yet</div>
+
+      <button class="btn btn-primary" onclick="showView('view-new')" style="margin-top: 24px">+ New Post</button>
+    </div>
+
+    <!-- Sections panel -->
+    <div id="panel-sections" style="display:none">
+      <div id="section-list"></div>
+    </div>
+
     <button class="btn btn-secondary" onclick="showView('view-settings')">Settings</button>
   </div>
 
@@ -384,6 +437,38 @@ permalink: /admin/
     <button class="btn btn-primary" id="publish-btn" onclick="publishPost()">Publish</button>
   </div>
 
+  <!-- SECTION EDITOR VIEW -->
+  <div id="view-section" class="view">
+    <div class="admin-header">
+      <h1 id="section-title">Section</h1>
+      <a href="#" onclick="showView('view-main'); return false;">&larr; Back</a>
+    </div>
+
+    <div id="section-items"></div>
+
+    <button class="btn btn-primary" onclick="editingIndex = null; showView('view-section-add')" style="margin-top: 24px">+ Add Item</button>
+    <button class="btn btn-secondary" id="save-section-btn" onclick="saveSection()">Save Changes</button>
+  </div>
+
+  <!-- ADD/EDIT SECTION ITEM VIEW -->
+  <div id="view-section-add" class="view">
+    <div class="admin-header">
+      <h1 id="item-view-title">Add Item</h1>
+      <a href="#" onclick="showView('view-section'); return false;">&larr; Back</a>
+    </div>
+
+    <label for="item-title">Title</label>
+    <input type="text" id="item-title" placeholder="Title" autocapitalize="words">
+
+    <label for="item-url">URL (optional)</label>
+    <input type="url" id="item-url" placeholder="https://" inputmode="url">
+
+    <label for="item-note">Note (optional)</label>
+    <input type="text" id="item-note" placeholder="// MARK: a comment">
+
+    <button class="btn btn-primary" id="item-save-btn" onclick="saveItemForm()">Add</button>
+  </div>
+
   <!-- SETTINGS VIEW -->
   <div id="view-settings" class="view">
     <div class="admin-header">
@@ -406,8 +491,20 @@ const REPO = 'telemetry/Terrence';
 const BRANCH = 'main';
 const API = 'https://api.github.com';
 
+const SECTIONS = [
+  { key: 'building', label: 'Building', file: '_data/building.yml' },
+  { key: 'sidequests', label: 'Side Quests', file: '_data/sidequests.yml' },
+  { key: 'imagemaking', label: 'Image Making', file: '_data/imagemaking.yml' },
+  { key: 'collecting', label: 'Collecting', file: '_data/collecting.yml' },
+  { key: 'exhibitions', label: 'Exhibitions', file: '_data/exhibitions.yml' }
+];
+
 let posts = [];
 let currentFilter = 'all';
+let currentSection = null;
+let sectionItems = [];
+let sectionSha = null;
+let editingIndex = null;
 
 // ---- Init ----
 
@@ -439,6 +536,27 @@ function showView(id) {
   if (id === 'view-settings') {
     document.getElementById('settings-token').value = localStorage.getItem('tg_admin_token') || '';
   }
+
+  if (id === 'view-section-add' && editingIndex === null) {
+    document.getElementById('item-view-title').textContent = 'Add Item';
+    document.getElementById('item-save-btn').textContent = 'Add';
+    document.getElementById('item-title').value = '';
+    document.getElementById('item-url').value = '';
+    document.getElementById('item-note').value = '';
+  }
+}
+
+// ---- Main tabs ----
+
+function switchMainTab(tab, btn) {
+  document.querySelectorAll('.tabs:first-of-type .tab').forEach(t => t.classList.remove('active'));
+  // find the parent tabs container
+  btn.classList.add('active');
+  document.getElementById('panel-posts').style.display = tab === 'posts' ? 'block' : 'none';
+  document.getElementById('panel-sections').style.display = tab === 'sections' ? 'block' : 'none';
+  document.getElementById('main-title').textContent = tab === 'posts' ? 'Posts' : 'Sections';
+
+  if (tab === 'sections') renderSectionList();
 }
 
 // ---- Token ----
@@ -487,14 +605,12 @@ async function loadPosts() {
     const files = await res.json();
     posts = [];
 
-    // Parse each file's front matter from filename
     for (const file of files) {
       if (file.name === 'default.md') continue;
       const parsed = parseFilename(file.name);
       if (parsed) posts.push(parsed);
     }
 
-    // Sort by date descending
     posts.sort((a, b) => b.date.localeCompare(a.date));
     renderPosts();
   } catch (err) {
@@ -503,14 +619,9 @@ async function loadPosts() {
 }
 
 function parseFilename(filename) {
-  // e.g. 2024-10-17-Cabel-Sasser-XOXO.md
   const match = filename.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.(md|markdown)$/);
   if (!match) return null;
-  return {
-    date: match[1],
-    slug: match[2],
-    filename: filename
-  };
+  return { date: match[1], slug: match[2], filename: filename };
 }
 
 async function loadPostDetails(post) {
@@ -532,7 +643,6 @@ function parseFrontMatter(content) {
     if (idx === -1) return;
     const key = line.slice(0, idx).trim();
     let val = line.slice(idx + 1).trim();
-    // Remove surrounding quotes
     if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
       val = val.slice(1, -1);
     }
@@ -541,21 +651,16 @@ function parseFrontMatter(content) {
   return fm;
 }
 
-// ---- Render ----
+// ---- Render Posts ----
 
 function renderPosts() {
   const list = document.getElementById('post-list');
   const empty = document.getElementById('empty-state');
 
-  // Hydrate posts that need details
-  const visible = currentFilter === 'all' ? posts : posts.filter(p => p.categories === currentFilter);
-
-  // Load details for all posts if not already loaded
   const needsDetail = posts.filter(p => !p.title);
   if (needsDetail.length > 0) {
     Promise.all(needsDetail.map(p => loadPostDetails(p).then(detail => Object.assign(p, detail))))
       .then(() => renderPosts());
-
     list.innerHTML = '<li class="empty">Loading...</li>';
     return;
   }
@@ -582,12 +687,12 @@ function renderPosts() {
 
 function filterPosts(filter, btn) {
   currentFilter = filter;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   renderPosts();
 }
 
-// ---- Publish ----
+// ---- Publish Post ----
 
 async function publishPost() {
   const title = document.getElementById('post-title').value.trim();
@@ -655,11 +760,205 @@ async function publishPost() {
   }
 }
 
+// ---- Sections ----
+
+function renderSectionList() {
+  const el = document.getElementById('section-list');
+  el.innerHTML = SECTIONS.map(s => `
+    <div class="section-item" onclick="openSection('${s.key}')">
+      <div>
+        <div class="section-name">${s.label}</div>
+      </div>
+      <span class="section-arrow">&rsaquo;</span>
+    </div>
+  `).join('');
+}
+
+async function openSection(key) {
+  currentSection = SECTIONS.find(s => s.key === key);
+  document.getElementById('section-title').textContent = currentSection.label;
+  document.getElementById('section-items').innerHTML = '<div class="empty">Loading...</div>';
+  document.getElementById('save-section-btn').disabled = false;
+  document.getElementById('save-section-btn').innerHTML = 'Save Changes';
+  showView('view-section');
+
+  try {
+    const res = await fetch(`${API}/repos/${REPO}/contents/${currentSection.file}?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${getToken()}` }
+    });
+
+    if (!res.ok) throw new Error('Failed to load');
+
+    const data = await res.json();
+    sectionSha = data.sha;
+    const yaml = decodeURIComponent(escape(atob(data.content)));
+    sectionItems = parseYaml(yaml);
+    renderSectionItems();
+  } catch (err) {
+    toast('Failed to load section', true);
+    sectionItems = [];
+    sectionSha = null;
+    renderSectionItems();
+  }
+}
+
+function renderSectionItems() {
+  const el = document.getElementById('section-items');
+
+  if (sectionItems.length === 0) {
+    el.innerHTML = '<div class="empty">No items</div>';
+    return;
+  }
+
+  el.innerHTML = sectionItems.map((item, i) => `
+    <div class="edit-item">
+      <div class="edit-item-title">${item.title}</div>
+      ${item.url ? `<div class="edit-item-url">${item.url}</div>` : ''}
+      ${item.note ? `<div class="edit-item-note">${item.note}</div>` : ''}
+      <div class="edit-item-actions">
+        <button class="action-move" onclick="editItem(${i})">Edit</button>
+        ${i > 0 ? `<button class="action-move" onclick="moveItem(${i}, -1)">&uarr; Up</button>` : ''}
+        ${i < sectionItems.length - 1 ? `<button class="action-move" onclick="moveItem(${i}, 1)">&darr; Down</button>` : ''}
+        <button class="action-delete" onclick="deleteItem(${i})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function moveItem(index, direction) {
+  const target = index + direction;
+  const temp = sectionItems[index];
+  sectionItems[index] = sectionItems[target];
+  sectionItems[target] = temp;
+  renderSectionItems();
+}
+
+function deleteItem(index) {
+  sectionItems.splice(index, 1);
+  renderSectionItems();
+}
+
+function editItem(index) {
+  editingIndex = index;
+  const item = sectionItems[index];
+  document.getElementById('item-view-title').textContent = 'Edit Item';
+  document.getElementById('item-save-btn').textContent = 'Update';
+  document.getElementById('item-title').value = item.title || '';
+  document.getElementById('item-url').value = item.url || '';
+  document.getElementById('item-note').value = item.note || '';
+  showView('view-section-add');
+}
+
+function saveItemForm() {
+  const title = document.getElementById('item-title').value.trim();
+  const url = document.getElementById('item-url').value.trim();
+  const note = document.getElementById('item-note').value.trim();
+
+  if (!title) { toast('Title is required', true); return; }
+
+  const item = { title };
+  if (url) item.url = url;
+  if (note) item.note = note;
+
+  if (editingIndex !== null) {
+    sectionItems[editingIndex] = item;
+    editingIndex = null;
+    toast('Item updated');
+  } else {
+    sectionItems.push(item);
+    toast('Item added');
+  }
+
+  showView('view-section');
+  renderSectionItems();
+}
+
+async function saveSection() {
+  const btn = document.getElementById('save-section-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Saving...';
+
+  const yaml = itemsToYaml(sectionItems);
+
+  try {
+    const body = {
+      message: `Update ${currentSection.label}`,
+      content: btoa(unescape(encodeURIComponent(yaml))),
+      branch: BRANCH
+    };
+    if (sectionSha) body.sha = sectionSha;
+
+    const res = await fetch(`${API}/repos/${REPO}/contents/${currentSection.file}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Failed to save');
+    }
+
+    const data = await res.json();
+    sectionSha = data.content.sha;
+    toast('Saved!');
+    btn.disabled = false;
+    btn.innerHTML = 'Save Changes';
+  } catch (err) {
+    toast(err.message, true);
+    btn.disabled = false;
+    btn.innerHTML = 'Save Changes';
+  }
+}
+
+// ---- YAML helpers ----
+
+function parseYaml(yaml) {
+  const items = [];
+  let current = null;
+
+  yaml.split('\n').forEach(line => {
+    if (line.startsWith('- ')) {
+      if (current) items.push(current);
+      current = {};
+      line = line.slice(2);
+    }
+
+    if (!current) return;
+
+    const match = line.trim().match(/^(\w+):\s*(.*)$/);
+    if (match) {
+      let val = match[2].trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      current[match[1]] = val;
+    }
+  });
+
+  if (current) items.push(current);
+  return items;
+}
+
+function itemsToYaml(items) {
+  return items.map(item => {
+    let lines = [];
+    // Title always needs quoting if it contains special chars
+    const titleNeedsQuote = /[&*#\[\]{}|>:,'"@`!%]/.test(item.title);
+    lines.push(`- title: ${titleNeedsQuote ? '"' + item.title.replace(/"/g, '\\"') + '"' : item.title}`);
+    if (item.url) lines.push(`  url: ${item.url}`);
+    if (item.note) lines.push(`  note: "${item.note.replace(/"/g, '\\"')}"`);
+    return lines.join('\n');
+  }).join('\n\n') + '\n';
+}
+
 // ---- Date helper ----
 
 function setDefaultDate() {
   const now = new Date();
-  // Offset to local time for the input
   const offset = now.getTimezoneOffset() * 60000;
   const local = new Date(now - offset);
   document.getElementById('post-date').value = local.toISOString().slice(0, 16);

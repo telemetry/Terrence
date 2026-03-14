@@ -15,94 +15,115 @@
 
   <title>Terry Gillespie - Design Engineer with over 20 Years experience</title>
   <style>
-    /* Box sizing rules */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
+    /* ---- Tokens ---- */
+    :root {
+      /* Colors */
+      --background: #F9F6EE;
+      --foreground: #0a131d;
+      --muted: #FAF9F6;
+      --muted-foreground: slategray;
+      --accent: #3da12a;
+      --accent-foreground: whitesmoke;
+      --accent-gradient: linear-gradient(to right, #061700, #52c234);
+      --border: slategray;
+      --ring: yellow;
+
+      /* Typography — Major Third scale (1.25) from 16px base */
+      --font-sans: "Inclusive Sans", -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+      --text-xs: 0.75rem;     /* 12px */
+      --text-sm: 0.875rem;    /* 14px */
+      --text-base: 1rem;      /* 16px */
+      --text-lg: 1.25rem;     /* 20px */
+      --text-xl: 1.5rem;      /* 24px */
+      --text-2xl: 2rem;       /* 32px */
+      --text-3xl: 2.25rem;    /* 36px */
+      --text-4xl: 3rem;       /* 48px */
+      --text-5xl: 4.5rem;     /* 72px */
+
+      /* Leading (line-height) */
+      --leading-none: 1;
+      --leading-tight: 1.15;
+      --leading-snug: 1.25;
+      --leading-normal: 1.5;
+      --leading-relaxed: 1.625;
+
+      /* Tracking (letter-spacing) */
+      --tracking-tight: -0.025em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.05em;
+
+      /* Font weights */
+      --font-thin: 200;
+      --font-light: 300;
+      --font-normal: 400;
+
+      /* Spacing — 4px base, 8pt grid */
+      --spacing-0: 0;
+      --spacing-0.5: 0.125rem;  /* 2px */
+      --spacing-1: 0.25rem;     /* 4px */
+      --spacing-1.5: 0.375rem;  /* 6px */
+      --spacing-2: 0.5rem;      /* 8px */
+      --spacing-3: 0.75rem;     /* 12px */
+      --spacing-4: 1rem;        /* 16px */
+      --spacing-5: 1.25rem;     /* 20px */
+      --spacing-6: 1.5rem;      /* 24px */
+      --spacing-8: 2rem;        /* 32px */
+      --spacing-10: 2.5rem;     /* 40px */
+      --spacing-12: 3rem;       /* 48px */
+      --spacing-16: 4rem;       /* 64px */
+      --spacing-20: 5rem;       /* 80px */
+      --spacing-24: 6rem;       /* 96px */
+
+      /* Radius */
+      --radius-sm: 0.25rem;   /* 4px */
+      --radius-md: 0.375rem;  /* 6px */
+      --radius-lg: 0.5rem;    /* 8px */
+      --radius-full: 9999px;
+
+      /* Layout */
+      --max-width: 90rem;     /* 1440px */
     }
 
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0a131d;
+        --foreground: #E8E4DD;
+        --muted: #161f2b;
+        --muted-foreground: #8893a2;
+        --border: #2a3545;
+        --ring: #52c234;
+      }
+    }
+
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body, h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+
+    ul[role="list"], ol[role="list"] { list-style: none; }
+
+    html { scroll-behavior: smooth; }
+
+    img, picture { max-width: 100%; display: block; }
+
+    input, button, textarea, select { font: inherit; }
 
     ::-moz-selection {
-      /* Code for Firefox */
       color: whitesmoke;
-      background: yellow;
+      background: var(--ring);
     }
 
     ::selection {
-      /* color: whitesmoke; */
-      background: yellow;
+      background: var(--ring);
     }
 
-    pre {
-      color: gray;
-      background: #FAF9F6;
-      /* a nice offwhite tone */
-      width: auto;
-      padding: 5px;
-      border-radius: 5px;
-      display: inline;
-      margin-bottom: 16px;
-    }
-
-    /* Remove default margin */
-    body,
-    h1,
-    h2,
-    h3,
-    h4,
-    p,
-    figure,
-    blockquote,
-    dl,
-    dd {
-      margin: 0;
-    }
-
-    /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-    ul[role="list"],
-    ol[role="list"] {
-      list-style: none;
-    }
-
-    /* Set core root defaults */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Set core body defaults */
-    body {
-      min-height: 100vh;
-      /* text-rendering: optimizeSpeed; */
-      line-height: 1.5;
-    }
-
-    /* A elements that don't have a class get default styles */
     a:not([class]) {
       text-decoration-skip-ink: auto;
     }
 
-    /* Make images easier to work with */
-    img,
-    picture {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Inherit fonts for inputs and buttons */
-    input,
-    button,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    /* Remove all animations and transitions for people that prefer not to see them */
     @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -110,123 +131,191 @@
       }
     }
 
+    /* ---- Base ---- */
     body {
-      font-family: "Inclusive Sans", -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
-      color: #0a131d;
-      padding: 50px 100px;
+      font-family: var(--font-sans);
+      color: var(--foreground);
+      background-color: var(--background);
+      min-height: 100vh;
+      line-height: var(--leading-normal);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      background-color: #F9F6EE;
-      /* digging this bone white */
-
+      gap: 0 var(--spacing-12);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 50px 100px;
     }
 
-    header,
-    footer {
-      padding: 24px 0;
+    /* ---- Layout ---- */
+    header, footer {
+      padding: var(--spacing-6) 0;
       grid-column: 1 / 3;
     }
 
     footer p {
-      margin: 0 0 24px 0;
+      margin: 0 0 var(--spacing-6) 0;
     }
 
     section {
-      padding: 24px 0 12px 0;
-      border-bottom: 1px dashed slategray;
+      padding: var(--spacing-6) 0 var(--spacing-3) 0;
+      border-bottom: 1px dashed var(--border);
     }
 
+    .fullwidth {
+      grid-column: 1 / 3;
+    }
+
+    /* ---- Typography ---- */
+    h1 {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-light);
+      line-height: 64px;
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--spacing-10);
+    }
+
+    h2 {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-thin);
+      line-height: var(--leading-tight);
+      margin-top: 2px;
+      margin-bottom: var(--spacing-8);
+    }
+
+    h2:has(+ pre) {
+      margin-bottom: var(--spacing-2);
+    }
+
+    pre + h2 {
+      margin-top: var(--spacing-6);
+    }
+
+    h4 {
+      font-size: var(--text-sm);
+      font-weight: var(--font-light);
+      line-height: var(--leading-normal);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--accent-foreground);
+      margin-bottom: var(--spacing-2);
+    }
+
+    p {
+      font-size: var(--text-lg);
+      font-weight: var(--font-thin);
+      line-height: var(--leading-snug);
+      margin-bottom: var(--spacing-2);
+    }
+
+    pre {
+      color: gray;
+      background: var(--muted);
+      width: auto;
+      padding: 5px;
+      border-radius: 5px;
+      display: inline;
+      margin-bottom: var(--spacing-4);
+    }
+
+    /* ---- Components ---- */
     .highlight {
-      color: whitesmoke;
-      background-image: linear-gradient(to right, #061700 0%, #52c234 100%);
+      color: var(--accent-foreground);
+      background-image: var(--accent-gradient);
       padding: 10px 15px;
       border-radius: 25px;
-      font-size: 14px;
+      font-size: var(--text-sm);
       margin: 0 36px 36px 0;
     }
 
     .headingHighlight {
-      background-color: #3da12a;
+      background-color: var(--accent);
       padding: 2px 6px;
       border-radius: 5px;
       font-weight: 100;
     }
 
     .nextHeading {
-      margin-top: 24px;
+      margin-top: var(--spacing-6);
     }
 
-
-    .fullwidth {
-      grid-column: 1 / 3;
+    /* ---- Row groups ---- */
+    .row-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 var(--spacing-12);
+      position: relative;
     }
 
-    h1 {
-      font-weight: 300;
-      font-size: 72px;
-      line-height: 64px;
-      margin-bottom: 40px;
-      ;
-
-    }
-
-    h2 {
-      font-size: 36px;
-      line-height: 42px;
-      margin-bottom: 32px;
-      margin-top: 2px;
-      color: #0a131d;
-      font-weight: 200;
-    }
-
-    /* Optionally reduce the h2 margin instead */
-    h2:has(+ pre) {
-      margin-bottom: 8px;
-    }
-
-    /* When an h2 comes immediately after a pre */
-pre + h2 {
-  margin-top:24px;
-}
-
-    h4 {
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 24px;
-      margin-bottom: 8px;
+    .row-label {
+      position: absolute;
+      left: -40px;
+      bottom: 24px;
+      transform: rotate(180deg);
+      writing-mode: vertical-lr;
+      font-size: var(--text-xs);
+      font-weight: var(--font-light);
       text-transform: uppercase;
-      color: whitesmoke;
+      letter-spacing: var(--tracking-wide);
+      color: var(--muted-foreground);
+      white-space: nowrap;
     }
 
-    p {
-      font-size: 20px;
-      line-height: 24px;
-      margin-bottom: 8px;
-      font-weight: 200;
+    .row-group-span {
+      grid-column: 1 / -1;
     }
 
+    /* ---- Links ---- */
     a {
-      color: #0a131d;
+      color: var(--foreground);
     }
 
     a:hover {
-      background-color: white;
+      background-color: var(--muted);
     }
 
-    @media only screen and (max-width: 600px) {
-
+    /* ---- Breakpoints ---- */
+    @media (max-width: 1024px) {
       body {
-        padding: 16px;
+        padding: var(--spacing-8) var(--spacing-12);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: var(--spacing-4);
+        grid-template-columns: 1fr;
       }
 
-      header,
-      footer {
+      header, footer {
         text-align: left;
         width: 100%;
+        grid-column: 1;
       }
 
       section {
-        grid-column: 1 / 3;
+        grid-column: 1;
+      }
+
+      .fullwidth {
+        grid-column: 1;
+      }
+
+      .row-group {
+        grid-template-columns: 1fr;
+      }
+
+      .row-label {
+        display: none;
+      }
+
+      h1 {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--spacing-8);
+      }
+
+      h2 {
+        font-size: var(--text-2xl);
+        margin-bottom: var(--spacing-6);
       }
     }
   </style>
@@ -238,65 +327,89 @@ pre + h2 {
       {{content}}
     </section>
   </header>
-  <section>
-    <h4><span class="headingHighlight">Work</span></h4>
-    <h2>{{page.work}}</h2>
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Graduate With Distinction</span></h4>
-    <!-- <h2>{{page.education}}</h2> -->
-    <h2><a href="https://typeparis.com/attendees/terry-gillespie">TypeParis 2025</a></h2>
-    <h4><span class="headingHighlight">Graduate 2020 Alumni</span></h4>
-    <h2>{{page.graduate}}</h2>
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Building</span></h4>
-    <h2><a href="https://recently.co/">Recently &trade;</a></h2>
-    <h2><a href="https://www.sloooow.app/">Sloooow</a></h2>
-    <h2><a href="https://duodecimal.co/">Duodecimal &trade;</a></h2>
-    <h2>Addend</h2>
-    <pre>// MARK: Daily Accountability Tool</pre>
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Reading</span></h4>
-    {% for post in site.categories.reading limit:5 %}
-    <h2><a href="{{ post.external_url }}">{{ post.title }}</a></h2>
-    {% endfor %}
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Image Making</span></h4>
-    <h2><a href="https://smallvictories.com.au/">Small Victories</a></h2>
-    <pre>// Select Photographs 2004 - {{ site.time | date: "%Y" }}</pre>
-    <h2><a href="https://www.instagram.com/tezjnr/">@tezjnr</a></h2>
-    <pre>// offline for 2025</pre>
-    <h4 class="nextHeading"><span class="headingHighlight">Collecting</span></h4>
-    <h2><a href="https://www.radiopictures.com.au/">Radio Pictures</a></h2>
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Watching</span></h4>
-    {% for post in site.categories.watching limit:5 %}
-    <h2><a href="{{ post.external_url }}">{{ post.title }}</a></h2>
-    {% endfor %}
-  </section>
-  <section>
-    <h4><span class="headingHighlight">Exhibitions</span></h4>
-    <h2><a href="https://www.museumofbrisbane.com.au/viewfinders-online/">Viewfinders @ Museum of Brisbane</a></h2>
-    <h2><a
-        href="https://digital.galahpress.com/articles/2025-galah-regional-photography-prize-3/">Galah
-        Regional Photography Prize Finalist - 2025</a></h2>
-    <h2><a
-        href="https://gallery.sunshinecoast.qld.gov.au/art-prizes/local-contemporary-art-prize/local-artists-local-content/2025-winners/2d-excellence-award">Local
-        Contemporary Art Prize 2025 - 2D Award</a></h2>
-    <h2>Du Rietz Art Awards Finalist - 2022, 2024</h2>
-  </section>
+  <div class="row-group fullwidth">
+    <span class="row-label">Things I Do</span>
+    <section>
+      <h4><span class="headingHighlight">Work</span></h4>
+      <h2>{{page.work}}</h2>
+      {% if site.data.sidequests.size > 0 %}
+      <h4 class="nextHeading"><span class="headingHighlight">Side Quests</span></h4>
+      {% for item in site.data.sidequests %}
+      {% if item.url %}<h2><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h2>
+      {% else %}<h2>{{ item.title }}</h2>{% endif %}
+      {% if item.note %}<pre>{{ item.note }}</pre>{% endif %}
+      {% endfor %}
+      {% endif %}
+    </section>
+    <section>
+      <h4><span class="headingHighlight">Graduate With Distinction</span></h4>
+      <!-- <h2>{{page.education}}</h2> -->
+      <h2><a href="https://typeparis.com/attendees/terry-gillespie" target="_blank" rel="noopener">TypeParis 2025</a></h2>
+      <h4><span class="headingHighlight">Graduate 2020 Alumni</span></h4>
+      <h2>{{page.graduate}}</h2>
+    </section>
+  </div>
+  <div class="row-group fullwidth">
+    <span class="row-label">Things I Make</span>
+    <section>
+      <h4><span class="headingHighlight">Building</span></h4>
+      {% for item in site.data.building %}
+      {% if item.url %}<h2><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h2>
+      {% else %}<h2>{{ item.title }}</h2>{% endif %}
+      {% if item.note %}<pre>{{ item.note }}</pre>{% endif %}
+      {% endfor %}
+    </section>
+    <section>
+      <h4><span class="headingHighlight">Image Making</span></h4>
+      {% for item in site.data.imagemaking %}
+      {% if item.url %}<h2><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h2>
+      {% else %}<h2>{{ item.title }}</h2>{% endif %}
+      {% if item.note %}{% assign current_year = site.time | date: "%Y" %}<pre>{{ item.note | replace: "YEAR", current_year }}</pre>{% endif %}
+      {% endfor %}
+      {% if site.data.collecting.size > 0 %}
+      <h4 class="nextHeading"><span class="headingHighlight">Collecting</span></h4>
+      {% for item in site.data.collecting %}
+      {% if item.url %}<h2><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h2>
+      {% else %}<h2>{{ item.title }}</h2>{% endif %}
+      {% if item.note %}<pre>{{ item.note }}</pre>{% endif %}
+      {% endfor %}
+      {% endif %}
+    </section>
+  </div>
+  <div class="row-group fullwidth">
+    <span class="row-label">Things I Enjoy</span>
+    <section>
+      <h4><span class="headingHighlight">Reading</span></h4>
+      {% for post in site.categories.reading limit:5 %}
+      <h2><a href="{{ post.external_url }}" target="_blank" rel="noopener">{{ post.title }}</a></h2>
+      {% endfor %}
+    </section>
+    <section>
+      <h4><span class="headingHighlight">Watching</span></h4>
+      {% for post in site.categories.watching limit:5 %}
+      <h2><a href="{{ post.external_url }}" target="_blank" rel="noopener">{{ post.title }}</a></h2>
+      {% endfor %}
+    </section>
+  </div>
+  <div class="row-group fullwidth">
+    <span class="row-label">Things I Show</span>
+    <section class="row-group-span">
+      <h4><span class="headingHighlight">Exhibitions</span></h4>
+      {% for item in site.data.exhibitions %}
+      {% if item.url %}<h2><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h2>
+      {% else %}<h2>{{ item.title }}</h2>{% endif %}
+      {% if item.note %}<pre>{{ item.note }}</pre>{% endif %}
+      {% endfor %}
+    </section>
+  </div>
   <footer>
     <p>Visit the <a href="/archive">Reading &amp; Watching archive</a>. </p>
-    <p>You can also find me on <a href="https://github.com/telemetry">Github</a>, <a
-        href="https://bsky.app/profile/tezjnr.com">bsky</a>
-      &amp; <a href="https://www.linkedin.com/in/tezjnr/">LinkedIn</a>
+    <p>You can also find me on <a href="https://github.com/telemetry" target="_blank" rel="noopener">Github</a>, <a
+        href="https://bsky.app/profile/tezjnr.com" target="_blank" rel="noopener">bsky</a>
+      &amp; <a href="https://www.linkedin.com/in/tezjnr/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
     <p>
-      <span class="nextHeading">Digital Presence &mdash; Since 1998</span>    
+      <span class="highlight nextHeading" style="background-image: linear-gradient(to right, #5c5ef2, #da8bd0);">Digital Presence &mdash; Since 1998</span>    
     </p>
   </footer>
 </body>
