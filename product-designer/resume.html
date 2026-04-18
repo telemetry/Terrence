@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrence Gillespie - Resume</title>
+  <style>
+    :root {
+      --gray1: hsl(0 0% 98%);
+      --gray8: hsl(0 0% 55%);
+      --gray11: hsl(0 0% 32%);
+      --gray12: hsl(0 0% 7%);
+      --bg: #fff;
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --gray1: hsl(0 0% 10%);
+        --gray8: hsl(0 0% 50%);
+        --gray11: hsl(0 0% 72%);
+        --gray12: hsl(0 0% 93%);
+        --bg: hsl(0 0% 7%);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font);
+      color: var(--gray12);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 24px 72px;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .name {
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 8px;
+    }
+
+    .contact {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      letter-spacing: 0.02em;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    a {
+      color: var(--gray12);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gray8);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray8);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid hsl(0 0% 90%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .section-label { border-bottom-color: hsl(0 0% 18%); }
+    }
+
+    /* Role */
+    .role {
+      margin-bottom: 20px;
+    }
+
+    .role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 2px;
+    }
+
+    .role-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .role-dates {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray8);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .role-company {
+      font-size: 13px;
+      color: var(--gray8);
+      margin-bottom: 6px;
+    }
+
+    .role-body {
+      font-size: 14px;
+      color: var(--gray11);
+      line-height: 1.6;
+    }
+
+    .role-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .role-body li {
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+
+    .role-body li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gray8);
+    }
+
+    /* Education row */
+    .edu {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .edu-left {}
+
+    .edu-institution {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .edu-detail {
+      font-size: 13px;
+      color: var(--gray11);
+      margin-top: 1px;
+    }
+
+    .edu-year {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray8);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-row {
+      display: flex;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .skill-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray8);
+      width: 96px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+
+    .skill-value {
+      color: var(--gray11);
+      line-height: 1.5;
+    }
+
+    /* Print */
+    @media print {
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: hsl(0 0% 7%);
+        background: white;
+      }
+
+      .page {
+        max-width: none;
+        padding: 0;
+      }
+
+      .tagline, .role-body, .edu-detail, .skill-value {
+        color: hsl(0 0% 32%);
+      }
+
+      .contact, .role-dates, .role-company, .section-label, .edu-year, .skill-label {
+        color: hsl(0 0% 55%);
+      }
+
+      .section-label {
+        border-bottom-color: hsl(0 0% 88%);
+      }
+
+      a {
+        color: hsl(0 0% 7%);
+        border-bottom: none;
+      }
+    }
+
+    @page {
+      margin: 16mm;
+      size: A4;
+    }
+
+    .page-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 32px;
+    }
+
+    .download-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      background: var(--bg);
+      border: 1px solid hsl(0 0% 85%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.15s ease;
+    }
+
+    .download-btn:hover {
+      color: var(--gray12);
+      border-color: var(--gray8);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .download-btn { border-color: hsl(0 0% 22%); }
+    }
+
+    .doc-footer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid hsl(0 0% 90%);
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .doc-footer { border-top-color: hsl(0 0% 18%); }
+    }
+
+    .doc-footer a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      border-bottom: none;
+      letter-spacing: 0.02em;
+      transition: color 0.15s ease;
+    }
+
+    .doc-footer a:hover { color: var(--gray12); }
+
+    @media print {
+      .download-btn { display: none; }
+      .doc-footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-top">
+    <a class="download-btn" href="Terrence_Gillespie_Resume.pdf" download>Download PDF ↓</a>
+  </div>
+
+  <div class="header">
+    <p class="name">Terrence Gillespie</p>
+    <p class="tagline">Principal Design Engineer — Design Systems, Payments & Native Platforms</p>
+    <div class="contact">
+      <span>Brisbane, Australia</span>
+      <span><a href="https://terrygillespie.com/product-designer/">terrygillespie.com/product-designer</a></span>
+      <span><a href="https://www.linkedin.com/in/tezjnr/">linkedin.com/in/tezjnr</a></span>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section">
+    <p class="section-label">Experience</p>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Principal Design Engineer</span>
+        <span class="role-dates">Apr 2020 – Present</span>
+      </div>
+      <p class="role-company">Westpac Group — Design Systems, iOS & Android</p>
+      <div class="role-body">
+        <ul>
+          <li>Custodian of the native app design system — tokens, components, and accessibility across iOS and Android for 4 million daily users</li>
+          <li>Led design and delivery of SafeCall (verified in-app calling) and SafeBlock (instant account locking) — scam prevention features protecting customers at the moment they pay</li>
+          <li>Led design integration of an acquired personal finance app — spending insights, charting, and budgeting at banking scale</li>
+          <li>People leader across a senior design team; governs pixel-level craft, component consistency, and handoff to native engineers</li>
+          <li>Westpac app rated #1 in Australia by Forrester three consecutive years (2023, 2024, 2025); #1 for access and inclusion — Australian Disability Network</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Senior Venture Designer</span>
+        <span class="role-dates">Dec 2018 – Apr 2020</span>
+      </div>
+      <p class="role-company">Westpac NEXT — Venture & Strategic Investments</p>
+      <div class="role-body">
+        <ul>
+          <li>Venture design integrating Westpac's strategic fund investments into core banking products</li>
+          <li>Designed and prototyped a property app and an insurance product</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Design Team Manager & Lead Product Designer</span>
+        <span class="role-dates">Apr 2016 – Dec 2018</span>
+      </div>
+      <p class="role-company">EyeOn IT — Telco & Healthcare, Sunshine Coast</p>
+      <div class="role-body">
+        <ul>
+          <li>Managed the design team and led product design across telco and healthcare clients</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Experience Design Lead</span>
+        <span class="role-dates">Jun 2013 – Mar 2016</span>
+      </div>
+      <p class="role-company">Telstra Digital — Identity, Authentication & Design Systems</p>
+      <div class="role-body">
+        <ul>
+          <li>Designed login, registration, and account recovery flows for 15 million registered mobile users — inclusive, accessible experiences at national scale</li>
+          <li>Delivered the responsive Telstra.com website and evolved the design system originally created by frog design</li>
+          <li>Led Google Design Sprints in the Idea Accelerator — rapid hypothesis validation from sketch to testable prototype</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Co-Founder & Design Lead</span>
+        <span class="role-dates">Jan 2008 – Jun 2013</span>
+      </div>
+      <p class="role-company">isotype — Full Service Design Studio, Sydney</p>
+      <div class="role-body">
+        <ul>
+          <li>Founded and ran a full-service design studio; clients included ASX, Coca-Cola Amatil, Havaianas, Westpac Group, and Sony Australia</li>
+          <li>Experience design, creative direction, apps, branding, and photography</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Education -->
+  <div class="section">
+    <p class="section-label">Education</p>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">TypeParis — Summer Programme</p>
+        <p class="edu-detail">Type Design — Distinction. Created Airlie, a Garamond revival in 3 styles and 15 weights, studying under Jean François Porchez.</p>
+      </div>
+      <span class="edu-year">2025</span>
+    </div>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">Apple Developer Academy — Scholarship</p>
+        <p class="edu-detail">@Unina Federico II, Naples. SwiftUI, Challenge Based Learning. Shipped Sloooow for Apple Watch (App Store).</p>
+      </div>
+      <span class="edu-year">2019–2020</span>
+    </div>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">Parsons School of Design — The New School</p>
+        <p class="edu-detail">Certificate, Design Leadership for Business. Mobile application design, team management.</p>
+      </div>
+      <span class="edu-year">2019–2021</span>
+    </div>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">TAFE Queensland</p>
+        <p class="edu-detail">Advanced Diploma, Digital Communication and Multimedia.</p>
+      </div>
+      <span class="edu-year">1998–2002</span>
+    </div>
+
+  </div>
+
+  <!-- Recognition -->
+  <div class="section">
+    <p class="section-label">Recognition</p>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">Local Contemporary Art Prize — 2D Excellence Award & Acquisition</p>
+        <p class="edu-detail">Work acquired for the permanent collection of Caloundra Regional Gallery.</p>
+      </div>
+      <span class="edu-year">2025</span>
+    </div>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">Viewfinders — Museum of Brisbane</p>
+        <p class="edu-detail">Selected for the New Light: Photography Now + Then exhibition.</p>
+      </div>
+      <span class="edu-year">2024–2025</span>
+    </div>
+
+    <div class="edu">
+      <div class="edu-left">
+        <p class="edu-institution">Du Rietz Art Awards — Finalist</p>
+        <p class="edu-detail">Fine art photography. Also 2D Highly Commended, 2022.</p>
+      </div>
+      <span class="edu-year">2022–2024</span>
+    </div>
+
+  </div>
+
+  <!-- Skills -->
+  <div class="section">
+    <p class="section-label">Skills</p>
+    <div class="skills">
+      <div class="skill-row">
+        <span class="skill-label">Design</span>
+        <span class="skill-value">Design systems, native app design (iOS & Android), interaction design, accessibility, tokens, handoff</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Code</span>
+        <span class="skill-value">SwiftUI, HTML, CSS, JavaScript</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Tools</span>
+        <span class="skill-value">Figma, Figma Dev Mode, Sketch, Keynote, Xcode, Adobe Suite, After Effects, Glyphs, GitHub</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Leadership</span>
+        <span class="skill-value">People management, design critique, stakeholder alignment, Google Design Sprints</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="doc-footer">
+    <a href="index.html">← Portfolio</a>
+    <a href="letter.html">Cover Letter</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
