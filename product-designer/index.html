@@ -254,12 +254,109 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
-    .exp-preview span {
+    .exp-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .exp-preview > span {
       font-family: var(--font-mono);
       font-size: 13px;
       color: var(--gray8);
+    }
+
+    /* AnyTwo card demo — verbatim nothing/style.css */
+    #anytwo-container {
+      background: transparent;
+      border: none;
+    }
+
+    .anytwo-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 32px;
+    }
+
+    .anytwo-widget {
+      width: 280px;
+      height: 280px;
+      border-radius: 56px;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .anytwo-hand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .anytwo-card {
+      width: 100px;
+      height: 134px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: -4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      border: 0.5px solid rgba(255, 255, 255, 0.06);
+      opacity: 0;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.15s ease;
+    }
+
+    .anytwo-rank {
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .anytwo-suit {
+      font-size: 24px;
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    .anytwo-deal {
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #00b44c;
+      background: rgba(0, 180, 76, 0.12);
+      border: 1px solid #00b44c;
+      padding: 6px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.15s ease;
+    }
+
+    .anytwo-deal:hover {
+      background: rgba(0, 180, 76, 0.2);
+      border-color: #00b44c;
+      color: #00b44c;
+    }
+
+    .anytwo-deal:active {
+      transform: scale(0.95);
     }
 
     .exp-info {
@@ -335,7 +432,8 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(0,0,0,0.12);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;
       cursor: pointer;
       transition: transform 0.15s ease;
     }
@@ -345,7 +443,17 @@
     }
 
     .sloooow-dot.active {
-      border: 2px solid white;
+      border: 2px solid var(--gray12);
+      box-shadow: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .sloooow-dot {
+        border-color: rgba(255,255,255,0.15);
+      }
+      .sloooow-dot.active {
+        border-color: white;
+      }
     }
 
     .sloooow-side {
@@ -736,7 +844,7 @@
   <section class="hero">
     <div class="profile-pic"><span>Photo</span></div>
     <h1>Terrence Gillespie</h1>
-    <p class="hero-role">Principal Design Engineer / Sydney</p>
+    <p class="hero-role">Principal Design Engineer</p>
     <p>20+ years designing surfaces, systems, and experiences that people trust. Currently governing the native app design system at Westpac across iOS and Android. Payments, identity, and typography - with an obsession for craft at every scale.</p>
   </section>
 
@@ -869,7 +977,7 @@
       <span>Glyphs</span>
     </div>
     <div class="placeholders placeholders--landscape">
-      <div class="placeholder"><span>Specimen</span></div>
+      <div class="placeholder" style="overflow:hidden;"><img src="../nothing/assets/airlie.png" alt="Airlie specimen" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       <div class="placeholder"><span>Weight range</span></div>
     </div>
   </section>
@@ -929,7 +1037,7 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><span>Roadie</span></div>
+        <div class="exp-preview"><img src="../nothing/assets/roadie.png" alt="Roadie"></div>
         <div class="exp-info">
           <p class="exp-name">Roadie</p>
           <p class="exp-desc">Collect, share, and review albums with friends. Built with MusicKit integration and shared listening.</p>
@@ -937,7 +1045,7 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><span>Recently</span></div>
+        <div class="exp-preview"><img src="../nothing/assets/recently01.png" alt="Recently"></div>
         <div class="exp-info">
           <p class="exp-name">Recently</p>
           <p class="exp-desc">Personal social network for celebrating great work - books, albums, films, and places.</p>
@@ -945,7 +1053,7 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><span>AnyTwo</span></div>
+        <div class="exp-preview" id="anytwo-container" style="aspect-ratio: 1;"></div>
         <div class="exp-info">
           <p class="exp-name">AnyTwo</p>
           <p class="exp-desc">Hold'em hand dealer with variance tracking. Live odds on your home screen.</p>
@@ -953,7 +1061,7 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><span>Texas Stack'em</span></div>
+        <div class="exp-preview"><img src="../nothing/assets/stackem.png" alt="Texas Stack'em"></div>
         <div class="exp-info">
           <p class="exp-name">Texas Stack'em</p>
           <p class="exp-desc">Hold'em meets match three. Poker hand recognition with physics-based card stacking.</p>
@@ -961,7 +1069,7 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><span>Addend</span></div>
+        <div class="exp-preview"><img src="../nothing/assets/addend.png" alt="Addend"></div>
         <div class="exp-info">
           <p class="exp-name">Addend</p>
           <p class="exp-desc">Daily accountability menu bar app. Track what you shipped, synced across devices.</p>
@@ -1186,6 +1294,9 @@
   setInterval(render, 60000);
 })();
 </script>
+
+<!-- AnyTwo Card Demo -->
+<script src="../nothing/components/anytwo.js"></script>
 
 </body>
 </html>
