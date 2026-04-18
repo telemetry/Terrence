@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terry Gillespie - Product Designer</title>
-  <meta name="description" content="Terry Gillespie - Principal Design Engineer. 20+ years designing surfaces, systems, and experiences across payments, identity, and typography.">
-  <meta property="og:title" content="Terry Gillespie - Product Designer">
+  <title>Terrence Gillespie - Product Designer</title>
+  <meta name="description" content="Terrence Gillespie - Principal Design Engineer. 20+ years designing surfaces, systems, and experiences across payments, identity, and typography.">
+  <meta property="og:title" content="Terrence Gillespie - Product Designer">
   <meta property="og:description" content="Principal Design Engineer. Design systems, payments, identity, and typography at scale.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
@@ -233,22 +233,24 @@
 
     /* Experiments */
     .experiments {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
       margin: 32px 0;
     }
 
     .exp {
-      background: var(--gray1);
-      border: 1px solid var(--border-card);
-      border-radius: 4px;
-      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
     }
 
     .exp-preview {
       aspect-ratio: 4 / 3;
-      background: var(--gray3);
+      background: var(--gray1);
+      border: 1px dashed var(--gray5);
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -261,19 +263,20 @@
     }
 
     .exp-info {
-      padding: 12px 16px;
+      padding-top: 8px;
     }
 
     .exp-name {
       font-size: 16px;
       font-weight: 500;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
 
     .exp-desc {
-      font-size: 13px;
+      font-size: 16px;
       color: var(--gray11);
-      margin-bottom: 4px;
+      line-height: 1.5;
+      margin-bottom: 8px;
     }
 
     .exp-stack {
@@ -526,15 +529,7 @@
     }
 
     .watch-demo-info {
-      padding-top: 32px;
-    }
-
-    .watch-demo-info .exp-name {
-      margin-bottom: 4px;
-    }
-
-    .watch-demo-info .exp-desc {
-      margin-bottom: 4px;
+      padding-top: 8px;
     }
 
     /* Awards / Education */
@@ -566,6 +561,37 @@
       color: var(--gray11);
     }
 
+    .section-caption {
+      font-size: 13px;
+      color: var(--gray8);
+      margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      margin-bottom: 0;
+    }
+
+    .section-link {
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .section-link a {
+      color: var(--gray8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-link a:hover {
+      color: var(--gray12);
+    }
+
     /* Videos */
     .videos {
       display: flex;
@@ -588,6 +614,28 @@
       font-family: var(--font-mono);
       font-size: 13px;
       color: var(--gray8);
+    }
+
+    .video-embed {
+      aspect-ratio: 16 / 9;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .video-embed iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-top: -4px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
     }
 
     /* Links */
@@ -628,6 +676,13 @@
     .footer-links {
       display: flex;
       gap: 24px;
+      align-items: baseline;
+    }
+
+    .footer-copy {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--gray8);
     }
 
     .footer-links a {
@@ -667,7 +722,7 @@
       .sloooow-layout { grid-template-columns: 1fr; }
       .sloooow-side { flex-direction: row; }
       .placeholder--tall { aspect-ratio: 1; }
-      .experiments { grid-template-columns: 1fr; }
+      .exp { grid-template-columns: 1fr; }
       .list-item { flex-direction: column; gap: 2px; }
       .list-year { width: auto; }
     }
@@ -680,9 +735,9 @@
   <!-- Hero -->
   <section class="hero">
     <div class="profile-pic"><span>Photo</span></div>
-    <h1>Terry Gillespie</h1>
+    <h1>Terrence Gillespie</h1>
     <p class="hero-role">Principal Design Engineer / Sydney</p>
-    <p>20+ years designing surfaces, systems, and experiences that people trust. Currently Principal Design Engineer at Westpac, governing the native app design system across iOS and Android. Deep expertise in payments, identity, and typography - with an obsession for craft at every scale. Storytelling through prototypes, comps, and working code. Apple Developer Academy scholarship graduate. TypeParis distinction.</p>
+    <p>20+ years designing surfaces, systems, and experiences that people trust. Currently governing the native app design system at Westpac across iOS and Android. Payments, identity, and typography - with an obsession for craft at every scale.</p>
   </section>
 
   <hr class="divider">
@@ -692,29 +747,29 @@
     <p class="section-label">Westpac Group</p>
     <h2>Banking at Scale</h2>
     <p class="section-subtitle">Principal Design Engineer - Design Systems</p>
-    <p class="section-body">Principal Design Engineer, people leader, and custodian of the native app design system - rated Australia's best mobile banking app three years running by Forrester. Six years of senior leadership translating complex financial products - payments, transfers, account management - into clean, accessible interfaces that 4 million people use every day. Governing component consistency, design tokens, and pixel-level craft across both platforms. Communicating design intent through prototypes, comps, and working code. Using AI to collapse the distance between idea and shipped surface.</p>
+    <p class="section-body">People leader and custodian of the native app design system - rated Australia's best mobile banking app three years running by Forrester. Six years of senior leadership translating complex financial products - payments, transfers, account management - into clean, accessible interfaces that 4 million people use every day. Governing component consistency, design tokens, and pixel-level craft across both platforms - prototyping with AI to move faster from idea to shipped surface.</p>
     <div class="section-meta">
       <span>4M daily users</span>
       <span>6+ years</span>
-      <span>~100 components per platform</span>
+      <span>Senior leadership role</span>
       <span>iOS & Android</span>
     </div>
     <div class="items">
       <div class="item">
         <span class="item-title">SafeCall</span>
-        <span class="item-desc">Building trust through verified in-app calling</span>
+        <span class="item-desc">Verified in-app calling</span>
       </div>
       <div class="item">
         <span class="item-title">SafeBlock</span>
-        <span class="item-desc">Giving customers control to lock accounts instantly</span>
+        <span class="item-desc">Instant account locking</span>
       </div>
       <div class="item">
         <span class="item-title">Personal Finance</span>
-        <span class="item-desc">Spending insights, charting, and budgeting surfaces</span>
+        <span class="item-desc">Spending insights, charting, budgeting</span>
       </div>
       <div class="item">
         <span class="item-title">Design System</span>
-        <span class="item-desc">Tokens, components, accessibility, and native code</span>
+        <span class="item-desc">Tokens, components, accessibility, native code</span>
       </div>
       <div class="item">
         <span class="item-title">Forrester #1</span>
@@ -739,7 +794,7 @@
     <p class="section-label">Telstra Digital</p>
     <h2>Identity & Authentication</h2>
     <p class="section-subtitle">Experience Design Lead</p>
-    <p class="section-body">UX Designer responsible for login, registration, and password recovery flows serving 15 million registered mobile users - designing inclusive, accessible experiences at massive scale. Delivered the responsive Telstra.com website and evolved the design system originally created by frog design. Led rapid prototyping through Google Design Sprints in the Idea Accelerator, validating concepts through sketches, comps, and testable prototypes.</p>
+    <p class="section-body">Led login, registration, and password recovery flows serving 15 million registered mobile users - designing inclusive, accessible experiences at massive scale. Delivered the responsive Telstra.com website and evolved the design system originally created by frog design. Ran rapid prototyping through Google Design Sprints in the Idea Accelerator, validating concepts through sketches, comps, and testable prototypes.</p>
     <div class="section-meta">
       <span>15M users</span>
       <span>3 years</span>
@@ -769,9 +824,12 @@
 
   <!-- Sloooow -->
   <section class="section">
-    <p class="section-label">Apple Developer Academy - Scholarship</p>
+    <div class="section-header">
+      <p class="section-label">Apple Developer Academy - Scholarship</p>
+      <span class="section-link"><a href="https://sloooow.app" target="_blank" rel="noopener">sloooow.app ↗</a></span>
+    </div>
     <h2>Sloooow</h2>
-    <p class="section-body">An Apple Watch app designed to change your relationship with time. A year clock that rotates once per year with complications for days past and days remaining. Built with obsessive attention to detail - every pixel considered on a 44mm surface. Shipped from Apple's Developer Academy in Naples, Italy as a scholarship recipient, Class of 19/20.</p>
+    <p class="section-body">An Apple Watch app designed to change your relationship with time. A year clock that rotates once per year with complications for days past and days remaining. Built with obsessive attention to detail - every pixel considered on a 44mm surface. Shipped from Apple's Developer Academy in Naples, Class of 19/20.</p>
     <div class="section-meta">
       <span>watchOS</span>
       <span>SwiftUI</span>
@@ -799,9 +857,12 @@
 
   <!-- Airlie -->
   <section class="section">
-    <p class="section-label">TypeParis - Distinction</p>
+    <div class="section-header">
+      <p class="section-label">TypeParis - Distinction</p>
+      <span class="section-link"><a href="https://typeparis.com/attendees/terry-gillespie" target="_blank" rel="noopener">TypeParis profile ↗</a></span>
+    </div>
     <h2>Airlie</h2>
-    <p class="section-body">A Garamond revival created under Jean François Porchez using Adrian Frutiger's 1950s methodology - the same craft lineage behind the typefaces in Apple's own products. Six weeks of intensive calligraphy, type history, and digital type design. An exercise in consistency, optical balance, and subtle detail across 3 styles and 15 weights.</p>
+    <p class="section-body">A six-week intensive programme in Paris covering typeface design, calligraphy techniques, type history, and modern software practices. Studied under the French master type designer Jean François Porchez using the same techniques established by Adrian Frutiger in the 1950s. The outcome: Airlie - a serif family inspired by Garamond and 18th-century punch-cut forms, with softer serifs and playful curves across 3 styles and 15 weights.</p>
     <div class="section-meta">
       <span>15 weights</span>
       <span>3 styles</span>
@@ -819,7 +880,7 @@
   <section class="section">
     <p class="section-label">Side Projects</p>
     <h2>Experiments</h2>
-    <p class="section-body">Apps, widgets, clocks, games, and prototypes - always shipping, always learning a new Apple platform. Built across iOS, iPadOS, watchOS, tvOS, and macOS.</p>
+    <p class="section-body">Always shipping, always learning. Built across every Apple platform.</p>
 
     <!-- Concentric — live demo in Apple Watch bezel -->
     <div class="watch-demo">
@@ -855,16 +916,8 @@
         <div class="exp-preview"><span>GlyphSketch</span></div>
         <div class="exp-info">
           <p class="exp-name">GlyphSketch</p>
-          <p class="exp-desc">iPad app for sketching typeface glyphs.</p>
+          <p class="exp-desc">iPad app for sketching and prototyping typeface glyphs. Draw letterforms with Apple Pencil, test spacing, and export to Glyphs.</p>
           <span class="exp-stack">iPadOS &middot; PencilKit</span>
-        </div>
-      </div>
-      <div class="exp">
-        <div class="exp-preview"><span>Roadie</span></div>
-        <div class="exp-info">
-          <p class="exp-name">Roadie</p>
-          <p class="exp-desc">Collect, share and review albums.</p>
-          <span class="exp-stack">iOS &middot; MusicKit &middot; CloudKit</span>
         </div>
       </div>
       <div class="exp">
@@ -876,10 +929,18 @@
         </div>
       </div>
       <div class="exp">
+        <div class="exp-preview"><span>Roadie</span></div>
+        <div class="exp-info">
+          <p class="exp-name">Roadie</p>
+          <p class="exp-desc">Collect, share, and review albums with friends. Built with MusicKit integration and shared listening.</p>
+          <span class="exp-stack">iOS &middot; MusicKit &middot; CloudKit</span>
+        </div>
+      </div>
+      <div class="exp">
         <div class="exp-preview"><span>Recently</span></div>
         <div class="exp-info">
           <p class="exp-name">Recently</p>
-          <p class="exp-desc">Personal social network. Celebrate great work.</p>
+          <p class="exp-desc">Personal social network for celebrating great work - books, albums, films, and places.</p>
           <span class="exp-stack">Vue &middot; iOS &middot; Firebase</span>
         </div>
       </div>
@@ -887,7 +948,7 @@
         <div class="exp-preview"><span>AnyTwo</span></div>
         <div class="exp-info">
           <p class="exp-name">AnyTwo</p>
-          <p class="exp-desc">Hold'em hand dealer. Variance and statistics.</p>
+          <p class="exp-desc">Hold'em hand dealer with variance tracking. Live odds on your home screen.</p>
           <span class="exp-stack">iOS &middot; SwiftUI &middot; Widget</span>
         </div>
       </div>
@@ -895,7 +956,7 @@
         <div class="exp-preview"><span>Texas Stack'em</span></div>
         <div class="exp-info">
           <p class="exp-name">Texas Stack'em</p>
-          <p class="exp-desc">Hold'em meets match three.</p>
+          <p class="exp-desc">Hold'em meets match three. Poker hand recognition with physics-based card stacking.</p>
           <span class="exp-stack">iOS &middot; SpriteKit</span>
         </div>
       </div>
@@ -903,7 +964,7 @@
         <div class="exp-preview"><span>Addend</span></div>
         <div class="exp-info">
           <p class="exp-name">Addend</p>
-          <p class="exp-desc">Menu bar accountability app.</p>
+          <p class="exp-desc">Daily accountability menu bar app. Track what you shipped, synced across devices.</p>
           <span class="exp-stack">macOS &middot; CloudKit</span>
         </div>
       </div>
@@ -914,9 +975,9 @@
 
   <!-- Recognition -->
   <section class="section">
-    <p class="section-label">Recognition</p>
+    <p class="section-label">Side Quests</p>
     <h2>Awards & Exhibitions</h2>
-    <p class="section-body">Practicing photographer alongside design work.</p>
+    <p class="section-body">Fine art photography alongside design work.</p>
     <div class="list">
       <div class="list-item">
         <span class="list-year">2026</span>
@@ -924,11 +985,23 @@
       </div>
       <div class="list-item">
         <span class="list-year">2025</span>
-        <span class="list-content">2D Award <span>- Local Contemporary Art Prize</span></span>
+        <span class="list-content">2D Excellence Award & Acquisition <span>- Local Contemporary Art Prize</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2025</span>
+        <span class="list-content">Finalist <span>- Local Contemporary Art Prize</span></span>
       </div>
       <div class="list-item">
         <span class="list-year">2025</span>
         <span class="list-content">Finalist <span>- Galah Regional Photography Prize</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2025</span>
+        <span class="list-content">Viewfinders <span>- Museum of Brisbane</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2024</span>
+        <span class="list-content">Viewfinders Selection <span>- New Light: Photography Now + Then</span></span>
       </div>
       <div class="list-item">
         <span class="list-year">2024</span>
@@ -936,40 +1009,42 @@
       </div>
       <div class="list-item">
         <span class="list-year">2022</span>
+        <span class="list-content">2D Highly Commended <span>- Du Rietz Art Awards</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2022</span>
         <span class="list-content">Finalist <span>- Du Rietz Art Awards</span></span>
       </div>
       <div class="list-item">
-        <span class="list-year">Exhibited</span>
-        <span class="list-content">Viewfinders <span>- Museum of Brisbane</span></span>
+        <span class="list-year">2016</span>
+        <span class="list-content">Finalist <span>- Sunshine Coast Environment Photography Awards</span></span>
       </div>
     </div>
-  </section>
+    <p class="section-caption">Selected works at <a href="https://smallvictories.com.au" target="_blank" rel="noopener">smallvictories.com.au</a></p>
 
-</div>
-
-<!-- Videos -->
-<div class="page">
-  <hr class="divider">
-  <section class="section">
-    <p class="section-label">Video</p>
-    <h2>Speaking & Press</h2>
+    <h2 style="margin-top: 48px;">Speaking</h2>
     <div class="videos">
-      <div class="video-placeholder"><span>TypeParis Presentation</span></div>
-      <div class="video-placeholder"><span>Artist Spotlight - Photography</span></div>
+      <div class="video-embed"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZXdbXEGv14Y?si=K34e0iMU3R2Xw02C&start=3614" title="TypeParis Presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-caption">TypeParis 2025 Graduation Day - Terrence presents his typeface, Airlie.</p>
+      <div class="video-embed"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/dzClUGZQY2I?si=cSKkVztd0raicG-c" title="Artist Spotlight - Photography" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-caption">Artist Spotlight - 2D Excellence Award winner, 2025 Local Contemporary Art Prize. Terrence discusses memory, composition, and empty space.</p>
+      <div class="video-embed"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/U5NcIAWVx-0?si=ERLaKANRNpZ1ZQ6p" title="Sloooow - Apple Watch App" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-caption">Sloooow - a year clock for Apple Watch. One rotation per year.</p>
     </div>
   </section>
+
 </div>
 
 <!-- Footer -->
 <div class="page">
   <hr class="divider">
   <footer class="footer">
-    <p class="footer-email"><a href="mailto:terry@terrygillespie.com">terry@terrygillespie.com</a></p>
     <div class="footer-links">
       <a href="https://terrygillespie.com">terrygillespie.com</a>
       <a href="https://github.com/telemetry" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/tezjnr/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://bsky.app/profile/tezjnr.com" target="_blank" rel="noopener">Bluesky</a>
+      <span class="footer-copy">&copy; 2026</span>
     </div>
   </footer>
 </div>
