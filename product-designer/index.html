@@ -231,6 +231,57 @@
       aspect-ratio: 1;
     }
 
+    /* iPhone carousel */
+    .phone-carousel-outer {
+      margin: 32px 0;
+      overflow: hidden;
+    }
+
+    .phone-carousel-track {
+      display: flex;
+      transition: transform 0.38s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .phone-slide {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      min-width: 100%;
+      align-items: start;
+    }
+
+    .iphone-frame {
+      width: 100%;
+    }
+
+    .iphone-frame img {
+      width: 100%;
+      display: block;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gray5);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--gray12);
+      transform: scale(1.3);
+    }
+
     /* Experiments */
     .experiments {
       display: flex;
@@ -240,10 +291,7 @@
     }
 
     .exp {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: start;
+      display: block;
     }
 
     .exp-preview {
@@ -384,11 +432,9 @@
 
     /* Sloooow layout */
     .sloooow-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      display: flex;
+      justify-content: center;
       margin: 32px 0;
-      align-items: start;
     }
 
     .sloooow-main {
@@ -842,6 +888,7 @@
       .item { flex-direction: column; gap: 2px; }
       .item-desc { text-align: left; }
       .placeholders { grid-template-columns: repeat(2, 1fr); }
+      .phone-slide { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .placeholders--square { grid-template-columns: repeat(2, 1fr); }
       .watch-demo { grid-template-columns: 1fr; }
       .watch-demo-left { align-items: center; }
@@ -906,11 +953,6 @@
         <span class="item-desc">#1 financial services company - Australian Disability Network</span>
       </div>
     </div>
-    <div class="placeholders">
-      <div class="placeholder"><span>SafeCall</span></div>
-      <div class="placeholder"><span>SafeBlock</span></div>
-      <div class="placeholder"><span>Personal Finance</span></div>
-    </div>
   </section>
 
   <hr class="divider">
@@ -972,10 +1014,6 @@
         <div class="sloooow-flavours" id="sloooow-flavours"></div>
         <div class="sloooow-info" id="sloooow-info"></div>
       </div>
-      <div class="sloooow-side">
-        <div class="placeholder placeholder--tall"><span>Complications</span></div>
-        <div class="placeholder placeholder--tall"><span>Detail</span></div>
-      </div>
     </div>
   </section>
 
@@ -993,10 +1031,6 @@
       <span>15 weights</span>
       <span>3 styles</span>
       <span>Glyphs</span>
-    </div>
-    <div class="placeholders placeholders--landscape">
-      <div class="placeholder" style="overflow:hidden;"><img src="../nothing/assets/airlie.png" alt="Airlie specimen" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-      <div class="placeholder"><span>Weight range</span></div>
     </div>
   </section>
 
@@ -1039,7 +1073,6 @@
 
     <div class="experiments">
       <div class="exp">
-        <div class="exp-preview"><span>GlyphSketch</span></div>
         <div class="exp-info">
           <p class="exp-name">GlyphSketch</p>
           <p class="exp-desc">iPad app for sketching and prototyping typeface glyphs. Draw letterforms with Apple Pencil, test spacing, and export to Glyphs.</p>
@@ -1047,7 +1080,6 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><span>Come Fly With Me</span></div>
         <div class="exp-info">
           <p class="exp-name">Come Fly With Me</p>
           <p class="exp-desc">A Slow TV experience - simulate the view a loved one has outside an airplane window in real time.</p>
@@ -1055,7 +1087,6 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><img src="../nothing/assets/roadie.png" alt="Roadie"></div>
         <div class="exp-info">
           <p class="exp-name">Roadie</p>
           <p class="exp-desc">Collect, share, and review albums with friends. Built with MusicKit integration and shared listening.</p>
@@ -1063,7 +1094,6 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><img src="../nothing/assets/recently01.png" alt="Recently"></div>
         <div class="exp-info">
           <p class="exp-name">Recently</p>
           <p class="exp-desc">Personal social network for celebrating great work - books, albums, films, and places.</p>
@@ -1079,7 +1109,6 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><img src="../nothing/assets/stackem.png" alt="Texas Stack'em"></div>
         <div class="exp-info">
           <p class="exp-name">Texas Stack'em</p>
           <p class="exp-desc">Hold'em meets match three. Poker hand recognition with physics-based card stacking.</p>
@@ -1087,7 +1116,6 @@
         </div>
       </div>
       <div class="exp">
-        <div class="exp-preview"><img src="../nothing/assets/addend.png" alt="Addend"></div>
         <div class="exp-info">
           <p class="exp-name">Addend</p>
           <p class="exp-desc">Daily accountability menu bar app. Track what you shipped, synced across devices.</p>
@@ -1320,6 +1348,35 @@
   render();
   setInterval(render, 60000);
 })();
+</script>
+
+<!-- Carousel -->
+<script>
+document.querySelectorAll('.phone-carousel-outer').forEach(outer => {
+  const track = outer.querySelector('.phone-carousel-track');
+  const dots = outer.querySelectorAll('.carousel-dot');
+  const slides = outer.querySelectorAll('.phone-slide');
+  const total = slides.length;
+  let current = 0;
+
+  function goTo(index) {
+    current = ((index % total) + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => goTo(parseInt(dot.dataset.slide)));
+  });
+
+  // Swipe
+  let startX = 0;
+  outer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  outer.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+  });
+});
 </script>
 
 <!-- AnyTwo Card Demo -->
