@@ -243,17 +243,24 @@
     }
 
     .carousel-track {
-      display: flex;
+      display: grid;
       width: 100%;
-      transition: transform 0.38s cubic-bezier(0.2, 0, 0, 1);
     }
 
     .carousel-slide {
+      grid-area: 1 / 1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      flex: 0 0 100%;
       align-items: start;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .carousel-slide--1col {
@@ -1411,15 +1418,17 @@
 <!-- Carousel -->
 <script>
 document.querySelectorAll('.carousel-outer').forEach(outer => {
-  const track = outer.querySelector('.carousel-track');
+  const slides = Array.from(outer.querySelectorAll('.carousel-slide'));
   const dots = outer.querySelectorAll('.carousel-dot');
-  const slides = outer.querySelectorAll('.carousel-slide');
   const total = slides.length;
   let current = 0;
 
+  slides[0].classList.add('active');
+
   function goTo(index) {
+    slides[current].classList.remove('active');
     current = ((index % total) + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    slides[current].classList.add('active');
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
   }
 
@@ -1427,7 +1436,6 @@ document.querySelectorAll('.carousel-outer').forEach(outer => {
     dot.addEventListener('click', () => goTo(parseInt(dot.dataset.slide)));
   });
 
-  // Swipe
   let startX = 0;
   outer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   outer.addEventListener('touchend', e => {
