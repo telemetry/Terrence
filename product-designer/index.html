@@ -231,44 +231,53 @@
       aspect-ratio: 1;
     }
 
-    /* iPhone carousel */
-    .phone-carousel-outer {
-      margin: 32px 0;
-      overflow: hidden;
+    /* Carousel */
+    .carousel-outer {
+      margin: 48px 0 16px;
+      width: 100%;
     }
 
-    .phone-carousel-track {
+    .carousel-clip {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carousel-track {
       display: flex;
+      width: 100%;
       transition: transform 0.38s cubic-bezier(0.2, 0, 0, 1);
     }
 
-    .phone-slide {
+    .carousel-slide {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      min-width: 100%;
+      flex: 0 0 100%;
       align-items: start;
     }
 
-    .iphone-frame {
+    .carousel-frame {
       width: 100%;
+      min-width: 0;
     }
 
-    .iphone-frame img {
+    .carousel-frame img {
       width: 100%;
+      height: auto;
       display: block;
     }
 
     .carousel-dots {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 6px;
       margin-top: 16px;
+      padding: 8px 0;
     }
 
     .carousel-dot {
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--gray5);
       border: none;
@@ -888,7 +897,7 @@
       .item { flex-direction: column; gap: 2px; }
       .item-desc { text-align: left; }
       .placeholders { grid-template-columns: repeat(2, 1fr); }
-      .phone-slide { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .carousel-slide { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .placeholders--square { grid-template-columns: repeat(2, 1fr); }
       .watch-demo { grid-template-columns: 1fr; }
       .watch-demo-left { align-items: center; }
@@ -907,7 +916,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="profile-pic"><span>Photo</span></div>
+
     <h1>Terrence Gillespie</h1>
     <p class="hero-role">Principal Design Engineer</p>
     <p>20+ years designing surfaces, systems, and experiences that people trust. Currently governing the native app design system at Westpac across iOS and Android. Payments, identity, and typography - with an obsession for craft at every scale.</p>
@@ -954,17 +963,19 @@
       </div>
     </div>
 
-    <div class="phone-carousel-outer">
-      <div class="phone-carousel-track">
-        <div class="phone-slide">
-          <div class="iphone-frame"><img src="test-mcp/frames/Accounts.png" alt="Accounts"></div>
-          <div class="iphone-frame"><img src="test-mcp/frames/Cashflow.png" alt="Cashflow"></div>
-          <div class="iphone-frame"><img src="test-mcp/frames/Expenses.png" alt="Expenses"></div>
+    <div class="carousel-outer">
+      <div class="carousel-clip">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <div class="carousel-frame"><img src="test-mcp/frames/Accounts.png" alt="Accounts"></div>
+          <div class="carousel-frame"><img src="test-mcp/frames/Cashflow.png" alt="Cashflow"></div>
+          <div class="carousel-frame"><img src="test-mcp/frames/Expenses.png" alt="Expenses"></div>
         </div>
-        <div class="phone-slide">
-          <div class="iphone-frame"><img src="test-mcp/frames/Insights.png" alt="Insights"></div>
-          <div class="iphone-frame"><img src="test-mcp/frames/Widgets.png" alt="Widgets"></div>
+        <div class="carousel-slide">
+          <div class="carousel-frame"><img src="test-mcp/frames/Insights.png" alt="Insights"></div>
+          <div class="carousel-frame"><img src="test-mcp/frames/Widgets.png" alt="Widgets"></div>
         </div>
+      </div>
       </div>
       <div class="carousel-dots">
         <button class="carousel-dot active" data-slide="0"></button>
@@ -1370,10 +1381,10 @@
 
 <!-- Carousel -->
 <script>
-document.querySelectorAll('.phone-carousel-outer').forEach(outer => {
-  const track = outer.querySelector('.phone-carousel-track');
+document.querySelectorAll('.carousel-outer').forEach(outer => {
+  const track = outer.querySelector('.carousel-track');
   const dots = outer.querySelectorAll('.carousel-dot');
-  const slides = outer.querySelectorAll('.phone-slide');
+  const slides = outer.querySelectorAll('.carousel-slide');
   const total = slides.length;
   let current = 0;
 
