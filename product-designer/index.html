@@ -241,6 +241,13 @@
       margin: 16px 0 0;
     }
 
+    .exp-demo-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 16px;
+    }
+
     .carousel-clip {
       overflow: hidden;
       width: 100%;
@@ -1113,8 +1120,13 @@
     <p class="section-body">Always shipping, always learning. Built across every Apple platform.</p>
 
     <!-- Concentric — live demo in Apple Watch bezel -->
-    <div class="watch-demo">
-      <div class="watch-demo-left">
+    <div class="exp exp--demo">
+      <div class="exp-info">
+        <p class="exp-name">Concentric</p>
+        <p class="exp-desc">Watch face concept. Intuit the time from the crop.</p>
+        <span class="exp-stack">watchOS &middot; SwiftUI</span>
+      </div>
+      <div class="exp-demo-center">
         <div class="watch-bezel" id="concentric-watch">
           <div class="watch-screen">
             <div class="concentric-outer" id="concentric-outer">
@@ -1133,11 +1145,6 @@
           <button class="concentric-toggle active" id="concentric-toggle-live">Live</button>
           <button class="concentric-toggle" id="concentric-toggle-warp">Time Warp</button>
         </div>
-      </div>
-      <div class="watch-demo-info">
-        <p class="exp-name">Concentric</p>
-        <p class="exp-desc">Watch face concept. Intuit the time from the crop.</p>
-        <span class="exp-stack">watchOS &middot; SwiftUI</span>
       </div>
     </div>
 
@@ -1186,14 +1193,14 @@
           <span class="exp-stack">Vue &middot; iOS &middot; Firebase</span>
         </div>
       </div>
-      <div class="watch-demo">
-        <div class="watch-demo-left">
-          <div class="exp-preview" id="anytwo-container" style="aspect-ratio: 1;"></div>
-        </div>
-        <div class="watch-demo-info">
+      <div class="exp exp--demo">
+        <div class="exp-info">
           <p class="exp-name">AnyTwo</p>
           <p class="exp-desc">Hold'em hand dealer with variance tracking. Live odds on your home screen.</p>
           <span class="exp-stack">iOS &middot; SwiftUI &middot; Widget</span>
+        </div>
+        <div class="exp-demo-center">
+          <div class="exp-preview" id="anytwo-container" style="aspect-ratio: 1;"></div>
         </div>
       </div>
       <div class="exp">
