@@ -248,6 +248,21 @@
       margin-top: 16px;
     }
 
+    /* 3-up on desktop, carousel on mobile */
+    .carousel-3up .carousel-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .carousel-3up .carousel-slide {
+      grid-area: unset;
+      opacity: 1;
+      pointer-events: auto;
+      grid-template-columns: 1fr;
+      transition: none;
+    }
+    .carousel-3up .carousel-dots { display: none; }
+
     .carousel-clip {
       overflow: hidden;
       width: 100%;
@@ -922,6 +937,10 @@
       .placeholders { grid-template-columns: repeat(2, 1fr); }
       .carousel-slide { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .carousel-slide--1col { grid-template-columns: 1fr; }
+      .carousel-3up .carousel-track { display: grid; grid-template-columns: 1fr; gap: 0; }
+      .carousel-3up .carousel-slide { grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+      .carousel-3up .carousel-slide.active { opacity: 1; pointer-events: auto; }
+      .carousel-3up .carousel-dots { display: flex; }
       .placeholders--square { grid-template-columns: repeat(2, 1fr); }
       .watch-demo { grid-template-columns: 1fr; }
       .watch-demo-left { align-items: center; }
@@ -1200,18 +1219,58 @@
           </div>
         </div>
       </div>
-      <div class="exp">
+      <div class="exp exp--full">
         <div class="exp-info">
           <p class="exp-name">Roadie</p>
           <p class="exp-desc">Collect, share, and review albums with friends. Built with MusicKit integration and shared listening.</p>
           <span class="exp-stack">iOS &middot; MusicKit &middot; CloudKit</span>
         </div>
+        <div class="carousel-outer carousel-3up">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/roadie/r1.png" alt="Roadie"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/roadie/r2.png" alt="Roadie"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/roadie/r3.png" alt="Roadie"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+            <button class="carousel-dot" data-slide="2"></button>
+          </div>
+        </div>
       </div>
-      <div class="exp">
+      <div class="exp exp--full">
         <div class="exp-info">
           <p class="exp-name">Recently</p>
           <p class="exp-desc">Personal social network for celebrating great work - books, albums, films, and places.</p>
           <span class="exp-stack">Vue &middot; iOS &middot; Firebase</span>
+        </div>
+        <div class="carousel-outer carousel-3up">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/recently/rec1.png" alt="Recently"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/recently/rec2.png" alt="Recently"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/recently/rec3.png" alt="Recently"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+            <button class="carousel-dot" data-slide="2"></button>
+          </div>
         </div>
       </div>
       <div class="exp exp--demo">
