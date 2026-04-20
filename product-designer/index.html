@@ -101,12 +101,19 @@
 
     .hero-intro {
       display: flex;
-      gap: 24px;
+      gap: 32px;
       align-items: flex-start;
     }
 
+    .hero-intro-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     .hero-photo {
-      width: 120px;
+      width: 180px;
       flex-shrink: 0;
       border-radius: 6px;
       border: 1px solid var(--gray5);
@@ -114,7 +121,8 @@
     }
 
     @media (max-width: 640px) {
-      .hero-photo { width: 88px; }
+      .hero-intro { flex-direction: column-reverse; }
+      .hero-photo { width: 100%; }
     }
 
     .hero h1 {
@@ -1007,8 +1015,11 @@
     <h1>Terrence Gillespie</h1>
     <p class="hero-role">Principal Design Engineer</p>
     <div class="hero-intro">
+      <div class="hero-intro-text">
+        <p>20+ years designing interfaces, systems, and experiences that people trust. Currently governing the native app design system at Westpac across iOS and Android. Payments, identity, and typography - with an obsession for craft at every scale.</p>
+        <p>Hi there, I'm a curious individual who works across design and code. A lifelong learner, I am interested in typography, photography and am generally optimistic about technology and the future. Thanks for reading my portfolio.</p>
+      </div>
       <img class="hero-photo" src="assets/profile.jpg" alt="Terrence Gillespie">
-      <p>20+ years designing interfaces, systems, and experiences that people trust. Currently governing the native app design system at Westpac across iOS and Android. Payments, identity, and typography - with an obsession for craft at every scale.</p>
     </div>
   </section>
 
