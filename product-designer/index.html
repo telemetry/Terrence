@@ -237,6 +237,10 @@
       width: 100%;
     }
 
+    .exp--full .carousel-outer {
+      margin: 0 0 0;
+    }
+
     .carousel-clip {
       overflow: hidden;
       width: 100%;
@@ -1138,7 +1142,23 @@
     </div>
 
     <div class="experiments">
-      <div class="exp">
+      <div class="exp exp--full">
+        <div class="carousel-outer">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/glyphsketch/glyphsketch-01.png" alt="GlyphSketch — glyph editor"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/glyphsketch/glyphsketch-02.png" alt="GlyphSketch — preview"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+          </div>
+        </div>
         <div class="exp-info">
           <p class="exp-name">GlyphSketch</p>
           <p class="exp-desc">iPad app for sketching and prototyping typeface glyphs. Draw letterforms with Apple Pencil, test spacing, and export to Glyphs.</p>
