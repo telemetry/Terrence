@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Airlie — a typeface</title>
+  <meta name="description" content="Airlie, a serif for quiet evenings, by Terry Gillespie.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js" defer></script>
+  <script src="viewer.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="../">← Terrence</a>
+    <span class="brand" id="brand"></span>
+    <button class="drop-hint" type="button" id="drop-trigger">Drop your own font</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 class="display" id="display-name"></h1>
+      <p class="tagline" id="tagline"></p>
+      <p class="byline"><span id="designer"></span> · <span id="year"></span></p>
+    </section>
+
+    <section class="spiel">
+      <h2>About</h2>
+      <p id="spiel-body"></p>
+    </section>
+
+    <section class="specimen">
+      <header class="section-header">
+        <h2>Specimen</h2>
+        <p class="hint">Type into the sample. Drag controls.</p>
+      </header>
+
+      <div class="controls" id="controls">
+        <label class="control control--size">
+          <span class="control__label">Size <output id="size-out">96</output>px</span>
+          <input type="range" id="size" min="12" max="240" value="96">
+        </label>
+
+        <label class="control control--track">
+          <span class="control__label">Tracking <output id="track-out">0</output></span>
+          <input type="range" id="track" min="-50" max="200" value="0">
+        </label>
+
+        <label class="control control--lh">
+          <span class="control__label">Line height <output id="lh-out">1.15</output></span>
+          <input type="range" id="lh" min="80" max="200" value="115">
+        </label>
+
+        <label class="control control--italic">
+          <input type="checkbox" id="italic">
+          <span>Italic</span>
+        </label>
+
+        <div id="axis-controls" class="axis-controls"></div>
+        <div id="feature-controls" class="feature-controls"></div>
+      </div>
+
+      <div
+        class="sample"
+        id="sample"
+        contenteditable="true"
+        spellcheck="false"
+        autocorrect="off"
+      ></div>
+    </section>
+
+    <section class="glyphs">
+      <header class="section-header">
+        <h2>Characters</h2>
+        <p class="hint" id="glyphs-meta">Click any glyph to copy.</p>
+      </header>
+      <div class="glyph-grid" id="glyph-grid"></div>
+    </section>
+
+    <section class="buy" id="buy-section" hidden>
+      <header class="section-header">
+        <h2>Get Airlie</h2>
+        <p class="hint" id="license-note"></p>
+      </header>
+      <div class="buy-row">
+        <span class="price" id="price"></span>
+        <div id="buy-mount"></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>Drop a <code>.otf</code>, <code>.ttf</code>, <code>.woff</code> or <code>.woff2</code> anywhere on the page to preview your own.</p>
+    </footer>
+  </main>
+
+  <div class="drop-overlay" id="drop-overlay" hidden>
+    <div class="drop-overlay__inner">
+      <p>Drop font here</p>
+      <p class="drop-overlay__sub">.otf · .ttf · .woff · .woff2</p>
+    </div>
+  </div>
+
+  <input type="file" id="file-input" accept=".otf,.ttf,.woff,.woff2,font/*" hidden>
+</body>
+</html>
