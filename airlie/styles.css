@@ -1,8 +1,10 @@
 :root {
-  --bg: #faf8f4;
-  --ink: #1a1815;
-  --rule: #1a1815;
-  --muted: #6b665e;
+  color-scheme: light dark;
+
+  --bg:    light-dark(#faf8f4, #14130f);
+  --ink:   light-dark(#1a1815, #f1ece2);
+  --rule:  light-dark(#1a1815, #f1ece2);
+  --muted: light-dark(#6b665e, #8a847a);
   --accent-base: #b13b1f;
   --accent: var(--accent-base);
   --accent-on: var(--bg);
@@ -10,26 +12,18 @@
   --type: "TYPEFACE", "Newsreader", Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14130f;
-    --ink: #f1ece2;
-    --rule: #f1ece2;
-    --muted: #8a847a;
-  }
-}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"]  { color-scheme: dark;  }
 
 /* Derive an accessible accent per mode by clamping lightness against the
    neutral background. Relative-colour syntax (Chrome 119+/Safari 16.4+/
    Firefox 128+); browsers without it fall back to the raw accent above. */
 @supports (color: oklch(from white l c h)) {
   :root {
-    --accent: oklch(from var(--accent-base) clamp(0.4, l, 0.55) c h);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --accent: oklch(from var(--accent-base) clamp(0.65, l, 0.82) c h);
-    }
+    --accent: light-dark(
+      oklch(from var(--accent-base) clamp(0.4, l, 0.55) c h),
+      oklch(from var(--accent-base) clamp(0.65, l, 0.82) c h)
+    );
   }
 }
 
@@ -58,12 +52,42 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   padding: 20px 32px;
   font-size: 13px;
   letter-spacing: 0.02em;
   max-width: 1180px;
   margin: 0 auto;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.theme-toggle button {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.theme-toggle button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
 }
 
 .back {
@@ -357,6 +381,55 @@ main {
   padding: 2px 6px;
   border-radius: 4px;
 }
+
+.accent-picker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.accent-picker label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+}
+.accent-picker input[type="color"] {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+.accent-picker input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+.accent-picker input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 999px;
+}
+.accent-picker input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 999px;
+}
+.accent-reset {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--ink) 40%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.accent-reset:hover { color: var(--ink); border-color: var(--ink); }
 
 /* DROP OVERLAY */
 .drop-overlay {

@@ -14,7 +14,13 @@
   <header class="topbar">
     <a class="back" href="../">← Terrence</a>
     <span class="brand" id="brand"></span>
-    <button class="drop-hint" type="button" id="drop-trigger">Drop your own font</button>
+    <div class="topbar-actions">
+      <div class="theme-toggle" role="group" aria-label="Theme">
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme-set="dark"  aria-pressed="false">Dark</button>
+      </div>
+      <button class="drop-hint" type="button" id="drop-trigger">Drop your own font</button>
+    </div>
   </header>
 
   <main>
@@ -90,6 +96,14 @@
 
     <footer class="foot">
       <p>Drop a <code>.otf</code>, <code>.ttf</code>, <code>.woff</code> or <code>.woff2</code> anywhere on the page to preview your own.</p>
+      <div class="accent-picker">
+        <label>
+          <span>Try an accent</span>
+          <input type="color" id="accent-picker" value="#b13b1f">
+        </label>
+        <code id="accent-readout">#b13b1f</code>
+        <button type="button" id="accent-reset" class="accent-reset">Reset</button>
+      </div>
     </footer>
   </main>
 

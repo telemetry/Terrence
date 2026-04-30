@@ -2,8 +2,44 @@
   const T = window.TYPEFACE;
   if (!T) { console.error('config.js missing'); return; }
 
+  // ---------- Theme + accent (persisted) ----------
+  const THEME_KEY  = 'airlie:theme';
+  const ACCENT_KEY = 'airlie:accent';
+  const root = document.documentElement;
+  const mql  = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function effectiveTheme(saved) {
+    if (saved === 'light' || saved === 'dark') return saved;
+    return mql.matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(saved) {
+    if (saved === 'light' || saved === 'dark') {
+      root.setAttribute('data-theme', saved);
+    } else {
+      root.removeAttribute('data-theme');
+    }
+    const eff = effectiveTheme(saved);
+    document.querySelectorAll('[data-theme-set]').forEach(b => {
+      b.setAttribute('aria-pressed', String(b.dataset.themeSet === eff));
+    });
+  }
+
+  applyTheme(localStorage.getItem(THEME_KEY) || 'system');
+  mql.addEventListener('change', () => {
+    if (!localStorage.getItem(THEME_KEY)) applyTheme('system');
+  });
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.themeSet;
+      localStorage.setItem(THEME_KEY, t);
+      applyTheme(t);
+    });
+  });
+
   // ---------- Populate static copy ----------
-  if (T.accent) document.documentElement.style.setProperty('--accent-base', T.accent);
+  const initialAccent = localStorage.getItem(ACCENT_KEY) || T.accent;
+  if (initialAccent) root.style.setProperty('--accent-base', initialAccent);
   document.title = `${T.name} — a typeface`;
   document.getElementById('brand').textContent = T.name;
   document.getElementById('display-name').textContent = T.name;
@@ -312,6 +348,25 @@
     section.hidden = false;
   }
   mountStripeBuyButton();
+
+  // ---------- Accent picker ----------
+  const accentInput   = document.getElementById('accent-picker');
+  const accentReadout = document.getElementById('accent-readout');
+  const accentReset   = document.getElementById('accent-reset');
+
+  function setAccent(hex, persist) {
+    root.style.setProperty('--accent-base', hex);
+    accentInput.value = hex;
+    accentReadout.textContent = hex.toLowerCase();
+    if (persist) localStorage.setItem(ACCENT_KEY, hex);
+  }
+  setAccent(initialAccent, false);
+
+  accentInput.addEventListener('input', e => setAccent(e.target.value, true));
+  accentReset.addEventListener('click', () => {
+    localStorage.removeItem(ACCENT_KEY);
+    setAccent(T.accent, false);
+  });
 
   // ---------- Kick off font load ----------
   tryLoadLocalFont().then(loaded => {
