@@ -11,6 +11,11 @@ window.TYPEFACE = {
     and a humanist axis that keeps it readable down to small sizes while
     holding its character at display.`,
 
+  // Brand accent. Pick one colour; the page derives accessible variants for
+  // light & dark mode automatically (lightness is clamped against the
+  // neutral backgrounds so the accent passes WCAG contrast in both).
+  accent: '#b13b1f',
+
   // Local font file. If absent, the page falls back to fallbackGoogleFont.
   fontUrl: 'fonts/Airlie.woff2',
   fallbackGoogleFont: {

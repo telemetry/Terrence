@@ -3,7 +3,9 @@
   --ink: #1a1815;
   --rule: #1a1815;
   --muted: #6b665e;
-  --accent: #b13b1f;
+  --accent-base: #b13b1f;
+  --accent: var(--accent-base);
+  --accent-on: var(--bg);
   --ui: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   --type: "TYPEFACE", "Newsreader", Georgia, serif;
 }
@@ -14,6 +16,20 @@
     --ink: #f1ece2;
     --rule: #f1ece2;
     --muted: #8a847a;
+  }
+}
+
+/* Derive an accessible accent per mode by clamping lightness against the
+   neutral background. Relative-colour syntax (Chrome 119+/Safari 16.4+/
+   Firefox 128+); browsers without it fall back to the raw accent above. */
+@supports (color: oklch(from white l c h)) {
+  :root {
+    --accent: oklch(from var(--accent-base) clamp(0.4, l, 0.55) c h);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: oklch(from var(--accent-base) clamp(0.65, l, 0.82) c h);
+    }
   }
 }
 
@@ -174,7 +190,7 @@ main {
 
 .control input[type="range"] {
   width: 100%;
-  accent-color: var(--ink);
+  accent-color: var(--accent);
 }
 
 .control--italic {
@@ -206,7 +222,11 @@ main {
   cursor: pointer;
   user-select: none;
 }
-.feature-controls input[type="checkbox"] { accent-color: var(--ink); }
+.feature-controls input[type="checkbox"] { accent-color: var(--accent); }
+.feature-controls label:has(input:checked) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
 .axis-controls label {
   flex-direction: column;
@@ -309,8 +329,8 @@ main {
   font-size: 14px;
   letter-spacing: 0.04em;
   padding: 14px 28px;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-on);
   border: 0;
   border-radius: 999px;
   opacity: 0.6;
@@ -353,7 +373,8 @@ main {
 }
 .drop-overlay[hidden] { display: none; }
 .drop-overlay__inner {
-  border: 2px dashed var(--ink);
+  border: 2px dashed var(--accent);
+  color: var(--accent);
   padding: 64px 96px;
   text-align: center;
   border-radius: 24px;

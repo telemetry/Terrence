@@ -3,6 +3,7 @@
   if (!T) { console.error('config.js missing'); return; }
 
   // ---------- Populate static copy ----------
+  if (T.accent) document.documentElement.style.setProperty('--accent-base', T.accent);
   document.title = `${T.name} — a typeface`;
   document.getElementById('brand').textContent = T.name;
   document.getElementById('display-name').textContent = T.name;
