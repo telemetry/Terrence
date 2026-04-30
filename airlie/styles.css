@@ -356,8 +356,9 @@ main {
   background: var(--accent);
   color: var(--accent-on);
   border: 0;
+  outline: 2px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 3px;
   border-radius: 999px;
-  opacity: 0.6;
   cursor: not-allowed;
 }
 .buy-stub-tag {
