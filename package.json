@@ -1,0 +1,11 @@
+{
+  "name": "terrence",
+  "private": true,
+  "description": "terrygillespie.com — Jekyll site + airlie typeface microsite template.",
+  "scripts": {
+    "dev": "npx --yes serve@14 . -l 4000",
+    "dev:airlie": "npx --yes serve@14 airlie -l 4001",
+    "dev:py": "python3 -m http.server 4000",
+    "dev:jekyll": "bundle exec jekyll serve --livereload"
+  }
+}
