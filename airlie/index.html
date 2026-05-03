@@ -20,6 +20,7 @@
         <button type="button" data-theme-set="dark"  aria-pressed="false">Dark</button>
       </div>
       <button class="drop-hint" type="button" id="drop-trigger">Drop your own font</button>
+      <button class="drop-hint edit-trigger" type="button" id="edit-trigger">Edit</button>
     </div>
   </header>
 
@@ -85,7 +86,7 @@
 
     <section class="buy" id="buy-section" hidden>
       <header class="section-header">
-        <h2>Get Airlie</h2>
+        <h2 id="buy-heading">Get Airlie</h2>
         <p class="hint" id="license-note"></p>
       </header>
       <div class="buy-row">
@@ -106,6 +107,51 @@
       </div>
     </footer>
   </main>
+
+  <aside class="edit-drawer" id="edit-drawer" hidden aria-label="Configure your typeface">
+    <header class="edit-drawer__head">
+      <div>
+        <h2>Configure</h2>
+        <p>Live preview · changes update the page as you type.</p>
+      </div>
+      <button type="button" id="edit-close" aria-label="Close editor">Close</button>
+    </header>
+
+    <div class="edit-drawer__body">
+      <fieldset>
+        <legend>Identity</legend>
+        <label><span>Name</span><input data-field="name" type="text"></label>
+        <label><span>Tagline</span><input data-field="tagline" type="text"></label>
+        <label><span>Designer</span><input data-field="designer" type="text"></label>
+        <label><span>Year</span><input data-field="year" type="number" min="1900" max="2100"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Copy</legend>
+        <label><span>About paragraph</span><textarea data-field="spiel" rows="5"></textarea></label>
+        <label><span>Specimen sample</span><textarea data-field="sampleText" rows="4"></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Brand</legend>
+        <label class="row"><span>Accent colour</span><input data-field="accent" type="color"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Stripe (optional)</legend>
+        <p class="fieldset-help">Create a Buy Button at <code>dashboard.stripe.com/buy-buttons</code>, paste IDs.</p>
+        <label><span>Buy button ID</span><input data-field="stripe.buyButtonId" type="text" placeholder="buy_btn_…"></label>
+        <label><span>Publishable key</span><input data-field="stripe.publishableKey" type="text" placeholder="pk_live_…"></label>
+        <label><span>Price label</span><input data-field="stripe.price" type="text" placeholder="$24"></label>
+        <label><span>License note</span><textarea data-field="stripe.licenseNote" rows="2"></textarea></label>
+      </fieldset>
+    </div>
+
+    <footer class="edit-drawer__foot">
+      <button type="button" class="edit-save" id="edit-copy">Copy config.js</button>
+      <p class="edit-help">Paste the result over <code>airlie/config.js</code> on GitHub and commit.</p>
+    </footer>
+  </aside>
 
   <div class="drop-overlay" id="drop-overlay" hidden>
     <div class="drop-overlay__inner">
