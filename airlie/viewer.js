@@ -374,19 +374,24 @@
 
   // ---------- Edit drawer (?edit=1) ----------
   const drawer = document.getElementById('edit-drawer');
+  const backdrop = document.getElementById('edit-backdrop');
   const editTrigger = document.getElementById('edit-trigger');
   const editClose   = document.getElementById('edit-close');
 
   function openDrawer() {
-    drawer.hidden = false;
+    backdrop.hidden = false;
+    // Force a frame so the backdrop transitions in instead of snapping.
+    requestAnimationFrame(() => { drawer.hidden = false; });
     document.body.classList.add('edit-open');
   }
   function closeDrawer() {
     drawer.hidden = true;
+    backdrop.hidden = true;
     document.body.classList.remove('edit-open');
   }
   editTrigger.addEventListener('click', openDrawer);
   editClose.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !drawer.hidden) closeDrawer();
   });
