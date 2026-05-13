@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrence Gillespie - Cover Letter</title>
+  <style>
+    :root {
+      --gray1: hsl(0 0% 98%);
+      --gray8: hsl(0 0% 55%);
+      --gray11: hsl(0 0% 32%);
+      --gray12: hsl(0 0% 7%);
+      --bg: #fff;
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --gray1: hsl(0 0% 10%);
+        --gray8: hsl(0 0% 50%);
+        --gray11: hsl(0 0% 72%);
+        --gray12: hsl(0 0% 93%);
+        --bg: hsl(0 0% 7%);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--gray12);
+      background: var(--bg);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 24px 72px;
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .name {
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .meta {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      letter-spacing: 0.02em;
+    }
+
+    .recipient {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 24px;
+    }
+
+    .body p {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 20px;
+    }
+
+    .body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sign-off {
+      margin-top: 24px;
+    }
+
+    .sign-off p {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 4px;
+    }
+
+    .sign-off .name {
+      font-size: 16px;
+      color: var(--gray12);
+    }
+
+    a {
+      color: var(--gray12);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gray8);
+    }
+
+    /* Print / PDF */
+    @media print {
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: hsl(0 0% 7%);
+        background: white;
+      }
+
+      .page {
+        max-width: none;
+        padding: 32px 64px;
+      }
+
+      .meta, .recipient, .body p, .sign-off p {
+        color: hsl(0 0% 32%);
+      }
+
+      .meta {
+        color: hsl(0 0% 55%);
+      }
+
+      a {
+        color: hsl(0 0% 7%);
+        border-bottom: none;
+      }
+    }
+
+    @page {
+      margin: 16mm;
+      size: A4;
+    }
+
+    @page :first {
+      margin-top: 16mm;
+    }
+
+    .page-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .download-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      background: var(--bg);
+      border: 1px solid hsl(0 0% 85%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.15s ease;
+    }
+
+    .download-btn:hover {
+      color: var(--gray12);
+      border-color: var(--gray8);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .download-btn { border-color: hsl(0 0% 22%); }
+    }
+
+    .doc-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid hsl(0 0% 90%);
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .doc-footer { border-top-color: hsl(0 0% 18%); }
+    }
+
+    .doc-footer a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      border-bottom: none;
+      letter-spacing: 0.02em;
+      transition: color 0.15s ease;
+    }
+
+    .doc-footer a:hover { color: var(--gray12); }
+
+    @media print {
+      .download-btn { display: none; }
+      .doc-footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-top">
+    <a class="download-btn" href="Terrence_Gillespie_Cover_Letter.pdf" download>Download PDF ↓</a>
+  </div>
+
+  <div class="header">
+    <p class="name">Terrence Gillespie</p>
+    <p class="meta">Principal Design Engineer / Brisbane</p>
+  </div>
+
+  <p class="recipient">Dear Anthropic Design Team,</p>
+
+  <div class="body">
+    <p>I want to help shape Claude Code. I use it daily — across this portfolio, side projects, and an experimental tvOS flight tracker — and the loop of "imagine a small interface, prototype it in HTML/CSS/JS in minutes, iterate against the model" has reshaped how I work. Working on the product that enables that loop, for millions of others, is the role I've been working toward.</p>
+
+    <p>I'm Principal Design Engineer at Westpac, one of Australia's four major banks, where I govern the native design system across iOS, Android, macOS, and watchOS for 4 million daily users. The work is complex — payments, identity, fraud prevention, regulation — and it ships fast. Recent features include SafeCall and SafeBlock, scam prevention features that protect customers at the moment they're being defrauded; I led the design integration of an acquired personal finance app — spending insights, charting, budgeting at banking scale. The Westpac app has been rated #1 in Australia by Forrester three years running, and #1 for access and inclusion by the Australian Disability Network. I present the annual design review to an engineering audience of 4,000 at TechX, building the case for craft at the scale where it's hardest to maintain.</p>
+
+    <p>My path ran through running a design studio in Sydney, leading mobile UX at Telstra (15 million users) and training at the Apple Developer Academy in Naples — SwiftUI, Challenge Based Learning, and Pixar's storytelling methodology. I learn quickly across platforms — the same instinct that took me from Sketch to Figma to SwiftUI now takes me into Claude Code and front-end prototyping. I prototype in HTML/CSS/JS, ship Storybook-style component libraries and macOS UI builders to my engineering partners, and treat handoff as a design problem in itself.</p>
+
+    <p>Typography is the through-line. I graduated from TypeParis last year with distinction and released a typeface, Airlie. That attention to scale, rhythm, and intent carries into every interface I touch.</p>
+
+    <p>Claude Code is, for me, the most interesting design surface in the industry right now — a tool sitting between intent and engineered output, across terminal and Desktop, shaping how the next generation of software gets made. I'd bring systems thinking, fast hands in code, and an obsession with craft.</p>
+
+    <p>I'm ready to relocate to San Francisco, New York, or Seattle. My portfolio is at <a href="https://terrygillespie.com/product-designer/">terrygillespie.com/product-designer</a>. Thank you for considering me.</p>
+  </div>
+
+  <div class="sign-off">
+    <p class="name">Terrence Gillespie</p>
+  </div>
+
+  <footer class="doc-footer">
+    <a href="index.html">← Portfolio</a>
+    <a href="resume.html">Resume</a>
+  </footer>
+</div>
+
+<script data-goatcounter="https://terrence.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

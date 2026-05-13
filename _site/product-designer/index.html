@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrence Gillespie - Product Designer</title>
+  <meta name="description" content="Terrence Gillespie - Principal Design Engineer. 20+ years designing interfaces, systems, and experiences across payments, identity, and typography.">
+  <meta property="og:title" content="Terrence Gillespie - Product Designer">
+  <meta property="og:description" content="Principal Design Engineer. Design systems, payments, identity, and typography at scale.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <style>
+    :root {
+      --gray1: hsl(0 0% 98%);
+      --gray3: hsl(0 0% 93%);
+      --gray5: hsl(0 0% 85%);
+      --gray8: hsl(0 0% 55%);
+      --gray11: hsl(0 0% 32%);
+      --gray12: hsl(0 0% 7%);
+      --bg: #fff;
+      --border: var(--gray3);
+      --border-card: var(--gray3);
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --gray1: hsl(0 0% 10%);
+        --gray3: hsl(0 0% 15%);
+        --gray5: hsl(0 0% 25%);
+        --gray8: hsl(0 0% 50%);
+        --gray11: hsl(0 0% 72%);
+        --gray12: hsl(0 0% 93%);
+        --bg: hsl(0 0% 7%);
+        --border: rgba(255,255,255,0.08);
+        --border-card: rgba(255,255,255,0.06);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--gray12);
+      background: var(--bg);
+      overflow-x: hidden;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    ::selection {
+      background: var(--gray12);
+      color: var(--bg);
+    }
+
+    /* Layout */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 128px 0 96px;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--gray1);
+      border: 1px solid var(--gray5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .profile-pic img {
+      width: 42px;
+      height: auto;
+      filter: brightness(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .profile-pic img {
+        filter: brightness(1) opacity(0.75);
+      }
+    }
+
+    .hero-intro {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .hero-intro-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-photo {
+      width: 180px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      border: 1px solid var(--gray5);
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .hero-intro { flex-direction: column-reverse; align-items: center; }
+      .hero-photo { width: 50%; }
+    }
+
+    .hero h1 {
+      font-size: 33px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .hero-role {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      letter-spacing: 0.02em;
+      margin-bottom: 32px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--gray11);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+
+    /* Section */
+    .section {
+      padding: 64px 0 8px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--gray8);
+      margin-bottom: 16px;
+    }
+
+    .section-body {
+      font-size: 19px;
+      color: var(--gray11);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .section-meta {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      margin-bottom: 32px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Items */
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .item-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .item-desc {
+      font-size: 16px;
+      color: var(--gray11);
+      text-align: right;
+    }
+
+    /* Placeholder image grid */
+    .placeholders {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .placeholder {
+      background: var(--gray1);
+      border: 1px dashed var(--gray5);
+      border-radius: 4px;
+      aspect-ratio: 9 / 16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .placeholder span {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+    }
+
+    .placeholders--landscape {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .placeholders--landscape .placeholder {
+      aspect-ratio: 16 / 10;
+    }
+
+    .placeholders--square {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .placeholders--square .placeholder {
+      aspect-ratio: 1;
+    }
+
+    /* Carousel */
+    .carousel-outer {
+      margin: 48px 0;
+      width: 100%;
+    }
+
+    .exp--full .carousel-outer {
+      margin: 16px 0 0;
+    }
+
+    .exp-demo-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    /* 3-up on desktop, carousel on mobile */
+    .carousel-3up .carousel-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .carousel-3up .carousel-slide {
+      grid-area: unset;
+      opacity: 1;
+      pointer-events: auto;
+      grid-template-columns: 1fr;
+      transition: none;
+    }
+    .carousel-3up .carousel-dots { display: none; }
+
+    .carousel-clip {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carousel-track {
+      display: grid;
+      width: 100%;
+    }
+
+    .carousel-slide {
+      grid-area: 1 / 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .carousel-slide--1col {
+      grid-template-columns: 1fr;
+    }
+
+    .carousel-frame {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .carousel-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .carousel-slide--1col .carousel-frame img {
+      border-radius: 8px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: flex-start;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 8px 0;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray5);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--gray12);
+      transform: scale(1.3);
+    }
+
+    /* Experiments */
+    .experiments {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      margin: 32px 0;
+    }
+
+    .exp {
+      display: block;
+    }
+
+    .exp-preview {
+      aspect-ratio: 4 / 3;
+      background: var(--gray1);
+      border: 1px dashed var(--gray5);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .exp-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .exp-preview > span {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+    }
+
+    /* AnyTwo card demo — verbatim nothing/style.css */
+    #anytwo-container {
+      background: transparent;
+      border: none;
+    }
+
+    .anytwo-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 32px;
+    }
+
+    .anytwo-widget {
+      width: 280px;
+      height: 280px;
+      border-radius: 56px;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .anytwo-hand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .anytwo-card {
+      width: 100px;
+      height: 134px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: -4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      border: 0.5px solid rgba(255, 255, 255, 0.06);
+      opacity: 0;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.15s ease;
+    }
+
+    .anytwo-rank {
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .anytwo-suit {
+      font-size: 24px;
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    .anytwo-deal {
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #00b44c;
+      background: rgba(0, 180, 76, 0.12);
+      border: 1px solid #00b44c;
+      padding: 6px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.15s ease;
+    }
+
+    .anytwo-deal:hover {
+      background: rgba(0, 180, 76, 0.2);
+      border-color: #00b44c;
+      color: #00b44c;
+    }
+
+    .anytwo-deal:active {
+      transform: scale(0.95);
+    }
+
+    .exp-info {
+      padding-top: 8px;
+    }
+
+    .exp-name {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .exp-desc {
+      font-size: 16px;
+      color: var(--gray11);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .exp-stack {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+    }
+
+    /* Sloooow layout */
+    .sloooow-layout {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0;
+    }
+
+    .sloooow-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .watch-bezel--sloooow {
+      width: 220px;
+      height: 268px;
+    }
+
+    .watch-screen--sloooow {
+      background: #000;
+    }
+
+    .sloooow-face {
+      width: 100%;
+      height: 100%;
+    }
+
+    .sloooow-info {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray8);
+      text-align: center;
+      width: 220px;
+    }
+
+    .sloooow-flavours {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      width: 220px;
+      justify-items: center;
+    }
+
+    .sloooow-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.12);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .sloooow-dot:hover {
+      transform: scale(1.3);
+    }
+
+    .sloooow-dot.active {
+      border: 2px solid var(--gray12);
+      box-shadow: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .sloooow-dot {
+        border-color: rgba(255,255,255,0.15);
+      }
+      .sloooow-dot.active {
+        border-color: white;
+      }
+    }
+
+    .sloooow-side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .placeholder--tall {
+      flex: 1;
+      aspect-ratio: auto;
+      min-height: 0;
+    }
+
+    /* Watch demo */
+    .watch-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+      margin: 32px 0 48px;
+    }
+
+    .watch-demo-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .watch-bezel {
+      width: 220px;
+      height: 268px;
+      background: #1a1a1a;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 20px 60px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+      position: relative;
+    }
+
+    .watch-bezel::before {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 72px;
+      width: 4px;
+      height: 48px;
+      background: #2a2a2a;
+      border-radius: 0 4px 4px 0;
+      box-shadow: inset -1px 0 0 rgba(255,255,255,0.06);
+    }
+
+    .watch-screen {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Concentric clock layers */
+    .concentric-outer {
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      top: 124px;
+      left: -102px;
+      transform-origin: 200px 0px;
+      transition: transform 0.5s ease-out;
+    }
+
+    /* Concentric scaled to 120% */
+    #concentric-watch {
+      width: 264px;
+      height: 322px;
+      border-radius: 48px;
+    }
+    #concentric-watch .watch-screen {
+      border-radius: 38px;
+    }
+    #concentric-watch .concentric-outer {
+      top: 149px;
+      left: -82px;
+    }
+
+    .concentric-inner {
+      width: 400px;
+      height: 400px;
+      position: relative;
+      transform-origin: 200px 200px;
+      transition: transform 0.5s ease-out;
+    }
+
+    .concentric-svg {
+      width: 400px;
+      height: 400px;
+    }
+
+    .concentric-dot {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 59, 48, 0.9);
+      border-radius: 50%;
+      top: -10px;
+      left: 168px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: 32px 212px;
+      transition: transform 0.5s ease-out;
+    }
+
+    .concentric-hour {
+      color: white;
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      transition: transform 0.5s ease-out;
+    }
+
+    /* Time Warp mode — faster transitions */
+    .watch-bezel.timewarp .concentric-outer,
+    .watch-bezel.timewarp .concentric-inner,
+    .watch-bezel.timewarp .concentric-dot,
+    .watch-bezel.timewarp .concentric-hour {
+      transition: transform 0.2s linear;
+    }
+
+    .watch-bezel.no-transition .concentric-outer,
+    .watch-bezel.no-transition .concentric-inner,
+    .watch-bezel.no-transition .concentric-dot,
+    .watch-bezel.no-transition .concentric-hour {
+      transition: none;
+    }
+
+    /* Toggle controls */
+    .concentric-controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .concentric-toggle {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray8);
+      background: var(--gray1);
+      border: 1px solid var(--border-card);
+      padding: 6px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.15s ease;
+    }
+
+    .concentric-toggle:hover {
+      color: var(--gray12);
+      border-color: var(--gray5);
+    }
+
+    .concentric-toggle.active {
+      background: rgba(255, 59, 48, 0.08);
+      border-color: rgba(255, 59, 48, 0.4);
+      color: rgb(255, 59, 48);
+      padding-left: 12px;
+    }
+
+    .concentric-toggle.active::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: rgb(255, 59, 48);
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+      animation: live-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .concentric-toggle.active-cyan {
+      background: rgba(90, 200, 250, 0.08);
+      border-color: rgba(90, 200, 250, 0.4);
+      color: #5ac8fa;
+    }
+
+    .watch-demo-info {
+      padding-top: 8px;
+    }
+
+    /* Awards / Education */
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .list-year {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      flex-shrink: 0;
+      width: 80px;
+    }
+
+    .list-content {
+      font-size: 16px;
+    }
+
+    .list-content span {
+      color: var(--gray11);
+    }
+
+    .section-caption {
+      font-size: 13px;
+      color: var(--gray8);
+      margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      margin-bottom: 0;
+    }
+
+    .section-link {
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .section-link a {
+      color: var(--gray8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-link a:hover {
+      color: var(--gray12);
+    }
+
+    /* Videos */
+    .videos {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16 / 9;
+      background: var(--gray1);
+      border: 1px dashed var(--gray5);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-placeholder span {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+    }
+
+    .video-embed {
+      aspect-ratio: 16 / 9;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .video-embed iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-caption {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-top: -4px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    /* Links */
+    a {
+      color: var(--gray12);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gray5);
+      transition: border-color 0.15s ease;
+    }
+
+    a:hover {
+      border-color: var(--gray12);
+    }
+
+    /* Downloads */
+    .downloads {
+      display: flex;
+      gap: 24px;
+      padding: 32px 0;
+    }
+
+    .downloads a {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .downloads a:hover {
+      color: var(--gray12);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 64px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 15px;
+    }
+
+    .footer-email {
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .footer-email a {
+      color: var(--gray12);
+      border-bottom: 1px solid var(--gray5);
+    }
+
+    .footer-email a:hover {
+      border-color: var(--gray12);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--gray8);
+    }
+
+    .footer-links a {
+      color: var(--gray8);
+      border: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gray12);
+    }
+
+    /* Focus */
+    a:focus-visible {
+      outline: 2px solid var(--gray8);
+      outline-offset: 2px;
+      border-color: transparent;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero { padding: 80px 0 64px; }
+      .hero h1 { font-size: 23px; }
+      .section h2 { font-size: 19px; }
+      .item { flex-direction: column; gap: 2px; }
+      .item-desc { text-align: left; }
+      .placeholders { grid-template-columns: repeat(2, 1fr); }
+      .carousel-slide { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .carousel-slide--1col { grid-template-columns: 1fr; }
+      .carousel-3up .carousel-track { display: grid; grid-template-columns: 1fr; gap: 0; }
+      .carousel-3up .carousel-slide { grid-area: 1 / 1; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+      .carousel-3up .carousel-slide.active { opacity: 1; pointer-events: auto; }
+      .carousel-3up .carousel-dots { display: flex; }
+      .placeholders--square { grid-template-columns: repeat(2, 1fr); }
+      .watch-demo { grid-template-columns: 1fr; }
+      .watch-demo-left { align-items: center; }
+      .sloooow-layout { grid-template-columns: 1fr; }
+      .sloooow-side { flex-direction: row; }
+      .placeholder--tall { aspect-ratio: 1; }
+      .exp { grid-template-columns: 1fr; }
+      .list-item { flex-direction: column; gap: 2px; }
+      .list-year { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="profile-pic"><img src="assets/t.svg" alt="T"></div>
+    <h1>Terrence Gillespie</h1>
+    <p class="hero-role">Principal Design Engineer</p>
+    <div class="hero-intro">
+      <div class="hero-intro-text">
+        <p>Hi there, I'm a curious individual who works across design and code. A lifelong learner, I am interested in typography, photography and am generally optimistic about technology and the future. Thanks for reading my portfolio.</p>
+        <p>20+ years designing interfaces, systems, and experiences that people trust. Currently governing the native app design system at Westpac across iOS and Android. Payments, identity, and typography - with an obsession for craft at every scale.</p>
+      </div>
+      <img class="hero-photo" src="assets/profile.jpg" alt="Terrence Gillespie">
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Westpac -->
+  <section class="section">
+    <p class="section-label">Westpac Group</p>
+    <h2>Banking at Scale</h2>
+    <p class="section-subtitle">Principal Design Engineer - Design Systems</p>
+    <p class="section-body">People leader and custodian of the native app design system - rated Australia's best mobile banking app three years running by Forrester. Six years of senior leadership translating complex financial products - payments, transfers, account management - into clean, accessible interfaces that 4 million people use every day. Governing component consistency, design tokens, and pixel-level craft across both platforms - prototyping with AI to move faster from idea to shipped surface.</p>
+    <div class="section-meta">
+      <span>4M daily users</span>
+      <span>6+ years</span>
+      <span>Senior leadership role</span>
+      <span>iOS & Android</span>
+    </div>
+    <div class="items">
+      <div class="item">
+        <span class="item-title">SafeCall</span>
+        <span class="item-desc">Verified in-app calling</span>
+      </div>
+      <div class="item">
+        <span class="item-title">SafeBlock</span>
+        <span class="item-desc">Instant account locking</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Personal Finance</span>
+        <span class="item-desc">Spending insights, charting, budgeting</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Design System</span>
+        <span class="item-desc">Tokens, components, accessibility, native code</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Forrester #1</span>
+        <span class="item-desc">Australia's best mobile banking app - 2023, 2024, 2025</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Access & Inclusion</span>
+        <span class="item-desc">#1 financial services company - Australian Disability Network</span>
+      </div>
+    </div>
+
+    <div class="carousel-outer">
+      <div class="carousel-clip">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <div class="carousel-frame"><img src="test-mcp/frames/Widgets.png" alt="Widgets"></div>
+          <div class="carousel-frame"><img src="test-mcp/frames/Accounts.png" alt="Accounts"></div>
+          <div class="carousel-frame"><img src="test-mcp/frames/Cashflow.png" alt="Cashflow"></div>
+        </div>
+        <div class="carousel-slide">
+          <div class="carousel-frame"><img src="test-mcp/frames/Expenses.png" alt="Expenses"></div>
+          <div class="carousel-frame"><img src="test-mcp/frames/Insights.png" alt="Insights"></div>
+        </div>
+      </div>
+      </div>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-slide="0"></button>
+        <button class="carousel-dot" data-slide="1"></button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Telstra -->
+  <section class="section">
+    <p class="section-label">Telstra Digital</p>
+    <h2>Identity & Authentication</h2>
+    <p class="section-subtitle">Experience Design Lead</p>
+    <p class="section-body">Led login, registration, and password recovery flows serving 15 million registered mobile users - designing inclusive, accessible experiences at massive scale. Delivered the responsive Telstra.com website and evolved the design system originally created by frog design. Ran rapid prototyping through Google Design Sprints in the Idea Accelerator, validating concepts through sketches, comps, and testable prototypes.</p>
+    <div class="section-meta">
+      <span>15M users</span>
+      <span>3 years</span>
+      <span>Mobile first</span>
+    </div>
+    <div class="items">
+      <div class="item">
+        <span class="item-title">Digital Identity</span>
+        <span class="item-desc">Login, registration, password recovery</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Responsive Telstra.com</span>
+        <span class="item-desc">Australia's largest telco</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Design System</span>
+        <span class="item-desc">Evolved from frog design foundation</span>
+      </div>
+      <div class="item">
+        <span class="item-title">Idea Accelerator</span>
+        <span class="item-desc">Google Design Sprints, rapid prototyping</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Sloooow -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-label">Apple Developer Academy — Scholarship</p>
+      <span class="section-link"><a href="https://sloooow.app" target="_blank" rel="noopener">sloooow.app ↗</a></span>
+    </div>
+    <h2>Sloooow. Year Clock</h2>
+    <p class="section-body">Conceptual art piece which asks the viewer to question their relationship with time. The movement of the "Day Hand" is imperceptible as it completes one rotation per calendar year.</p>
+    <p class="section-body">Inspiration for this project comes from James Turrell's work which explores geological time scale and the 365 laps completed in Marina Abramović's "Relation in movement" performance. This work was created while studying at the Apple Developer Academy in Napoli during 2019 – 2020.</p>
+    <div class="section-meta">
+      <span>watchOS</span>
+      <span>SwiftUI</span>
+      <span>Complications</span>
+      <span>Digital Crown</span>
+    </div>
+    <div class="carousel-outer">
+      <div class="carousel-clip">
+        <div class="carousel-track">
+          <div class="carousel-slide carousel-slide--1col">
+            <div class="carousel-frame"><img src="assets/sloooow/wrist.jpg" alt="Sloooow — Year Clock"></div>
+          </div>
+          <div class="carousel-slide carousel-slide--1col">
+            <div class="sloooow-layout">
+              <div class="sloooow-main">
+                <div class="watch-bezel watch-bezel--sloooow">
+                  <div class="watch-screen watch-screen--sloooow">
+                    <div class="sloooow-face" id="sloooow-face"></div>
+                  </div>
+                </div>
+                <div class="sloooow-flavours" id="sloooow-flavours"></div>
+                <div class="sloooow-info" id="sloooow-info"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-slide="0"></button>
+        <button class="carousel-dot" data-slide="1"></button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Airlie -->
+  <section class="section">
+    <div class="section-header">
+      <p class="section-label">TypeParis - Distinction</p>
+      <span class="section-link"><a href="https://typeparis.com/attendees/terry-gillespie" target="_blank" rel="noopener">TypeParis profile ↗</a></span>
+    </div>
+    <h2>Airlie</h2>
+    <p class="section-body">A six-week intensive programme in Paris covering typeface design, calligraphy techniques, type history, and modern software practices. Studied under the French master type designer Jean François Porchez using the same techniques established by Adrian Frutiger in the 1950s. The outcome: Airlie - a serif family inspired by Garamond and 18th-century punch-cut forms, with softer serifs and playful curves across 3 styles and 15 weights.</p>
+    <div class="section-meta">
+      <span>15 weights</span>
+      <span>3 styles</span>
+      <span>Glyphs</span>
+    </div>
+
+    <div class="carousel-outer">
+      <div class="carousel-clip">
+        <div class="carousel-track">
+          <div class="carousel-slide carousel-slide--1col">
+            <div class="carousel-frame"><img src="assets/airlie/6873c9d92d7c87c9eda3ea98_Airlie-Font-30.png" alt="Airlie weight range"></div>
+          </div>
+          <div class="carousel-slide carousel-slide--1col">
+            <div class="carousel-frame"><img src="assets/airlie/6873c9dae2f4b2000428ccdd_Airlie-Font-06.png" alt="Airlie specimen"></div>
+          </div>
+          <div class="carousel-slide carousel-slide--1col">
+            <div class="carousel-frame"><img src="assets/airlie/6873c9d97500d2a7e3f703b8_Airlie-Font-31.png" alt="Airlie styles"></div>
+          </div>
+          <div class="carousel-slide carousel-slide--1col">
+            <div class="carousel-frame"><img src="assets/airlie/6873c9d9901a6b65d9aaea95_Airlie-Font-38.png" alt="Airlie detail"></div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-slide="0"></button>
+        <button class="carousel-dot" data-slide="1"></button>
+        <button class="carousel-dot" data-slide="2"></button>
+        <button class="carousel-dot" data-slide="3"></button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Experiments -->
+  <section class="section">
+    <p class="section-label">Side Projects</p>
+    <h2>Experiments</h2>
+    <p class="section-body">Always shipping, always learning. Built across web and native platforms — AI-native prototyping from idea to working interface.</p>
+
+    <!-- Concentric — live demo in Apple Watch bezel -->
+    <div class="exp exp--demo">
+      <div class="exp-info">
+        <p class="exp-name">Concentric</p>
+        <p class="exp-desc">Watch face exploration in minimalism, using just the specific crop and arc of the circle segment to intuit the current time.</p>
+        <span class="exp-stack">watchOS &middot; SwiftUI</span>
+      </div>
+      <div class="exp-demo-center">
+        <div class="watch-bezel" id="concentric-watch">
+          <div class="watch-screen">
+            <div class="concentric-outer" id="concentric-outer">
+              <div class="concentric-inner" id="concentric-inner">
+                <svg class="concentric-svg" viewBox="0 0 560 560">
+                  <circle cx="280" cy="280" r="250" fill="none" stroke="white" stroke-width="44" opacity="0.9"/>
+                </svg>
+                <div class="concentric-dot" id="concentric-dot">
+                  <span class="concentric-hour" id="concentric-hour"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="concentric-controls">
+          <button class="concentric-toggle active" id="concentric-toggle-live">Live</button>
+          <button class="concentric-toggle" id="concentric-toggle-warp">Time Warp</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="experiments">
+      <div class="exp exp--full">
+        <div class="exp-info">
+          <p class="exp-name">GlyphSketch</p>
+          <p class="exp-desc">iPad app for sketching and prototyping typeface glyphs. Draw letterforms with Apple Pencil, on the go, get a rough idea down and then export to Glyphs as JSON.</p>
+          <span class="exp-stack">iPadOS &middot; PencilKit</span>
+        </div>
+        <div class="carousel-outer">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/glyphsketch/glyphsketch-01.png" alt="GlyphSketch — glyph editor"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/glyphsketch/glyphsketch-02.png" alt="GlyphSketch — preview"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp exp--full">
+        <div class="exp-info">
+          <p class="exp-name">Come Fly With Me</p>
+          <p class="exp-desc">A "Slow TV" app — enter flight details to experience the same window seat view as your loved one in real time.</p>
+          <span class="exp-stack">tvOS &middot; MapKit</span>
+        </div>
+        <div class="carousel-outer">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/flighttracker/cfwm_01.png" alt="Come Fly With Me"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/flighttracker/cfwm_02.png" alt="Come Fly With Me — map view"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/flighttracker/cfwm_03.png" alt="Come Fly With Me — detail"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+            <button class="carousel-dot" data-slide="2"></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp exp--full">
+        <div class="exp-info">
+          <p class="exp-name">Roadie</p>
+          <p class="exp-desc">Roadie is a social music curation app for people who take album listening seriously. Collect, share, and review albums with friends, built with MusicKit integration and shared listening.</p>
+          <span class="exp-stack">iOS &middot; MusicKit &middot; CloudKit</span>
+        </div>
+        <div class="carousel-outer carousel-3up">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/roadie/r1.png" alt="Roadie"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/roadie/r2.png" alt="Roadie"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/roadie/r3.png" alt="Roadie"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+            <button class="carousel-dot" data-slide="2"></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp exp--full">
+        <div class="exp-info">
+          <p class="exp-name">Recently</p>
+          <p class="exp-desc">What have you enjoyed... Recently™. Driven by the desire to share other people's projects and interesting finds on the internet. Vue.js website and iOS app with share sheet integration for easy sharing of internet gems.</p>
+          <span class="exp-stack">Vue &middot; iOS &middot; Firebase</span>
+        </div>
+        <div class="carousel-outer carousel-3up">
+          <div class="carousel-clip">
+            <div class="carousel-track">
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/recently/rec1.png" alt="Recently"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/recently/rec2.png" alt="Recently"></div>
+              </div>
+              <div class="carousel-slide carousel-slide--1col">
+                <div class="carousel-frame"><img src="assets/recently/rec3.png" alt="Recently"></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" data-slide="0"></button>
+            <button class="carousel-dot" data-slide="1"></button>
+            <button class="carousel-dot" data-slide="2"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Recognition -->
+  <section class="section">
+    <p class="section-label">Side Quests</p>
+    <h2>Awards & Exhibitions</h2>
+    <p class="section-body">Fine art photography alongside design work.</p>
+    <div class="list">
+      <div class="list-item">
+        <span class="list-year">2026</span>
+        <span class="list-content">Finalist <span>- Local Contemporary Art Prize</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2025</span>
+        <span class="list-content">2D Excellence Award & Acquisition <span>- Local Contemporary Art Prize</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2025</span>
+        <span class="list-content">Finalist <span>- Local Contemporary Art Prize</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2025</span>
+        <span class="list-content">Finalist <span>- Galah Regional Photography Prize</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2025</span>
+        <span class="list-content">Viewfinders <span>- Museum of Brisbane</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2024</span>
+        <span class="list-content">Viewfinders Selection <span>- New Light: Photography Now + Then</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2024</span>
+        <span class="list-content">Finalist <span>- Du Rietz Art Awards</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2022</span>
+        <span class="list-content">2D Highly Commended <span>- Du Rietz Art Awards</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2022</span>
+        <span class="list-content">Finalist <span>- Du Rietz Art Awards</span></span>
+      </div>
+      <div class="list-item">
+        <span class="list-year">2016</span>
+        <span class="list-content">Finalist <span>- Sunshine Coast Environment Photography Awards</span></span>
+      </div>
+    </div>
+    <p class="section-caption">Selected works at <a href="https://smallvictories.com.au" target="_blank" rel="noopener">smallvictories.com.au</a></p>
+
+    <h2 style="margin-top: 48px;">Speaking</h2>
+    <div class="videos">
+      <div class="video-embed"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZXdbXEGv14Y?si=K34e0iMU3R2Xw02C&start=3614" title="TypeParis Presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-caption">TypeParis 2025 Graduation Day - Terrence presents his typeface, Airlie.</p>
+      <div class="video-embed"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/U5NcIAWVx-0?si=ERLaKANRNpZ1ZQ6p" title="Sloooow - Apple Watch App" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-caption">Sloooow - a year clock for Apple Watch. One rotation per year.</p>
+      <div class="video-embed"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/dzClUGZQY2I?si=cSKkVztd0raicG-c" title="Artist Spotlight - Photography" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <p class="video-caption">Artist Spotlight - 2D Excellence Award winner, 2025 Local Contemporary Art Prize. Terrence discusses memory, composition, and empty space.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- Downloads -->
+<div class="page">
+  <div class="downloads">
+    <a href="letter.html">Cover Letter</a>
+    <a href="resume.html">Resume</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="page">
+  <hr class="divider">
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://terrygillespie.com">terrygillespie.com</a>
+      <a href="https://github.com/telemetry" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/tezjnr/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://bsky.app/profile/tezjnr.com" target="_blank" rel="noopener">Bluesky</a>
+      <span class="footer-copy">&copy; 2026</span>
+    </div>
+  </footer>
+</div>
+
+<!-- Concentric Clock — Live + Time Warp -->
+<script>
+(function() {
+  var warp = false;
+  var simTime = 0;
+  var interval = null;
+  var watch = document.getElementById('concentric-watch');
+  var liveBtn = document.getElementById('concentric-toggle-live');
+  var warpBtn = document.getElementById('concentric-toggle-warp');
+
+  if (!watch) return;
+
+  function setMode(toWarp) {
+    warp = toWarp;
+    liveBtn.classList.toggle('active', !warp);
+    warpBtn.classList.toggle('active-cyan', warp);
+    watch.classList.add('no-transition');
+    watch.classList.toggle('timewarp', warp);
+    clearInterval(interval);
+
+    if (warp) {
+      var now = new Date();
+      simTime = now.getHours() * 60 + now.getMinutes();
+      tick();
+      requestAnimationFrame(function() { watch.classList.remove('no-transition'); });
+      interval = setInterval(tick, 200);
+    } else {
+      tick();
+      requestAnimationFrame(function() { watch.classList.remove('no-transition'); });
+      interval = setInterval(tick, 1000);
+    }
+  }
+
+  function tick() {
+    var angle, hour;
+    if (warp) {
+      angle = simTime * 6;
+      hour = Math.floor(simTime / 60) % 24;
+      simTime++;
+    } else {
+      var now = new Date();
+      angle = now.getMinutes() * 6;
+      hour = now.getHours();
+    }
+
+    var outer = document.getElementById('concentric-outer');
+    var inner = document.getElementById('concentric-inner');
+    var dot = document.getElementById('concentric-dot');
+    var hourEl = document.getElementById('concentric-hour');
+
+    if (!outer) return;
+
+    outer.style.transform = 'rotate(' + angle + 'deg)';
+    inner.style.transform = 'rotate(' + -angle + 'deg)';
+    dot.style.transform = 'rotate(' + angle + 'deg)';
+    hourEl.style.transform = 'rotate(' + -angle + 'deg)';
+    hourEl.textContent = hour;
+  }
+
+  liveBtn.addEventListener('click', function() { setMode(false); });
+  warpBtn.addEventListener('click', function() { setMode(true); });
+
+  tick();
+  interval = setInterval(tick, 1000);
+})();
+</script>
+
+<!-- Sloooow Year Clock -->
+<script>
+(function() {
+  var flavours = [
+    '#ffffff','#6ac4dc','#ac8e68','#66d4cf','#ff8ff3','#ff6b95',
+    '#ff3b30','#ff9500','#ffcc00','#34c759','#5ac8fa','#007aff',
+    '#af52de','#8e8e93'
+  ];
+  var current = Math.floor(Math.random() * flavours.length);
+
+  function dayOfYear() {
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    return Math.floor((now - start) / 86400000);
+  }
+
+  function totalDays() {
+    var y = new Date().getFullYear();
+    return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0 ? 366 : 365;
+  }
+
+  function render() {
+    var day = dayOfYear();
+    var total = totalDays();
+    var angle = (day / total) * 360;
+    var face = document.getElementById('sloooow-face');
+    var info = document.getElementById('sloooow-info');
+    if (!face) return;
+    face.style.background = 'conic-gradient(from ' + angle + 'deg, ' + flavours[current] + ', #000000)';
+    info.textContent = 'Day ' + day + ' of ' + total + '  ·  ' + (day / total * 100).toFixed(1) + '%';
+  }
+
+  // Build flavour dots
+  var picker = document.getElementById('sloooow-flavours');
+  flavours.forEach(function(hex, i) {
+    var dot = document.createElement('div');
+    dot.className = 'sloooow-dot' + (i === current ? ' active' : '');
+    dot.style.background = hex;
+    dot.addEventListener('click', function() {
+      current = i;
+      picker.querySelectorAll('.sloooow-dot').forEach(function(d) { d.classList.remove('active'); });
+      dot.classList.add('active');
+      render();
+    });
+    picker.appendChild(dot);
+  });
+
+  // Scroll on watch face cycles flavours
+  var scrollAcc = 0;
+  var face = document.getElementById('sloooow-face');
+  if (face) {
+    face.style.cursor = 'ns-resize';
+    face.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      scrollAcc += e.deltaY;
+      if (Math.abs(scrollAcc) < 50) return;
+      var dir = scrollAcc > 0 ? 1 : -1;
+      scrollAcc = 0;
+      current = (current + dir + flavours.length) % flavours.length;
+      picker.querySelectorAll('.sloooow-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+      render();
+    }, { passive: false });
+  }
+
+  render();
+  setInterval(render, 60000);
+})();
+</script>
+
+<!-- Carousel -->
+<script>
+document.querySelectorAll('.carousel-outer').forEach(outer => {
+  const slides = Array.from(outer.querySelectorAll('.carousel-slide'));
+  const dots = outer.querySelectorAll('.carousel-dot');
+  const total = slides.length;
+  let current = 0;
+
+  slides[0].classList.add('active');
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    current = ((index % total) + total) % total;
+    slides[current].classList.add('active');
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => goTo(parseInt(dot.dataset.slide)));
+  });
+
+  let startX = 0;
+  outer.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  outer.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+  });
+});
+</script>
+
+<!-- AnyTwo Card Demo -->
+<script src="../nothing/components/anytwo.js"></script>
+
+<script data-goatcounter="https://terrence.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
