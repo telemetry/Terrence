@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>Knead — mould a letter</title>
+  <meta name="description" content="Edit one letterform at a time on your phone. Mould the vector points directly, or nudge them with precision on the trackpad.">
+  <meta name="theme-color" content="#0d0d0f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Knead">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="glyphs.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="bar">
+    <span class="brand"><b>Knead</b><small>mould a letter</small></span>
+    <div class="bar-actions">
+      <button class="ghost" id="fill-toggle" type="button" aria-pressed="false">Fill</button>
+      <button class="ghost" id="export" type="button">Export</button>
+    </div>
+  </header>
+
+  <div class="stage-wrap">
+    <svg id="stage" xmlns="http://www.w3.org/2000/svg" aria-label="Letterform editing stage"></svg>
+    <div class="readout" id="readout" hidden></div>
+    <nav class="rail" id="rail" aria-label="Choose a letter"></nav>
+  </div>
+
+  <section class="deck">
+    <div class="tools">
+      <button class="ghost icon" id="prev" type="button" aria-label="Previous point">‹</button>
+      <button class="ghost icon" id="next" type="button" aria-label="Next point">›</button>
+
+      <div class="seg" role="group" aria-label="What the trackpad moves">
+        <button type="button" data-target="anchor" class="on">Point</button>
+        <button type="button" data-target="in">In</button>
+        <button type="button" data-target="out">Out</button>
+      </div>
+
+      <span class="spacer"></span>
+
+      <button class="ghost" id="smooth" type="button" aria-pressed="false">Smooth</button>
+      <button class="ghost" id="undo" type="button" disabled>Undo</button>
+      <button class="ghost" id="reset" type="button">Reset</button>
+    </div>
+
+    <div class="pad-row">
+      <div class="pad" id="pad">
+        <div class="pad-hint" id="pad-hint">Tap a point on the letter, then drag here to mould it.</div>
+        <div class="pad-puck" id="pad-puck"></div>
+      </div>
+      <div class="pad-side">
+        <label>Fine</label>
+        <input class="sens" id="sens" type="range" min="20" max="400" value="100" aria-label="Sensitivity">
+        <label>Bold</label>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>
