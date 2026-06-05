@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>Knead — mould a letter</title>
+  <meta name="theme-color" content="#0d0d0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Knead">
+  <style>@font-face{font-family:"Young Serif";font-display:swap;src:url(data:font/woff2;base64,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) format("woff2");}
+/* Knead — mould one letter at a time, on a phone.
+   Self-contained, no build step, no network. */
+
+
+
+:root {
+  --bg:        #0d0d0f;
+  --panel:     #141417;
+  --line:      #26262b;
+  --ink:       #f3f1ea;   /* the letter */
+  --muted:     #7c7c84;
+  --faint:     #45454d;
+  --accent:    #ff5c38;   /* selection / live node */
+  --accent-dim:#ff5c3833;
+  --handle:    #4ea1ff;   /* bezier handles */
+  --guide:     #ffffff14;
+  --radius:    14px;
+  --touch:     44px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, system-ui, ui-sans-serif, "Segoe UI", sans-serif;
+  font-size: 15px;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* lock to the visible viewport on phones */
+  height: 100dvh;
+  overflow: hidden;
+  touch-action: none;            /* we handle all gestures */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ---- top bar -------------------------------------------------- */
+.bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-top, 0px));
+  padding-top: calc(10px + env(safe-area-inset-top, 0px));
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  letter-spacing: -0.01em;
+}
+.brand b { font-weight: 600; }
+.brand small { color: var(--muted); font-size: 12px; letter-spacing: 0.02em; }
+.bar-actions { display: flex; gap: 8px; }
+
+/* ---- stage (the letter) -------------------------------------- */
+.stage-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+#stage { width: 100%; height: 100%; display: block; }
+
+.glyph-fill {
+  fill: var(--ink);
+  fill-rule: evenodd;
+  transition: fill-opacity .15s ease;
+}
+.glyph-outline {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.25px;
+  vector-effect: non-scaling-stroke;
+  opacity: .9;
+}
+.guide { stroke: var(--guide); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.guide-label { fill: var(--faint); font-size: 11px; }
+
+.handle-line { stroke: var(--handle); stroke-width: 1px; vector-effect: non-scaling-stroke; opacity: .85; }
+.handle-dot  { fill: var(--bg); stroke: var(--handle); stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+
+.node {
+  fill: var(--bg);
+  stroke: var(--ink);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+.node.smooth { /* circle */ }
+.node.sel { fill: var(--accent); stroke: var(--accent); }
+.node-hit { fill: transparent; }   /* fat invisible touch target */
+
+/* floating readout of the live point */
+.readout {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: var(--muted);
+  background: #00000055;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 6px 9px;
+  pointer-events: none;
+  line-height: 1.4;
+  backdrop-filter: blur(6px);
+}
+.readout b { color: var(--ink); font-weight: 500; }
+.readout .tgt { color: var(--accent); }
+
+/* letter rail down the right edge of the stage */
+.rail {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  padding: 8px 6px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background: linear-gradient(to left, #00000044, transparent);
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail button {
+  flex: 0 0 auto;
+  height: 40px;
+  font-family: "Young Serif", Georgia, serif;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 9px;
+}
+.rail button.on { color: var(--ink); background: #ffffff10; border-color: var(--line); }
+
+/* ---- bottom deck --------------------------------------------- */
+.deck {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  padding: 10px 12px calc(12px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.seg button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0 12px;
+  height: 34px;
+  font-size: 13px;
+  letter-spacing: .01em;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button.on { background: var(--accent); color: #fff; }
+
+.spacer { flex: 1 1 auto; }
+
+button.ghost, .seg, .rail button { -webkit-tap-highlight-color: transparent; }
+button.ghost {
+  height: 34px;
+  min-width: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: var(--ink);
+  background: #ffffff0a;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+button.ghost:active { background: #ffffff18; }
+button.ghost:disabled { color: var(--faint); }
+button.ghost.icon { padding: 0; width: 34px; font-size: 17px; }
+
+/* the trackpad */
+.pad-row { display: flex; gap: 10px; align-items: stretch; }
+.pad {
+  position: relative;
+  flex: 1 1 auto;
+  height: 132px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(120% 120% at 50% 0%, #1c1c21, #101013);
+  overflow: hidden;
+  touch-action: none;
+}
+.pad::before, .pad::after { /* faint crosshair */
+  content: "";
+  position: absolute;
+  background: #ffffff0e;
+}
+.pad::before { left: 50%; top: 8%; bottom: 8%; width: 1px; transform: translateX(-.5px); }
+.pad::after  { top: 50%; left: 8%; right: 8%; height: 1px; transform: translateY(-.5px); }
+.pad-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 0 24px;
+  pointer-events: none;
+}
+.pad-puck {
+  position: absolute;
+  width: 18px; height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-dim);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .12s ease;
+}
+.pad.live .pad-puck { opacity: 1; }
+.pad.live .pad-hint { opacity: 0; }
+
+.pad-side {
+  flex: 0 0 auto;
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pad-side label { font-size: 10px; color: var(--muted); text-align: center; letter-spacing: .04em; text-transform: uppercase; }
+.sens {
+  -webkit-appearance: none;
+  appearance: none;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 34px;
+  flex: 1 1 auto;
+  margin: 0 auto;
+  background: transparent;
+}
+.sens::-webkit-slider-runnable-track { width: 4px; background: var(--line); border-radius: 4px; }
+.sens::-moz-range-track { width: 4px; background: var(--line); border-radius: 4px; }
+.sens::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-left: -9px; border-radius: 50%; background: var(--ink); }
+.sens::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: var(--ink); }
+
+/* tiny toast */
+.toast {
+  position: fixed;
+  left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 12px);
+  background: var(--ink);
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 20;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (min-width: 760px) {
+  body { max-width: 520px; margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+}
+</style>
+</head>
+<body>
+<header class="bar">
+    <span class="brand"><b>Knead</b><small>mould a letter</small></span>
+    <div class="bar-actions">
+      <button class="ghost" id="fill-toggle" type="button" aria-pressed="false">Fill</button>
+      <button class="ghost" id="export" type="button">Export</button>
+    </div>
+  </header>
+
+  <div class="stage-wrap">
+    <svg id="stage" xmlns="http://www.w3.org/2000/svg" aria-label="Letterform editing stage"></svg>
+    <div class="readout" id="readout" hidden></div>
+    <nav class="rail" id="rail" aria-label="Choose a letter"></nav>
+  </div>
+
+  <section class="deck">
+    <div class="tools">
+      <button class="ghost icon" id="prev" type="button" aria-label="Previous point">‹</button>
+      <button class="ghost icon" id="next" type="button" aria-label="Next point">›</button>
+
+      <div class="seg" role="group" aria-label="What the trackpad moves">
+        <button type="button" data-target="anchor" class="on">Point</button>
+        <button type="button" data-target="in">In</button>
+        <button type="button" data-target="out">Out</button>
+      </div>
+
+      <span class="spacer"></span>
+
+      <button class="ghost" id="smooth" type="button" aria-pressed="false">Smooth</button>
+      <button class="ghost" id="undo" type="button" disabled>Undo</button>
+      <button class="ghost" id="reset" type="button">Reset</button>
+    </div>
+
+    <div class="pad-row">
+      <div class="pad" id="pad">
+        <div class="pad-hint" id="pad-hint">Tap a point on the letter, then drag here to mould it.</div>
+        <div class="pad-puck" id="pad-puck"></div>
+      </div>
+      <div class="pad-side">
+        <label>Fine</label>
+        <input class="sens" id="sens" type="range" min="20" max="400" value="100" aria-label="Sensitivity">
+        <label>Bold</label>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+  <script>/* Baked letterform data — cubic outlines extracted from Young Serif (OFL).
+   Coordinates in font units (y-up, em=1000). Generated, do not hand-edit. */
+window.GLYPHS = {"font":"Young Serif","upm":1000,"ascent":1046,"descent":-366,"xHeight":500,"capHeight":750,"glyphs":{"a":{"advance":619,"contours":[[{"x":533,"y":185,"inX":533.0,"inY":293.6666666666667,"outX":533.0,"outY":137.00000000000006,"line":true},{"x":592.0,"y":87.0,"inX":542.6666666666665,"inY":93.66666666666666,"outX":600.0,"outY":86.33333333333333,"line":false},{"x":604.0,"y":74.0,"inX":604.0,"inY":82.0,"outX":604.0,"outY":63.0,"line":false},{"x":604,"y":41,"inX":604.0,"inY":52.0,"outX":604.0,"outY":31.666666666666664,"line":true},{"x":589.0,"y":27.0,"inX":599.0,"inY":27.0,"outX":490.9999999999993,"outY":27.0,"line":false},{"x":405.0,"y":-11.0,"inX":450.9999999999998,"inY":8.999999999999932,"outX":402.3333333333333,"outY":-12.333333333333332,"line":false},{"x":398.0,"y":-13.0,"inX":400.0,"inY":-13.0,"outX":397.0,"outY":-13.0,"line":false},{"x":395,"y":-13,"inX":396.0,"inY":-13.0,"outX":392.33333333333326,"outY":-13.0,"line":true},{"x":395.0,"y":10.5,"inX":392.33333333333326,"inY":-10.16666666666666,"outX":397.6666666666665,"outY":31.166666666666647,"line":false},{"x":404.0,"y":79.0,"inX":401.33333333333326,"inY":60.3333333333333,"outX":393.9999999999999,"outY":52.99999999999998,"line":false},{"x":252.0,"y":-13.0,"inX":353.99999999999994,"inY":-13.0,"outX":161.33333333333312,"outY":-13.0,"line":false},{"x":30.0,"y":251.0,"inX":30.0,"inY":56.33333333333334,"outX":30.0,"outY":436.9999999999998,"line":false},{"x":264.0,"y":513.0,"inX":143.9999999999999,"inY":513.0,"outX":329.3333333333332,"outY":513.0,"line":false},{"x":426.0,"y":455.0,"inX":384.6666666666666,"inY":492.3333333333333,"outX":460.6666666666665,"outY":469.66666666666646,"line":false},{"x":502.0,"y":495.0,"inX":484.6666666666666,"inY":481.6666666666666,"outX":508.6666666666666,"outY":500.3333333333332,"line":false},{"x":525.0,"y":511.0,"inX":515.6666666666664,"inY":505.6666666666666,"outX":527.0,"outY":512.3333333333333,"line":false},{"x":530.0,"y":513.0,"inX":528.6666666666666,"inY":513.0,"outX":530.3333333333334,"outY":513.0,"line":false},{"x":531,"y":513,"inX":530.6666666666666,"inY":513.0,"outX":532.3333333333333,"outY":513.0,"line":true},{"x":533.0,"y":511.0,"inX":533.0,"inY":512.3333333333333,"outX":533.0,"outY":402.3333333333333,"line":false}],[{"x":393,"y":342,"inX":393.0,"inY":275.0,"outX":387.0,"outY":381.9999999999999,"line":true},{"x":282.0,"y":446.0,"inX":360.0,"inY":446.0,"outX":185.99999999999983,"outY":446.0,"line":false},{"x":159.0,"y":283.0,"inX":159.0,"inY":366.9999999999999,"outX":159.0,"outY":155.00000000000003,"line":false},{"x":297.0,"y":75.0,"inX":215.66666666666663,"inY":75.0,"outX":344.9999999999999,"outY":75.0,"line":false},{"x":383.0,"y":122.0,"inX":371.0,"inY":100.66666666666659,"outX":389.0,"outY":132.66666666666666,"line":false},{"x":393.0,"y":141.0,"inX":392.3333333333333,"inY":139.0,"outX":393.0,"outY":208.0,"line":false}]]},"e":{"advance":515,"contours":[[{"x":175,"y":179,"inX":271.6666666666667,"inY":221.33333333333334,"outX":197.66666666666663,"outY":123.0,"line":true},{"x":325.0,"y":71.0,"inX":247.66666666666663,"inY":71.0,"outX":367.6666666666665,"outY":71.0,"line":false},{"x":453.0,"y":145.0,"inX":418.3333333333332,"inY":94.33333333333321,"outX":456.99999999999994,"outY":151.66666666666652,"line":false},{"x":471.5,"y":147.0,"inX":464.1666666666664,"inY":151.00000000000006,"outX":475.16666666666663,"outY":145.0,"line":false},{"x":501.0,"y":130.0,"inX":485.0,"inY":139.33333333333331,"outX":507.3999999999999,"outY":125.19999999999993,"line":false},{"x":499.0,"y":105.0,"inX":505.8571428571427,"inY":116.42857142857136,"outX":461.66666666666663,"outY":35.66666666666666,"line":false},{"x":298.0,"y":-13.0,"inX":400.66666666666663,"inY":-13.0,"outX":131.99999999999986,"outY":-13.0,"line":false},{"x":30.0,"y":255.0,"inX":30.0,"inY":111.00000000000003,"outX":30.0,"outY":438.99999999999966,"line":false},{"x":268.0,"y":513.0,"inX":150.66666666666615,"inY":513.0,"outX":401.33333333333275,"outY":513.0,"line":false},{"x":474.0,"y":318.0,"inX":474.0,"inY":395.3333333333333,"outX":474.0,"outY":312.66666666666663,"line":false},{"x":465.0,"y":306.0,"inX":471.0,"inY":308.66666666666663,"outX":368.3333333333333,"outY":263.6666666666667,"line":false}],[{"x":324,"y":322,"inX":270.3333333333333,"inY":295.0,"outX":324.0,"outY":386.0,"line":true},{"x":243.0,"y":432.0,"inX":289.66666666666663,"inY":432.0,"outX":188.33333333333326,"outY":432.0,"line":false},{"x":154.0,"y":318.0,"inX":154.0,"inY":383.3333333333332,"outX":154.0,"outY":297.99999999999994,"line":false},{"x":163.0,"y":241.0,"inX":155.0,"inY":264.99999999999994,"outX":216.66666666666666,"outY":268.0,"line":false}]]},"g":{"advance":522,"contours":[[{"x":506,"y":530,"inX":481.6666666666667,"inY":524.6666666666666,"outX":511.99999999999983,"outY":531.4999999999999,"line":true},{"x":519.0,"y":516.0,"inX":519.0,"inY":534.0000000000002,"outX":519.0,"outY":450.6666666666665,"line":false},{"x":448.0,"y":413.0,"inX":493.3333333333332,"inY":413.0,"outX":480.3076923076922,"outY":359.1538461538461,"line":false},{"x":445.5,"y":224.5,"inX":480.4999999999999,"inY":281.9528301886792,"outX":410.16666666666663,"outY":166.49999999999997,"line":false},{"x":252.0,"y":130.0,"inX":343.99999999999994,"inY":130.0,"outX":205.33333333333331,"outY":130.0,"line":false},{"x":131.0,"y":158.0,"inX":165.0,"inY":139.33333333333331,"outX":113.66666666666661,"outY":144.66666666666663,"line":false},{"x":129.0,"y":107.5,"inX":114.33333333333333,"inY":121.49999999999996,"outX":143.66666666666663,"outY":93.49999999999999,"line":false},{"x":264.0,"y":81.0,"inX":182.66666666666657,"inY":85.0,"outX":381.33333333333275,"outY":75.66666666666666,"line":false},{"x":496.0,"y":-67.0,"inX":495.9999999999998,"inY":53.00000000000058,"outX":495.9999999999998,"outY":-176.33333333333368,"line":false},{"x":247.0,"y":-215.0,"inX":366.99999999999966,"inY":-214.9999999999999,"outX":124.99999999999986,"outY":-214.99999999999991,"line":false},{"x":20.0,"y":-93.0,"inX":20.0,"inY":-176.99999999999994,"outX":20.0,"outY":-49.0,"line":false},{"x":80.0,"y":1.0,"inX":46.66666666666666,"inY":-17.666666666666664,"outX":46.0,"outY":22.333333333333332,"line":false},{"x":29.0,"y":92.0,"inX":29.0,"inY":52.666666666666664,"outX":29.0,"outY":137.33333333333331,"line":false},{"x":91.0,"y":185.0,"inX":54.99999999999999,"inY":170.33333333333331,"outX":51.666666666666664,"outY":220.99999999999997,"line":false},{"x":32.0,"y":321.0,"inX":32.0,"inY":266.3333333333333,"outX":32.0,"outY":426.9999999999999,"line":false},{"x":252.0,"y":513.0,"inX":115.99999999999989,"inY":513.0,"outX":308.0,"outY":513.0,"line":false},{"x":390.0,"y":474.0,"inX":354.0,"inY":498.0,"outX":396.6666666666666,"outY":470.00000000000006,"line":false},{"x":404.0,"y":470.0,"inX":401.33333333333326,"inY":470.0,"outX":414.6666666666664,"outY":470.0,"line":false},{"x":422.0,"y":496.0,"inX":422.0,"inY":475.9999999999997,"outX":422.0,"outY":497.0,"line":false},{"x":422,"y":499,"inX":422.0,"inY":498.0,"outX":422.0,"outY":507.66666666666663,"line":true},{"x":433.0,"y":514.0,"inX":425.66666666666663,"inY":512.6666666666666,"outX":457.3333333333333,"outY":519.3333333333334,"line":false}],[{"x":252,"y":453,"inX":328.0,"inY":453.0,"outX":175.99999999999983,"outY":453.0,"line":false},{"x":154.0,"y":321.0,"inX":154.0,"inY":378.9999999999998,"outX":154.0,"outY":262.9999999999999,"line":false},{"x":252.0,"y":189.0,"inX":175.99999999999994,"inY":189.0,"outX":327.9999999999999,"outY":189.0,"line":false},{"x":343.0,"y":321.0,"inX":343.0,"inY":262.99999999999983,"outX":343.0,"outY":378.9999999999999,"line":false}],[{"x":248,"y":-146,"inX":147.99999999999983,"inY":-146.0,"outX":346.6666666666665,"outY":-146.0,"line":false},{"x":401.0,"y":-95.0,"inX":401.0,"inY":-125.66666666666666,"outX":401.0,"outY":-52.333333333333314,"line":false},{"x":241.0,"y":-38.0,"inX":342.33333333333326,"inY":-43.33333333333333,"outX":205.0,"outY":-36.0,"line":false},{"x":148.0,"y":-26.0,"inX":174.0,"inY":-32.0,"outX":129.33333333333331,"outY":-38.666666666666664,"line":false},{"x":120.0,"y":-79.0,"inX":120.0,"inY":-56.33333333333333,"outX":120.0,"outY":-108.99999999999994,"line":false}]]},"n":{"advance":681,"contours":[[{"x":579,"y":326,"inX":579.0,"inY":419.33333333333314,"outX":579.0,"outY":269.0,"line":false},{"x":579,"y":155,"inX":579.0,"inY":212.0,"outX":579.0,"outY":81.66666666666674,"line":true},{"x":643.0,"y":60.0,"inX":604.3333333333333,"inY":60.0,"outX":645.6666666666666,"outY":60.0,"line":false},{"x":651,"y":60,"inX":648.3333333333334,"inY":60.0,"outX":661.0,"outY":60.0,"line":true},{"x":666.0,"y":45.0,"inX":666.0,"inY":55.0,"outX":666.0,"outY":35.0,"line":false},{"x":666,"y":15,"inX":666.0,"inY":25.0,"outX":666.0,"outY":5.0,"line":true},{"x":651.0,"y":0.0,"inX":661.0,"inY":0.0,"outX":562.3333333333334,"outY":0.0,"line":false},{"x":385,"y":0,"inX":473.6666666666667,"inY":0.0,"outX":375.0,"outY":0.0,"line":true},{"x":370.0,"y":15.0,"inX":370.0,"inY":5.0,"outX":370.0,"outY":25.0,"line":false},{"x":370,"y":45,"inX":370.0,"inY":35.0,"outX":370.0,"outY":55.0,"line":true},{"x":385.0,"y":60.0,"inX":375.0,"inY":60.0,"outX":387.3333333333333,"outY":60.0,"line":false},{"x":392,"y":60,"inX":389.6666666666667,"inY":60.0,"outX":419.99999999999994,"outY":60.0,"line":true},{"x":439.0,"y":155.0,"inX":438.9999999999999,"inY":81.6666666666665,"outX":439.0,"outY":212.0,"line":false},{"x":439,"y":326,"inX":439.0,"inY":269.0,"outX":438.9999999999999,"outY":390.0000000000001,"line":true},{"x":367.0,"y":425.0,"inX":422.99999999999983,"inY":425.0,"outX":316.9999999999997,"outY":425.0,"line":false},{"x":245.0,"y":339.0,"inX":262.99999999999983,"inY":382.9999999999997,"outX":245.0,"outY":277.6666666666667,"line":false},{"x":245,"y":155,"inX":245.0,"inY":216.33333333333334,"outX":244.99999999999994,"outY":101.66666666666663,"line":true},{"x":309.0,"y":60.0,"inX":270.33333333333326,"inY":60.0,"outX":309.6666666666667,"outY":60.0,"line":false},{"x":311,"y":60,"inX":310.3333333333333,"inY":60.0,"outX":321.0,"outY":60.0,"line":true},{"x":326.0,"y":45.0,"inX":326.0,"inY":55.0,"outX":326.0,"outY":35.0,"line":false},{"x":326,"y":15,"inX":326.0,"inY":25.0,"outX":326.0,"outY":5.0,"line":true},{"x":311.0,"y":0.0,"inX":321.0,"inY":0.0,"outX":217.33333333333331,"outY":0.0,"line":false},{"x":30,"y":0,"inX":123.66666666666667,"inY":0.0,"outX":20.0,"outY":0.0,"line":true},{"x":15.0,"y":15.0,"inX":15.0,"inY":5.0,"outX":15.0,"outY":25.0,"line":false},{"x":15,"y":45,"inX":15.0,"inY":35.0,"outX":15.0,"outY":55.0,"line":true},{"x":30.0,"y":60.0,"inX":20.0,"inY":60.0,"outX":30.666666666666668,"outY":60.0,"line":false},{"x":32,"y":60,"inX":31.333333333333332,"inY":60.0,"outX":81.33333333333331,"outY":60.0,"line":true},{"x":105.0,"y":155.0,"inX":105.0,"inY":101.6666666666666,"outX":105.0,"outY":197.0,"line":false},{"x":105,"y":281,"inX":105.0,"inY":239.0,"outX":105.0,"outY":334.99999999999983,"line":true},{"x":45.0,"y":396.0,"inX":101.00000000000016,"inY":390.0,"outX":37.666666666666664,"outY":396.66666666666663,"line":false},{"x":34.0,"y":409.0,"inX":34.0,"inY":400.99999999999994,"outX":34.0,"outY":420.3333333333333,"line":false},{"x":34,"y":443,"inX":34.0,"inY":431.6666666666667,"outX":34.0,"outY":449.66666666666663,"line":true},{"x":48.0,"y":456.0,"inX":38.666666666666664,"inY":454.0,"outX":143.99999999999994,"outY":470.66666666666663,"line":false},{"x":243.0,"y":527.0,"inX":216.3333333333333,"inY":508.33333333333326,"outX":246.33333333333331,"outY":529.6666666666666,"line":false},{"x":251.0,"y":531.0,"inX":248.99999999999997,"inY":531.0,"outX":251.33333333333334,"outY":531.0,"line":false},{"x":252,"y":531,"inX":251.66666666666666,"inY":531.0,"outX":254.66666666666674,"outY":531.0,"line":true},{"x":253.0,"y":521.0,"inX":254.3333333333332,"inY":528.9999999999997,"outX":247.33333333333334,"outY":480.0,"line":false},{"x":236,"y":398,"inX":241.66666666666666,"inY":439.0,"outX":263.99999999999983,"outY":443.9999999999996,"line":true},{"x":409.0,"y":513.0,"inX":318.9999999999998,"inY":513.0,"outX":552.9999999999998,"outY":513.0,"line":false}]]},"o":{"advance":574,"contours":[[{"x":281,"y":513,"inX":142.9999999999997,"inY":513.0,"outX":432.9999999999999,"outY":513.0,"line":false},{"x":544.0,"y":245.0,"inX":544.0,"inY":380.99999999999994,"outX":544.0,"outY":146.33333333333326,"line":false},{"x":417.0,"y":20.5,"inX":492.99999999999994,"inY":65.16666666666664,"outX":379.0,"outY":-1.8333333333333321,"line":false},{"x":293.0,"y":-13.0,"inX":337.66666666666663,"inY":-13.0,"outX":140.99999999999983,"outY":-13.0,"line":false},{"x":30.0,"y":256.0,"inX":30.0,"inY":114.66666666666646,"outX":30.0,"outY":401.99999999999966,"line":false}],[{"x":324,"y":68,"inX":225.33333333333326,"inY":68.0,"outX":349.3333333333332,"outY":68.0,"line":false},{"x":406.5,"y":113.0,"inX":383.1666666666666,"inY":79.6666666666666,"outX":427.44696969696963,"outY":142.92424242424238,"line":false},{"x":410.5,"y":259.5,"inX":430.8142857142856,"inY":195.54761904761898,"outX":383.49999999999983,"outY":344.4999999999999,"line":false},{"x":250.0,"y":432.0,"inX":323.9999999999999,"inY":432.0,"outX":195.3333333333332,"outY":432.0,"line":false},{"x":149.0,"y":318.0,"inX":149.0,"inY":388.6666666666665,"outX":149.0,"outY":227.33333333333314,"line":false}]]},"r":{"advance":530,"contours":[[{"x":231,"y":395,"inX":238.99999999999991,"inY":440.3333333333326,"outX":267.0,"outY":472.33333333333326,"line":false},{"x":407.0,"y":513.0,"inX":336.33333333333326,"inY":513.0,"outX":469.66666666666646,"outY":513.0,"line":false},{"x":520.0,"y":410.0,"inX":520.0,"inY":478.00000000000006,"outX":520.0,"outY":380.66666666666634,"line":false},{"x":494.0,"y":346.0,"inX":517.9999999999999,"inY":356.6666666666666,"outX":462.6666666666667,"outY":333.3333333333333,"line":false},{"x":400,"y":308,"inX":431.3333333333333,"inY":320.6666666666667,"outX":395.99999999999994,"outY":306.66666666666663,"line":true},{"x":391.0,"y":306.0,"inX":392.99999999999994,"inY":306.0,"outX":385.0,"outY":306.0,"line":false},{"x":382.0,"y":315.0,"inX":382.0,"inY":309.0,"outX":382.0,"outY":317.0,"line":false},{"x":384.0,"y":324.0,"inX":382.66666666666663,"inY":320.0,"outX":392.0,"outY":342.6666666666666,"line":false},{"x":393.0,"y":374.0,"inX":393.0,"inY":360.6666666666666,"outX":393.0,"outY":430.69999999999993,"line":false},{"x":303.0,"y":412.0,"inX":339.5217391304347,"inY":437.56521739130426,"outX":276.3333333333332,"outY":393.33333333333326,"line":false},{"x":246.0,"y":339.0,"inX":255.33333333333331,"inY":364.3333333333332,"outX":246.0,"outY":277.6666666666667,"line":false},{"x":246,"y":155,"inX":246.0,"inY":216.33333333333334,"outX":246.0,"outY":101.6666666666666,"line":true},{"x":319.0,"y":60.0,"inX":269.66666666666663,"inY":60.0,"outX":319.6666666666667,"outY":60.0,"line":false},{"x":321,"y":60,"inX":320.3333333333333,"inY":60.0,"outX":331.0,"outY":60.0,"line":true},{"x":336.0,"y":45.0,"inX":336.0,"inY":55.0,"outX":336.0,"outY":35.0,"line":false},{"x":336,"y":15,"inX":336.0,"inY":25.0,"outX":336.0,"outY":5.0,"line":true},{"x":321.0,"y":0.0,"inX":331.0,"inY":0.0,"outX":224.0,"outY":0.0,"line":false},{"x":30,"y":0,"inX":127.0,"inY":0.0,"outX":20.0,"outY":0.0,"line":true},{"x":15.0,"y":15.0,"inX":15.0,"inY":5.0,"outX":15.0,"outY":25.0,"line":false},{"x":15,"y":45,"inX":15.0,"inY":35.0,"outX":15.0,"outY":55.0,"line":true},{"x":30.0,"y":60.0,"inX":20.0,"inY":60.0,"outX":30.666666666666668,"outY":60.0,"line":false},{"x":32,"y":60,"inX":31.333333333333332,"inY":60.0,"outX":81.33333333333331,"outY":60.0,"line":true},{"x":105.0,"y":155.0,"inX":105.0,"inY":101.6666666666666,"outX":105.0,"outY":197.0,"line":false},{"x":105,"y":281,"inX":105.0,"inY":239.0,"outX":105.0,"outY":334.99999999999983,"line":true},{"x":46.0,"y":396.0,"inX":102.00000000000017,"inY":390.0,"outX":38.0,"outY":396.66666666666663,"line":false},{"x":34.0,"y":409.0,"inX":34.0,"inY":400.99999999999994,"outX":34.0,"outY":420.3333333333333,"line":false},{"x":34,"y":443,"inX":34.0,"inY":431.6666666666667,"outX":34.0,"outY":449.66666666666663,"line":true},{"x":49.0,"y":456.0,"inX":39.0,"inY":454.0,"outX":96.33333333333333,"outY":463.3333333333333,"line":false},{"x":173.5,"y":491.0,"inX":137.83333333333331,"inY":475.0,"outX":209.16666666666663,"outY":507.0,"line":false},{"x":246.0,"y":529.0,"inX":233.33333333333331,"inY":519.6666666666666,"outX":248.0,"outY":530.3333333333333,"line":false},{"x":251.0,"y":531.0,"inX":249.66666666666666,"inY":531.0,"outX":251.66666666666666,"outY":531.0,"line":false},{"x":253,"y":531,"inX":252.33333333333334,"inY":531.0,"outX":254.33333333333331,"outY":531.0,"line":true},{"x":255.0,"y":529.0,"inX":255.0,"inY":530.3333333333333,"outX":255.0,"outY":526.333333333333,"line":false}]]},"t":{"advance":410,"contours":[[{"x":397,"y":72,"inX":391.6666666666667,"inY":80.66666666666667,"outX":401.39999999999986,"outY":66.13333333333331,"line":true},{"x":392.0,"y":52.0,"inX":401.77777777777766,"inY":58.1111111111111,"outX":382.0,"outY":45.666666666666664,"line":false},{"x":362,"y":33,"inX":372.0,"inY":39.333333333333336,"outX":325.99999999999994,"outY":10.333333333333307,"line":true},{"x":221.0,"y":-13.0,"inX":271.6666666666666,"inY":-13.0,"outX":160.99999999999994,"outY":-13.0,"line":false},{"x":106.0,"y":141.0,"inX":105.99999999999996,"inY":23.00000000000003,"outX":106.0,"outY":202.66666666666666,"line":false},{"x":106,"y":326,"inX":106.0,"inY":264.3333333333333,"outX":105.99999999999996,"outY":379.9999999999999,"line":true},{"x":33.0,"y":440.0,"inX":105.00000000000014,"inY":440.0,"outX":23.0,"outY":440.0,"line":false},{"x":18.0,"y":455.0,"inX":18.0,"inY":445.0,"outX":18.0,"outY":465.0,"line":false},{"x":18,"y":485,"inX":18.0,"inY":475.0,"outX":18.0,"outY":495.0,"line":true},{"x":33.0,"y":500.0,"inX":23.0,"inY":500.0,"outX":57.33333333333333,"outY":500.0,"line":false},{"x":106,"y":500,"inX":81.66666666666667,"inY":500.0,"outX":106.0,"outY":522.3333333333334,"line":true},{"x":106,"y":567,"inX":106.0,"inY":544.6666666666666,"outX":105.99999999999999,"outY":575.6666666666666,"line":true},{"x":115.0,"y":585.0,"inX":108.99999999999999,"inY":581.6666666666666,"outX":144.33333333333326,"outY":601.0,"line":false},{"x":237.0,"y":668.0,"inX":199.66666666666657,"inY":630.6666666666665,"outX":238.33333333333331,"outY":669.3333333333333,"line":false},{"x":242.0,"y":670.0,"inX":239.99999999999997,"inY":670.0,"outX":242.66666666666666,"outY":670.0,"line":false},{"x":244,"y":670,"inX":243.33333333333334,"inY":670.0,"outX":245.33333333333331,"outY":670.0,"line":true},{"x":246.0,"y":667.0,"inX":246.0,"inY":669.0,"outX":246.0,"outY":611.3333333333334,"line":false},{"x":246,"y":500,"inX":246.0,"inY":555.6666666666666,"outX":290.6666666666667,"outY":500.0,"line":true},{"x":380,"y":500,"inX":335.3333333333333,"inY":500.0,"outX":390.0,"outY":500.0,"line":true},{"x":395.0,"y":485.0,"inX":395.0,"inY":495.0,"outX":395.0,"outY":470.6666666666667,"line":false},{"x":395,"y":442,"inX":395.0,"inY":456.3333333333333,"outX":395.0,"outY":431.99999999999994,"line":true},{"x":380.0,"y":427.0,"inX":390.0,"inY":426.99999999999994,"outX":335.3333333333333,"outY":427.0,"line":false},{"x":246,"y":427,"inX":290.6666666666667,"inY":427.0,"outX":246.0,"outY":331.6666666666667,"line":true},{"x":246,"y":141,"inX":246.0,"inY":236.33333333333331,"outX":246.0,"outY":39.888888888888985,"line":true},{"x":359.0,"y":102.0,"inX":315.0784313725488,"inY":74.54901960784302,"outX":370.6666666666665,"outY":108.66666666666661,"line":false},{"x":381.0,"y":98.0,"inX":375.44444444444434,"inY":106.88888888888889,"outX":386.3333333333333,"outY":89.33333333333333,"line":false}]]}}};
+</script>
+  <script>/* Knead — edit one letterform at a time on a phone.
+   Mould the vector points directly on the glyph, or select a point and
+   nudge it with precision on the trackpad below (your finger never covers
+   the node you're shaping). Vanilla JS, no build, no dependencies.
+
+   Letterforms are real cubic outlines baked from Young Serif (OFL).
+   Working coordinates are y-down (SVG); font data is y-up, flipped on load. */
+
+(function () {
+  "use strict";
+
+  var DATA = window.GLYPHS;
+  if (!DATA) return;
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var A = DATA.ascent;                 // y-flip reference: Yview = A - Yfont
+  var EM_H = DATA.ascent - DATA.descent;
+
+  // ---- DOM ---------------------------------------------------------------
+  var stage   = document.getElementById("stage");
+  var rail    = document.getElementById("rail");
+  var readout = document.getElementById("readout");
+  var pad     = document.getElementById("pad");
+  var puck    = document.getElementById("pad-puck");
+  var sens    = document.getElementById("sens");
+  var toastEl = document.getElementById("toast");
+
+  // ---- state -------------------------------------------------------------
+  var pristine = {};   // key -> original (flipped) contours
+  var session  = {};   // key -> current working contours
+  var key, work;       // current letter + its working contours
+  var sel = { c: 0, n: 0 };
+  var target = "anchor";              // anchor | in | out
+  var fillOn = false;
+  var history = [];                   // snapshots for undo (current letter)
+  var scale = 1;                      // user-units -> screen px (for sizing)
+
+  // ---- geometry helpers --------------------------------------------------
+  function clone(c) { return JSON.parse(JSON.stringify(c)); }
+  function len(dx, dy) { return Math.hypot(dx, dy); }
+
+  function isSmooth(nd) {
+    var ix = nd.inX - nd.x, iy = nd.inY - nd.y;
+    var ox = nd.outX - nd.x, oy = nd.outY - nd.y;
+    var li = len(ix, iy), lo = len(ox, oy);
+    if (li < 1 || lo < 1) return false;          // a handle is retracted -> corner
+    var cross = ix * oy - iy * ox;               // ~0 when colinear
+    var dot = ix * ox + iy * oy;                 // <0 when pointing opposite ways
+    return Math.abs(cross) / (li * lo) < 0.08 && dot < 0;
+  }
+
+  function buildGlyph(k) {
+    var g = DATA.glyphs[k];
+    var c = g.contours.map(function (ct) {
+      return ct.map(function (p) {
+        return {
+          x: p.x, y: A - p.y,
+          inX: p.inX, inY: A - p.inY,
+          outX: p.outX, outY: A - p.outY,
+          smooth: false
+        };
+      });
+    });
+    c.forEach(function (ct) { ct.forEach(function (nd) { nd.smooth = isSmooth(nd); }); });
+    return c;
+  }
+
+  // ---- load / frame ------------------------------------------------------
+  function loadGlyph(k) {
+    key = k;
+    if (!pristine[k]) pristine[k] = buildGlyph(k);
+    if (!session[k]) session[k] = clone(pristine[k]);
+    work = session[k];
+    if (sel.c >= work.length) sel = { c: 0, n: 0 };
+    history = [];
+    frame();
+    syncRail();
+    syncSmoothBtn();
+    render();
+    updateUndo();
+  }
+
+  // viewBox sized to the letter (+ metric guides), centred and scaled to fit.
+  function frame() {
+    var xs = [], ys = [];
+    work.forEach(function (ct) {
+      ct.forEach(function (p) {
+        xs.push(p.x, p.inX, p.outX);
+        ys.push(p.y, p.inY, p.outY);
+      });
+    });
+    var minx = Math.min.apply(null, xs), maxx = Math.max.apply(null, xs);
+    var miny = Math.min.apply(null, ys), maxy = Math.max.apply(null, ys);
+    // keep baseline + x-height in view
+    miny = Math.min(miny, A - DATA.capHeight);
+    maxy = Math.max(maxy, A - DATA.descent);
+    var w = maxx - minx, h = maxy - miny;
+    var padU = Math.max(w, h) * 0.16;
+    stage.setAttribute("viewBox",
+      (minx - padU) + " " + (miny - padU) + " " + (w + 2 * padU) + " " + (h + 2 * padU));
+    stage.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  }
+
+  function measureScale() {
+    var ctm = stage.getScreenCTM();
+    scale = ctm ? Math.abs(ctm.a) || 1 : 1;
+  }
+
+  // ---- path data ---------------------------------------------------------
+  function contourD(ct) {
+    var d = "M" + r(ct[0].x) + " " + r(ct[0].y);
+    for (var i = 0; i < ct.length; i++) {
+      var cur = ct[i], nx = ct[(i + 1) % ct.length];
+      d += "C" + r(cur.outX) + " " + r(cur.outY) + " " +
+                 r(nx.inX) + " " + r(nx.inY) + " " +
+                 r(nx.x) + " " + r(nx.y);
+    }
+    return d + "Z";
+  }
+  function glyphD() { return work.map(contourD).join(" "); }
+  function r(n) { return Math.round(n * 100) / 100; }
+
+  // ---- render ------------------------------------------------------------
+  function el(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  function render() {
+    measureScale();
+    var nodeR = 6.5 / scale, hitR = 21 / scale, handR = 5 / scale;
+    while (stage.firstChild) stage.removeChild(stage.firstChild);
+
+    var vb = stage.viewBox.baseVal;
+
+    // guides: baseline + x-height + cap
+    [["base", A], ["x", A - DATA.xHeight], ["cap", A - DATA.capHeight]].forEach(function (gd) {
+      stage.appendChild(el("line", {
+        class: "guide", x1: vb.x, y1: gd[1], x2: vb.x + vb.width, y2: gd[1]
+      }));
+    });
+
+    // fill
+    if (fillOn) stage.appendChild(el("path", { class: "glyph-fill", d: glyphD() }));
+    // outline (always, so the shape reads while editing)
+    stage.appendChild(el("path", { class: "glyph-outline", d: glyphD(),
+      style: fillOn ? "opacity:.25" : "" }));
+
+    // handles for the selected node
+    var node = work[sel.c] && work[sel.c][sel.n];
+    if (node) {
+      stage.appendChild(el("line", { class: "handle-line", x1: node.x, y1: node.y, x2: node.inX, y2: node.inY }));
+      stage.appendChild(el("line", { class: "handle-line", x1: node.x, y1: node.y, x2: node.outX, y2: node.outY }));
+      stage.appendChild(el("rect", { class: "handle-dot",
+        x: node.inX - handR, y: node.inY - handR, width: handR * 2, height: handR * 2 }));
+      stage.appendChild(el("rect", { class: "handle-dot",
+        x: node.outX - handR, y: node.outY - handR, width: handR * 2, height: handR * 2 }));
+    }
+
+    // anchors
+    work.forEach(function (ct, ci) {
+      ct.forEach(function (nd, ni) {
+        var on = (ci === sel.c && ni === sel.n);
+        stage.appendChild(el("circle", {
+          class: "node" + (nd.smooth ? " smooth" : "") + (on ? " sel" : ""),
+          cx: nd.x, cy: nd.y, r: nodeR
+        }));
+      });
+    });
+
+    updateReadout();
+  }
+
+  function updateReadout() {
+    var nd = work[sel.c] && work[sel.c][sel.n];
+    if (!nd) { readout.hidden = true; return; }
+    readout.hidden = false;
+    var px = nd.x, py = A - nd.y;            // back to font units (y-up) for the type nerd
+    if (target === "in")  { px = nd.inX;  py = A - nd.inY; }
+    if (target === "out") { px = nd.outX; py = A - nd.outY; }
+    var label = target === "anchor" ? "Point" : (target === "in" ? "In handle" : "Out handle");
+    readout.innerHTML = "<b>" + key + "</b> &middot; <span class='tgt'>" + label + "</span><br>" +
+      "x " + Math.round(px) + "&nbsp;&nbsp; y " + Math.round(py);
+  }
+
+  // ---- mutation ----------------------------------------------------------
+  function pushHistory() {
+    history.push(clone(work));
+    if (history.length > 60) history.shift();
+    updateUndo();
+  }
+  function updateUndo() {
+    document.getElementById("undo").disabled = history.length === 0;
+  }
+
+  // move a point of the selected node by (dx,dy) in user units
+  function nudge(which, dx, dy) {
+    var nd = work[sel.c][sel.n];
+    if (which === "anchor") {
+      nd.x += dx; nd.y += dy;
+      nd.inX += dx; nd.inY += dy;
+      nd.outX += dx; nd.outY += dy;
+    } else if (which === "in") {
+      nd.inX += dx; nd.inY += dy;
+      if (nd.smooth) mirror(nd, "in");
+    } else {
+      nd.outX += dx; nd.outY += dy;
+      if (nd.smooth) mirror(nd, "out");
+    }
+  }
+
+  // keep the opposite handle colinear (preserve its own length)
+  function mirror(nd, moved) {
+    if (moved === "in") {
+      var dx = nd.inX - nd.x, dy = nd.inY - nd.y;
+      var ol = len(nd.outX - nd.x, nd.outY - nd.y) || len(dx, dy);
+      var l = len(dx, dy) || 1;
+      nd.outX = nd.x - dx / l * ol;
+      nd.outY = nd.y - dy / l * ol;
+    } else {
+      var ex = nd.outX - nd.x, ey = nd.outY - nd.y;
+      var il = len(nd.inX - nd.x, nd.inY - nd.y) || len(ex, ey);
+      var l2 = len(ex, ey) || 1;
+      nd.inX = nd.x - ex / l2 * il;
+      nd.inY = nd.y - ey / l2 * il;
+    }
+  }
+
+  function setSmooth(on) {
+    var nd = work[sel.c][sel.n];
+    nd.smooth = on;
+    if (on) {
+      // align handles along the average of their current directions
+      var ox = nd.outX - nd.x, oy = nd.outY - nd.y;
+      var ix = nd.x - nd.inX, iy = nd.y - nd.inY;   // line direction (in -> anchor)
+      var lo = len(ox, oy), li = len(nd.inX - nd.x, nd.inY - nd.y);
+      var dx = (lo ? ox / lo : 0) + (li ? ix / Math.hypot(ix, iy) : 0);
+      var dy = (lo ? oy / lo : 0) + (li ? iy / Math.hypot(ix, iy) : 0);
+      var dl = len(dx, dy);
+      if (dl < 1e-3) { dx = ox || 1; dy = oy; dl = len(dx, dy); }
+      dx /= dl; dy /= dl;
+      if (!lo && !li) { lo = li = 60; }
+      nd.outX = nd.x + dx * (lo || li);
+      nd.outY = nd.y + dy * (lo || li);
+      nd.inX = nd.x - dx * (li || lo);
+      nd.inY = nd.y - dy * (li || lo);
+    }
+    syncSmoothBtn();
+    render();
+  }
+
+  // ---- pointer mapping ---------------------------------------------------
+  function clientToUser(cx, cy) {
+    var ctm = stage.getScreenCTM().inverse();
+    var p = stage.createSVGPoint(); p.x = cx; p.y = cy;
+    p = p.matrixTransform(ctm);
+    return { x: p.x, y: p.y };
+  }
+  function userToClient(ux, uy) {
+    var ctm = stage.getScreenCTM();
+    return { x: ctm.a * ux + ctm.c * uy + ctm.e, y: ctm.b * ux + ctm.d * uy + ctm.f };
+  }
+
+  // ---- direct moulding on the glyph -------------------------------------
+  var drag = null;   // {kind, offx, offy}
+
+  stage.addEventListener("pointerdown", function (ev) {
+    ev.preventDefault();
+    var node = work[sel.c] && work[sel.c][sel.n];
+    var best = null, bestD = 28;   // px
+
+    // selected node's handles take priority
+    if (node) {
+      [["in", node.inX, node.inY], ["out", node.outX, node.outY]].forEach(function (h) {
+        var s = userToClient(h[1], h[2]);
+        var d = len(s.x - ev.clientX, s.y - ev.clientY);
+        if (d < bestD) { bestD = d; best = { kind: h[0] }; }
+      });
+    }
+    // then any anchor
+    work.forEach(function (ct, ci) {
+      ct.forEach(function (nd, ni) {
+        var s = userToClient(nd.x, nd.y);
+        var d = len(s.x - ev.clientX, s.y - ev.clientY);
+        if (d < bestD) { bestD = d; best = { kind: "anchor", c: ci, n: ni }; }
+      });
+    });
+    if (!best) return;
+
+    if (best.kind === "anchor") { sel = { c: best.c, n: best.n }; target = "anchor"; syncTargetSeg(); syncSmoothBtn(); }
+    pushHistory();
+    var nd = work[sel.c][sel.n];
+    var ux = best.kind === "in" ? nd.inX : best.kind === "out" ? nd.outX : nd.x;
+    var uy = best.kind === "in" ? nd.inY : best.kind === "out" ? nd.outY : nd.y;
+    var u = clientToUser(ev.clientX, ev.clientY);
+    drag = { kind: best.kind, offx: ux - u.x, offy: uy - u.y };
+    stage.setPointerCapture(ev.pointerId);
+    render();
+  });
+
+  stage.addEventListener("pointermove", function (ev) {
+    if (!drag) return;
+    var u = clientToUser(ev.clientX, ev.clientY);
+    var nd = work[sel.c][sel.n];
+    var tx = u.x + drag.offx, ty = u.y + drag.offy;
+    if (drag.kind === "anchor") nudge("anchor", tx - nd.x, ty - nd.y);
+    else if (drag.kind === "in") { nd.inX = tx; nd.inY = ty; if (nd.smooth) mirror(nd, "in"); }
+    else { nd.outX = tx; nd.outY = ty; if (nd.smooth) mirror(nd, "out"); }
+    render();
+  });
+
+  function endDrag(ev) { if (drag) { drag = null; try { stage.releasePointerCapture(ev.pointerId); } catch (e) {} } }
+  stage.addEventListener("pointerup", endDrag);
+  stage.addEventListener("pointercancel", endDrag);
+
+  // ---- trackpad (precise, occlusion-free) --------------------------------
+  var padState = null;   // {lastx, lasty}
+
+  function unitsPerPx() { return (+sens.value) / 100; }
+
+  pad.addEventListener("pointerdown", function (ev) {
+    ev.preventDefault();
+    if (!(work[sel.c] && work[sel.c][sel.n])) { flash("Tap a point on the letter first"); return; }
+    pushHistory();
+    padState = { lastx: ev.clientX, lasty: ev.clientY };
+    pad.classList.add("live");
+    placePuck(ev);
+    pad.setPointerCapture(ev.pointerId);
+  });
+  pad.addEventListener("pointermove", function (ev) {
+    if (!padState) return;
+    var k = unitsPerPx();
+    var dx = (ev.clientX - padState.lastx) * k;
+    var dy = (ev.clientY - padState.lasty) * k;
+    padState.lastx = ev.clientX; padState.lasty = ev.clientY;
+    nudge(target, dx, dy);
+    placePuck(ev);
+    render();
+  });
+  function padEnd(ev) {
+    if (!padState) return;
+    padState = null;
+    pad.classList.remove("live");
+    try { pad.releasePointerCapture(ev.pointerId); } catch (e) {}
+  }
+  pad.addEventListener("pointerup", padEnd);
+  pad.addEventListener("pointercancel", padEnd);
+
+  function placePuck(ev) {
+    var b = pad.getBoundingClientRect();
+    var x = Math.max(10, Math.min(b.width - 10, ev.clientX - b.left));
+    var y = Math.max(10, Math.min(b.height - 10, ev.clientY - b.top));
+    puck.style.left = x + "px";
+    puck.style.top = y + "px";
+  }
+
+  // ---- selection stepping ------------------------------------------------
+  function flat() {
+    var list = [];
+    work.forEach(function (ct, ci) { ct.forEach(function (_, ni) { list.push([ci, ni]); }); });
+    return list;
+  }
+  function step(dir) {
+    var list = flat();
+    var idx = list.findIndex(function (p) { return p[0] === sel.c && p[1] === sel.n; });
+    idx = (idx + dir + list.length) % list.length;
+    sel = { c: list[idx][0], n: list[idx][1] };
+    syncSmoothBtn();
+    render();
+  }
+
+  // ---- UI wiring ---------------------------------------------------------
+  function syncRail() {
+    Array.prototype.forEach.call(rail.children, function (b) {
+      b.classList.toggle("on", b.dataset.key === key);
+    });
+  }
+  function syncTargetSeg() {
+    document.querySelectorAll(".seg [data-target]").forEach(function (b) {
+      b.classList.toggle("on", b.dataset.target === target);
+    });
+  }
+  function syncSmoothBtn() {
+    var nd = work[sel.c] && work[sel.c][sel.n];
+    var btn = document.getElementById("smooth");
+    var on = !!(nd && nd.smooth);
+    btn.classList.toggle("on", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.textContent = on ? "Smooth" : "Corner";
+  }
+
+  // letter rail
+  Object.keys(DATA.glyphs).forEach(function (k) {
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.key = k; b.textContent = k;
+    b.addEventListener("click", function () { loadGlyph(k); });
+    rail.appendChild(b);
+  });
+
+  // target segmented control
+  document.querySelectorAll(".seg [data-target]").forEach(function (b) {
+    b.addEventListener("click", function () { target = b.dataset.target; syncTargetSeg(); updateReadout(); });
+  });
+
+  document.getElementById("prev").addEventListener("click", function () { step(-1); });
+  document.getElementById("next").addEventListener("click", function () { step(1); });
+  document.getElementById("smooth").addEventListener("click", function () {
+    var nd = work[sel.c] && work[sel.c][sel.n]; if (!nd) return;
+    pushHistory(); setSmooth(!nd.smooth);
+  });
+  document.getElementById("undo").addEventListener("click", function () {
+    if (!history.length) return;
+    session[key] = history.pop(); work = session[key];
+    if (sel.c >= work.length) sel = { c: 0, n: 0 };
+    updateUndo(); syncSmoothBtn(); render();
+  });
+  document.getElementById("reset").addEventListener("click", function () {
+    pushHistory();
+    session[key] = clone(pristine[key]); work = session[key];
+    sel = { c: 0, n: 0 }; syncSmoothBtn(); render();
+    flash("Letter reset");
+  });
+  document.getElementById("fill-toggle").addEventListener("click", function () {
+    fillOn = !fillOn;
+    this.classList.toggle("on", fillOn);
+    this.setAttribute("aria-pressed", fillOn ? "true" : "false");
+    render();
+  });
+  document.getElementById("export").addEventListener("click", exportSVG);
+
+  // ---- export ------------------------------------------------------------
+  function exportSVG() {
+    var adv = DATA.glyphs[key].advance;
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + adv + ' ' + Math.round(EM_H) + '">\n' +
+      '  <path fill-rule="evenodd" d="' + glyphD() + '"/>\n' +
+      '</svg>\n';
+    copy(svg, "SVG copied to clipboard");
+  }
+  function copy(text, msg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { flash(msg); }, function () { fallbackCopy(text, msg); });
+    } else fallbackCopy(text, msg);
+  }
+  function fallbackCopy(text, msg) {
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); flash(msg); } catch (e) { flash("Copy failed"); }
+    document.body.removeChild(ta);
+  }
+
+  // ---- toast -------------------------------------------------------------
+  var toastT;
+  function flash(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove("show"); }, 1500);
+  }
+
+  // ---- resize / boot -----------------------------------------------------
+  var rT;
+  window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(render, 120); });
+  window.addEventListener("orientationchange", function () { setTimeout(render, 250); });
+
+  // start on the lowercase a
+  loadGlyph(DATA.glyphs.a ? "a" : Object.keys(DATA.glyphs)[0]);
+  syncTargetSeg();
+  syncSmoothBtn();
+
+  // register the service worker for offline use (skipped on file://)
+  if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
