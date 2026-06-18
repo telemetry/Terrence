@@ -3,8 +3,9 @@
    nudge it with precision on the trackpad below (your finger never covers
    the node you're shaping). Vanilla JS, no build, no dependencies.
 
-   Letterforms are real cubic outlines baked from Young Serif (OFL).
-   Working coordinates are y-down (SVG); font data is y-up, flipped on load. */
+   Letterforms are real cubic outlines baked from several type families
+   (serif, sans, mono, display, blackletter, pixel). Working coordinates are
+   y-down (SVG); font data is y-up, flipped on load. */
 
 (function () {
   "use strict";
@@ -12,9 +13,12 @@
   var DATA = window.GLYPHS;
   if (!DATA) return;
 
+  var FAMS = {};
+  DATA.families.forEach(function (f) { FAMS[f.id] = f; });
+
   var SVGNS = "http://www.w3.org/2000/svg";
-  var A = DATA.ascent;                 // y-flip reference: Yview = A - Yfont
-  var EM_H = DATA.ascent - DATA.descent;
+  var fam;             // active family object
+  var A, EM_H;         // y-flip reference (ascent) + em height, per family
 
   // ---- DOM ---------------------------------------------------------------
   var stage   = document.getElementById("stage");
@@ -24,16 +28,19 @@
   var puck    = document.getElementById("pad-puck");
   var sens    = document.getElementById("sens");
   var toastEl = document.getElementById("toast");
+  var famSel  = document.getElementById("family");
 
   // ---- state -------------------------------------------------------------
-  var pristine = {};   // key -> original (flipped) contours
-  var session  = {};   // key -> current working contours
+  var pristine = {};   // "famId/letter" -> original (flipped) contours
+  var session  = {};   // "famId/letter" -> current working contours
   var key, work;       // current letter + its working contours
   var sel = { c: 0, n: 0 };
   var target = "anchor";              // anchor | in | out
   var fillOn = false;
   var history = [];                   // snapshots for undo (current letter)
   var scale = 1;                      // user-units -> screen px (for sizing)
+
+  function sk(k) { return fam.id + "/" + k; }   // session/pristine key
 
   // ---- geometry helpers --------------------------------------------------
   function clone(c) { return JSON.parse(JSON.stringify(c)); }
@@ -50,7 +57,7 @@
   }
 
   function buildGlyph(k) {
-    var g = DATA.glyphs[k];
+    var g = fam.glyphs[k];
     var c = g.contours.map(function (ct) {
       return ct.map(function (p) {
         return {
@@ -65,12 +72,23 @@
     return c;
   }
 
-  // ---- load / frame ------------------------------------------------------
+  // ---- load family / glyph / frame --------------------------------------
+  function loadFamily(id) {
+    fam = FAMS[id] || DATA.families[0];
+    A = fam.ascent;
+    EM_H = fam.ascent - fam.descent;
+    rail.style.fontFamily = '"' + fam.railFont + '", Georgia, serif';
+    if (famSel) famSel.value = fam.id;
+    if (!key || !fam.glyphs[key]) key = fam.glyphs.a ? "a" : Object.keys(fam.glyphs)[0];
+    sel = { c: 0, n: 0 };
+    loadGlyph(key);
+  }
+
   function loadGlyph(k) {
     key = k;
-    if (!pristine[k]) pristine[k] = buildGlyph(k);
-    if (!session[k]) session[k] = clone(pristine[k]);
-    work = session[k];
+    if (!pristine[sk(k)]) pristine[sk(k)] = buildGlyph(k);
+    if (!session[sk(k)]) session[sk(k)] = clone(pristine[sk(k)]);
+    work = session[sk(k)];
     if (sel.c >= work.length) sel = { c: 0, n: 0 };
     history = [];
     frame();
@@ -92,8 +110,8 @@
     var minx = Math.min.apply(null, xs), maxx = Math.max.apply(null, xs);
     var miny = Math.min.apply(null, ys), maxy = Math.max.apply(null, ys);
     // keep baseline + x-height in view
-    miny = Math.min(miny, A - DATA.capHeight);
-    maxy = Math.max(maxy, A - DATA.descent);
+    miny = Math.min(miny, A - fam.capHeight);
+    maxy = Math.max(maxy, A - fam.descent);
     var w = maxx - minx, h = maxy - miny;
     var padU = Math.max(w, h) * 0.16;
     stage.setAttribute("viewBox",
@@ -135,7 +153,7 @@
     var vb = stage.viewBox.baseVal;
 
     // guides: baseline + x-height + cap
-    [["base", A], ["x", A - DATA.xHeight], ["cap", A - DATA.capHeight]].forEach(function (gd) {
+    [["base", A], ["x", A - fam.xHeight], ["cap", A - fam.capHeight]].forEach(function (gd) {
       stage.appendChild(el("line", {
         class: "guide", x1: vb.x, y1: gd[1], x2: vb.x + vb.width, y2: gd[1]
       }));
@@ -390,13 +408,21 @@
     btn.textContent = on ? "Smooth" : "Corner";
   }
 
-  // letter rail
-  Object.keys(DATA.glyphs).forEach(function (k) {
+  // letter rail (letters are shared across families)
+  Object.keys(DATA.families[0].glyphs).forEach(function (k) {
     var b = document.createElement("button");
     b.type = "button"; b.dataset.key = k; b.textContent = k;
     b.addEventListener("click", function () { loadGlyph(k); });
     rail.appendChild(b);
   });
+
+  // family dropdown
+  DATA.families.forEach(function (f) {
+    var o = document.createElement("option");
+    o.value = f.id; o.textContent = f.label;
+    famSel.appendChild(o);
+  });
+  famSel.addEventListener("change", function () { loadFamily(famSel.value); });
 
   // target segmented control
   document.querySelectorAll(".seg [data-target]").forEach(function (b) {
@@ -411,13 +437,13 @@
   });
   document.getElementById("undo").addEventListener("click", function () {
     if (!history.length) return;
-    session[key] = history.pop(); work = session[key];
+    session[sk(key)] = history.pop(); work = session[sk(key)];
     if (sel.c >= work.length) sel = { c: 0, n: 0 };
     updateUndo(); syncSmoothBtn(); render();
   });
   document.getElementById("reset").addEventListener("click", function () {
     pushHistory();
-    session[key] = clone(pristine[key]); work = session[key];
+    session[sk(key)] = clone(pristine[sk(key)]); work = session[sk(key)];
     sel = { c: 0, n: 0 }; syncSmoothBtn(); render();
     flash("Letter reset");
   });
@@ -431,7 +457,7 @@
 
   // ---- export ------------------------------------------------------------
   function exportSVG() {
-    var adv = DATA.glyphs[key].advance;
+    var adv = fam.glyphs[key].advance;
     var svg =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + adv + ' ' + Math.round(EM_H) + '">\n' +
       '  <path fill-rule="evenodd" d="' + glyphD() + '"/>\n' +
@@ -465,8 +491,8 @@
   window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(render, 120); });
   window.addEventListener("orientationchange", function () { setTimeout(render, 250); });
 
-  // start on the lowercase a
-  loadGlyph(DATA.glyphs.a ? "a" : Object.keys(DATA.glyphs)[0]);
+  // start on the default family's lowercase a
+  loadFamily(DATA.default || DATA.families[0].id);
   syncTargetSeg();
   syncSmoothBtn();
 

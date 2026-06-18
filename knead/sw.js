@@ -1,8 +1,10 @@
 /* Knead service worker — cache everything, run fully offline. */
-var CACHE = "knead-v1";
+var CACHE = "knead-v2";
 var ASSETS = [
   ".", "index.html", "styles.css", "glyphs.js", "app.js",
-  "manifest.webmanifest", "fonts/YoungSerif-subset.woff2",
+  "manifest.webmanifest",
+  "fonts/serif.woff2", "fonts/sans.woff2", "fonts/mono.woff2",
+  "fonts/display.woff2", "fonts/blackletter.woff2", "fonts/pixel.woff2",
   "apple-touch-icon.png", "icon-192.png", "icon-512.png"
 ];
 
