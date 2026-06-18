@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Knead — case study · Terry Gillespie</title>
+  <meta name="description" content="Knead: editing a typeface one letter at a time on a phone, by turning the bottom half of the screen into a precision trackpad. A design-engineering case study.">
+  <meta name="theme-color" content="#0d0d0f">
+  <meta property="og:title" content="Knead — a phone-first type editor">
+  <meta property="og:description" content="The bottom half of the screen is a trackpad. Mould one letter at a time.">
+  <meta property="og:image" content="knead-static.png">
+  <style>
+    :root{
+      --bg:#0d0d0f; --panel:#141417; --line:#26262b; --ink:#f3f1ea;
+      --muted:#8a8a93; --faint:#55555e; --accent:#ff5c38; --blue:#4ea1ff;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:-apple-system,system-ui,"Segoe UI",sans-serif;
+      line-height:1.6; font-size:17px; -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit}
+    .wrap{max-width:760px; margin:0 auto; padding:0 22px}
+    /* top nav */
+    nav{display:flex; align-items:center; justify-content:space-between;
+      padding:16px 22px; border-bottom:1px solid var(--line); position:sticky; top:0;
+      background:rgba(13,13,15,.82); backdrop-filter:blur(8px); z-index:5}
+    nav .home{color:var(--muted); text-decoration:none; font-size:15px}
+    nav .home:hover{color:var(--ink)}
+    .cta{display:inline-block; text-decoration:none; font-weight:600; font-size:14px;
+      padding:8px 16px; border-radius:999px; background:var(--accent); color:#fff}
+    .cta.ghost{background:#ffffff10; color:var(--ink); border:1px solid var(--line)}
+    /* hero */
+    header.hero{padding:64px 0 28px}
+    .eyebrow{color:var(--accent); font-weight:600; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 14px}
+    h1{font-size:clamp(40px,9vw,68px); line-height:1.02; letter-spacing:-.02em; margin:0 0 18px; font-weight:700}
+    .lead{font-size:clamp(19px,3.4vw,23px); color:#cfcfd6; margin:0 0 28px; max-width:38ch}
+    .facts{display:flex; flex-wrap:wrap; gap:8px 10px; margin:26px 0 30px}
+    .facts span{font-size:13px; color:var(--muted); border:1px solid var(--line); border-radius:8px; padding:6px 11px}
+    .facts b{color:var(--ink); font-weight:600}
+    .herobtns{display:flex; gap:10px; flex-wrap:wrap}
+    /* sections */
+    section{padding:40px 0; border-top:1px solid var(--line)}
+    h2{font-size:clamp(24px,4.6vw,32px); letter-spacing:-.01em; margin:0 0 6px; font-weight:700}
+    .kicker{color:var(--accent); font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin:0 0 16px}
+    p{margin:0 0 18px; color:#d7d7dd}
+    p .em{color:var(--ink); font-weight:600}
+    .pull{font-size:clamp(22px,4.4vw,30px); line-height:1.25; color:var(--ink); font-weight:600; letter-spacing:-.01em; margin:8px 0}
+    /* figure + toggle */
+    figure{margin:24px 0 8px}
+    .figbox{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#0a0a0c}
+    .figbox img{display:block; width:100%; height:auto}
+    .figbox img[hidden]{display:none}
+    .toggle{display:inline-flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; margin:14px 0 0}
+    .toggle button{appearance:none; border:0; background:transparent; color:var(--muted); font-size:13px; font-weight:600; padding:8px 16px; cursor:pointer}
+    .toggle button+button{border-left:1px solid var(--line)}
+    .toggle button.on{background:var(--accent); color:#fff}
+    figcaption{color:var(--faint); font-size:13px; margin-top:10px}
+    /* lists / grid */
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:22px 0}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}}
+    .card{border:1px solid var(--line); border-radius:14px; padding:18px; background:var(--panel)}
+    .card h3{margin:0 0 6px; font-size:17px}
+    .card p{margin:0; font-size:15px; color:var(--muted)}
+    /* table */
+    table{width:100%; border-collapse:collapse; margin:18px 0; font-size:15px}
+    th,td{text-align:left; padding:10px 8px; border-bottom:1px solid var(--line)}
+    th{color:var(--muted); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.04em}
+    td.n{font-variant-numeric:tabular-nums; color:var(--muted); text-align:right}
+    .fam{font-weight:600}
+    /* demo embed */
+    .demo{display:flex; justify-content:center; padding:8px 0 0}
+    .phone{width:300px; max-width:86vw; aspect-ratio:9/19.5; border:10px solid #1a1a1f; border-radius:38px; overflow:hidden; box-shadow:0 24px 60px #0008; background:#000}
+    .phone iframe{width:100%; height:100%; border:0; display:block}
+    .stats{display:flex; flex-wrap:wrap; gap:10px 26px; margin:14px 0 4px}
+    .stat b{display:block; font-size:28px; letter-spacing:-.01em}
+    .stat span{font-size:13px; color:var(--muted)}
+    footer{padding:48px 0 80px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
+    footer a{color:var(--ink)}
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="home" href="/">← Terry Gillespie</a>
+    <a class="cta" href="./">Open the live tool ↗</a>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Case study · Tool · Type design · iOS</p>
+      <h1>Knead</h1>
+      <p class="lead">Editing a typeface one letter at a time, on a phone — by turning the bottom half of the screen into a precision trackpad.</p>
+      <div class="facts">
+        <span><b>Role</b> &nbsp;Concept, design &amp; build</span>
+        <span><b>Surface</b> &nbsp;Mobile web → native iOS</span>
+        <span><b>Build</b> &nbsp;Vanilla JS · SVG · PWA</span>
+        <span><b>Year</b> &nbsp;2026</span>
+        <span><b>Status</b> &nbsp;Working prototype</span>
+      </div>
+      <div class="herobtns">
+        <a class="cta" href="./">Try it on your phone</a>
+        <a class="cta ghost" href="#mechanic">See the mechanic ↓</a>
+      </div>
+    </header>
+
+    <section>
+      <p class="kicker">The problem</p>
+      <h2>Vector editing assumes a desktop</h2>
+      <p>Type and vector tools are built for a mouse: a 1&nbsp;px cursor, a big canvas, hover states. Move that onto a phone and two things break. Your <span class="em">finger covers the exact point you're trying to move</span> — you can't see what you're doing. And precision evaporates: a thumb is ~45&nbsp;px wide, but a curve handle needs sub-pixel nudges.</p>
+      <p>So mobile type tools mostly don't exist, and the ones that try just shrink the desktop UI. The interesting question isn't “how do we fit the tool on a phone” — it's <span class="em">“what does a phone do better?”</span></p>
+    </section>
+
+    <section id="mechanic">
+      <p class="kicker">The insight</p>
+      <h2>The bottom half is a trackpad</h2>
+      <p class="pull">One letter fills the screen. The bottom half becomes an iPod-style control surface that drives the point up top — so your finger is never on the thing it's shaping.</p>
+      <p>Select a node, then drag anywhere on the pad below. Movement is <span class="em">relative and geared down</span> (a precision gain of ~0.42), so a big, comfortable thumb swipe becomes a tiny, exact move on the glyph. It's the same trick a laptop trackpad plays — your hand and the cursor live in different places — applied to vector editing.</p>
+
+      <figure>
+        <div class="figbox">
+          <img id="fig-anim" src="knead-anim.gif" alt="Animated exploded diagram: a finger circling the trackpad drives a node on the letterform above.">
+          <img id="fig-static" src="knead-static.png" alt="Annotated exploded diagram of the Stage, Trackpad and Device layers." hidden>
+        </div>
+        <div class="toggle" role="group" aria-label="Diagram mode">
+          <button id="t-anim" class="on" type="button">Animated</button>
+          <button id="t-static" type="button">Static</button>
+        </div>
+        <figcaption>Exploded view — Stage (the letterform + live node and handles) over the Trackpad (your input) over the Device. Generated programmatically in isometric so it stays editable.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <p class="kicker">How it works</p>
+      <h2>Two ways to shape a curve</h2>
+      <div class="grid">
+        <div class="card"><h3>Mould directly</h3><p>Drag the anchor points and bezier handles right on the glyph — fast, for big gestural moves.</p></div>
+        <div class="card"><h3>Nudge on the pad</h3><p>For precision: select, then drag below. Finger off the glyph, geared down, with a Fine↔Bold sensitivity slider.</p></div>
+        <div class="card"><h3>Point · In · Out</h3><p>Aim the pad at the anchor or either of its two curve handles. Step ‹ › along the outline instead of poking tiny dots.</p></div>
+        <div class="card"><h3>Smooth / Corner</h3><p>Toggle a node's continuity; smooth keeps the two handles colinear as you pull one. Fill to preview, undo/reset per letter, export SVG.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">The type system</p>
+      <h2>Real outlines, six families</h2>
+      <p>The letters aren't faked paths — they're <span class="em">actual font outlines</span>. Each glyph is extracted with fontTools, its TrueType quadratics converted to cubic béziers, and baked to JSON the editor reads. Pick a class from the dropdown and the whole letterform — and its node structure — changes underneath you.</p>
+      <table>
+        <thead><tr><th>Family</th><th>Typeface</th><th class="n">Nodes in “a”</th></tr></thead>
+        <tbody>
+          <tr><td class="fam">Serif</td><td>Young Serif</td><td class="n">25</td></tr>
+          <tr><td class="fam">Sans</td><td>National Park</td><td class="n">23</td></tr>
+          <tr><td class="fam">Mono</td><td>JetBrains Mono</td><td class="n">20</td></tr>
+          <tr><td class="fam">Display</td><td>Gloock</td><td class="n">22</td></tr>
+          <tr><td class="fam">Blackletter</td><td>UnifrakturMaguntia</td><td class="n">33</td></tr>
+          <tr><td class="fam">Pixel</td><td>Silkscreen</td><td class="n">16</td></tr>
+        </tbody>
+      </table>
+      <p>A blackletter <span class="em">a</span> carries 33 control points; a pixel one only 16 — so each family genuinely <em>feels</em> different to mould. All six are OFL; blackletter is pulled live from Google Fonts, the rest from an open set.</p>
+    </section>
+
+    <section>
+      <p class="kicker">The craft</p>
+      <h2>Built to disappear</h2>
+      <div class="stats">
+        <div class="stat"><b>0</b><span>frameworks / build step</span></div>
+        <div class="stat"><b>1</b><span>SVG render loop</span></div>
+        <div class="stat"><b>100%</b><span>offline after first load</span></div>
+        <div class="stat"><b>6</b><span>typefaces, baked in</span></div>
+      </div>
+      <p>The whole thing is vanilla JS and one SVG, redrawn each frame; pointer events unify mouse, touch and trackpad so the same code runs everywhere. It's an installable PWA — “Add to Home Screen” and it runs full-screen in airplane mode. Even the diagram on this page is generated from a script, not drawn by hand, so the projection and the precision gain stay honest.</p>
+    </section>
+
+    <section>
+      <p class="kicker">Try it</p>
+      <h2>The live tool</h2>
+      <p>Best on a phone, in portrait. Tap a point on the <span class="em">a</span>, drag on the pad, switch families.</p>
+      <div class="demo">
+        <div class="phone"><iframe src="./" title="Knead live editor" loading="lazy"></iframe></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Where it's going</p>
+      <h2>Toward a native instrument</h2>
+      <p>The web prototype proves the interaction; the product is native iOS. SwiftUI for the shell, a Canvas/Metal layer for the glyph, and the things a browser can't give you: 120&nbsp;Hz, real haptics on grab and snap, importing any installed font via CoreText to edit its actual glyphs, and exporting to <span class="em">.glyphs</span> / UFO. The data model and both interactions port over unchanged.</p>
+    </section>
+
+    <footer>
+      <p>Knead — concept, design and build by Terry Gillespie, 2026. &nbsp;<a href="./">Open the tool</a> · <a href="/">More work</a></p>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      var a=document.getElementById('t-anim'), s=document.getElementById('t-static');
+      var fa=document.getElementById('fig-anim'), fs=document.getElementById('fig-static');
+      function show(anim){
+        fa.hidden=!anim; fs.hidden=anim;
+        a.classList.toggle('on',anim); s.classList.toggle('on',!anim);
+      }
+      a.addEventListener('click',function(){show(true)});
+      s.addEventListener('click',function(){show(false)});
+    })();
+  </script>
+</body>
+</html>
