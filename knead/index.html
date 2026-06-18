@@ -18,7 +18,9 @@
 </head>
 <body>
   <header class="bar">
-    <span class="brand"><b>Knead</b><small>mould a letter</small></span>
+    <a class="brand" href="about.html" target="_top" aria-label="Back to the Knead project">
+      <span class="back">‹</span><b>Knead</b><small>the project</small>
+    </a>
     <div class="bar-actions">
       <select class="select" id="family" aria-label="Typeface family"></select>
       <button class="ghost" id="fill-toggle" type="button" aria-pressed="false">Fill</button>
@@ -56,9 +58,9 @@
         <div class="pad-puck" id="pad-puck"></div>
       </div>
       <div class="pad-side">
-        <label>Fine</label>
-        <input class="sens" id="sens" type="range" min="20" max="400" value="100" aria-label="Sensitivity">
         <label>Bold</label>
+        <input class="sens" id="sens" type="range" min="20" max="400" value="100" aria-label="Sensitivity: Fine (small, precise moves) to Bold (large moves)">
+        <label>Fine</label>
       </div>
     </div>
   </section>
