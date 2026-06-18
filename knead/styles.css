@@ -229,7 +229,7 @@ button.ghost.icon { padding: 0; width: 34px; font-size: 17px; }
 .pad {
   position: relative;
   flex: 1 1 auto;
-  height: clamp(200px, 34vh, 360px);
+  height: clamp(260px, 46vh, 640px);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:

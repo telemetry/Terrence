@@ -1,7 +1,9 @@
-/* Knead service worker — cache everything, run fully offline. */
-var CACHE = "knead-v2";
+/* Knead service worker.
+   Network-first for code (so deploys show up immediately, offline falls back
+   to cache); cache-first for fonts/icons (rarely change, want them instant). */
+var CACHE = "knead-v3";
 var ASSETS = [
-  ".", "index.html", "styles.css", "glyphs.js", "app.js",
+  ".", "index.html", "styles.css", "glyphs.js", "app.js", "about.html",
   "manifest.webmanifest",
   "fonts/serif.woff2", "fonts/sans.woff2", "fonts/mono.woff2",
   "fonts/display.woff2", "fonts/blackletter.woff2", "fonts/pixel.woff2",
@@ -23,15 +25,35 @@ self.addEventListener("activate", function (e) {
   }).then(function () { return self.clients.claim(); }));
 });
 
+function isCode(req) {
+  if (req.mode === "navigate") return true;
+  return /\.(html|js|css|webmanifest)(\?|$)/.test(req.url);
+}
+
 self.addEventListener("fetch", function (e) {
   if (e.request.method !== "GET") return;
-  e.respondWith(
-    caches.match(e.request).then(function (hit) {
-      return hit || fetch(e.request).then(function (res) {
+  if (isCode(e.request)) {
+    // network-first: always try for the freshest code, fall back to cache offline
+    e.respondWith(
+      fetch(e.request).then(function (res) {
         var copy = res.clone();
         caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
         return res;
-      }).catch(function () { return caches.match("index.html"); });
-    })
-  );
+      }).catch(function () {
+        return caches.match(e.request).then(function (hit) { return hit || caches.match("index.html"); });
+      })
+    );
+  } else {
+    // cache-first for fonts/icons
+    e.respondWith(
+      caches.match(e.request).then(function (hit) {
+        return hit || fetch(e.request).then(function (res) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
+          return res;
+        });
+      })
+    );
+  }
 });
+
