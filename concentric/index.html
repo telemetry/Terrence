@@ -63,12 +63,15 @@
     /* ---- live Concentric clock (faithful port) ---- */
     .clock-demo{display:flex;flex-direction:column;align-items:center;gap:12px;margin:14px 0 0}
     .concentric-watch{width:280px;height:280px;border-radius:56px;overflow:hidden;background:#000;position:relative}
-    .concentric-outer{width:560px;height:560px;position:absolute;top:140px;left:-140px;transform-origin:280px 0px;transition:transform .5s ease-out}
-    .concentric-inner{width:560px;height:560px;position:relative;transform-origin:280px 280px;transition:transform .5s ease-out}
+    .concentric-ring{width:560px;height:560px;position:absolute;top:140px;left:-140px;transform-origin:280px 0px;transition:transform .5s ease-out}
     .concentric-svg{width:560px;height:560px}
-    .concentric-dot{position:absolute;width:90px;height:90px;background:rgba(255,59,48,.95);border-radius:50%;top:-15px;left:235px;
-      display:flex;align-items:center;justify-content:center;transition:transform .5s ease-out}
-    .concentric-hour{color:#fff;font-family:-apple-system,system-ui,sans-serif;font-size:40px;font-weight:600;transition:transform .5s ease-out}
+    .concentric-dot{position:absolute;width:92px;height:92px;background:rgba(255,59,48,.95);border-radius:50%;top:94px;left:94px;
+      display:flex;align-items:center;justify-content:center}   /* fixed, centred */
+    .concentric-hour{color:#fff;font-family:-apple-system,system-ui,sans-serif;font-size:40px;font-weight:600}
+    .concentric-watch.warp .concentric-ring{transition:transform .12s linear}
+    .c-controls{display:flex;gap:8px}
+    .c-toggle{font-size:12px;color:var(--muted);background:#ffffff10;border:1px solid var(--line);border-radius:999px;padding:6px 16px;cursor:pointer}
+    .c-toggle.on{background:rgba(255,92,56,.16);border-color:var(--accent);color:var(--accent)}
     .clock-now{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;letter-spacing:.04em}
     @media(max-width:360px){ .concentric-watch{transform:scale(.86)} }
   </style>
@@ -86,12 +89,14 @@
       <p class="lead">An ambient watch you read by intuition — built from counter-rotating layers and a moving crop.</p>
       <div class="clock-demo">
         <div class="concentric-watch" id="concentric">
-          <div class="concentric-outer" id="c-outer">
-            <div class="concentric-inner" id="c-inner">
-              <svg class="concentric-svg" viewBox="0 0 560 560"><circle cx="280" cy="280" r="250" fill="none" stroke="#e6e6e6" stroke-width="44"/></svg>
-              <div class="concentric-dot" id="c-dot"><span class="concentric-hour" id="c-hour"></span></div>
-            </div>
+          <div class="concentric-ring" id="c-ring">
+            <svg class="concentric-svg" viewBox="0 0 560 560"><circle cx="280" cy="280" r="250" fill="none" stroke="#e6e6e6" stroke-width="44"/></svg>
           </div>
+          <div class="concentric-dot"><span class="concentric-hour" id="c-hour"></span></div>
+        </div>
+        <div class="c-controls">
+          <button id="c-live" class="c-toggle on" type="button">Live</button>
+          <button id="c-warp" class="c-toggle" type="button">Time warp</button>
         </div>
         <p class="clock-now" id="c-now">live · your time</p>
       </div>
@@ -114,7 +119,7 @@
       <p class="kicker">How it's built</p>
       <h2>Counter-rotating layers</h2>
       <p class="pull">Each layer turns the opposite way to the one above it — +t, −t, +t, −t. The spins cancel where they should and survive where they shouldn't.</p>
-      <p>The <span class="em">Outer</span> layer carries an oversized, off-centre ring and rotates one turn per hour; because the ring's centre is offset, that spin swings the visible crescent — the <span class="em">crop</span> — around the face. The <span class="em">Inner</span> layer counter-rotates to cancel the spin, so the ring stays a clean circle instead of tumbling. The <span class="em">hand</span> rides the ring to mark the minute, and the <span class="em">number</span> counter-rotates again so the hour always sits upright.</p>
+      <p>The <span class="em">Outer</span> layer carries an oversized, off-centre ring and rotates one turn per hour; because the ring's centre is offset, that spin swings the visible crescent — the <span class="em">crop</span> — around the face. The <span class="em">Inner</span> layer counter-rotates to cancel the spin, so the ring stays a clean circle instead of tumbling. The <span class="em">dot</span> sits still in the centre showing the hour — you read the minute from where the crop falls. The counter-rotations are precisely what hold the dot fixed and upright while the ring does the work.</p>
 
       <figure>
         <div class="figbox">
@@ -130,11 +135,11 @@
 
       <ul class="levels">
         <li><span class="rot zero">fixed</span><div><b>Window</b> — <span>the rounded square that crops everything below</span></div></li>
-        <li><span class="rot pos">+t</span><div><b>Outer</b> — <span>swings the offset ring's centre → moves the crop</span></div></li>
+        <li><span class="rot pos">+t</span><div><b>Outer</b> — <span>swings the offset ring → the crop you read for the minute</span></div></li>
         <li><span class="rot neg">−t</span><div><b>Inner</b> — <span>cancels the spin so the ring stays true</span></div></li>
         <li><span class="rot zero">—</span><div><b>Ring</b> — <span>the white track</span></div></li>
-        <li><span class="rot pos">+t</span><div><b>Hand</b> — <span>rides the ring to mark the minute</span></div></li>
-        <li><span class="rot neg">−t</span><div><b>Number</b> — <span>the hour, kept upright</span></div></li>
+        <li><span class="rot zero">fixed</span><div><b>Dot</b> — <span>stays in the centre, shows the hour</span></div></li>
+        <li><span class="rot neg">−t</span><div><b>Number</b> — <span>held upright by the counter-spins</span></div></li>
       </ul>
     </section>
 
@@ -165,20 +170,24 @@
       a.addEventListener('click',function(){show(true)});
       s.addEventListener('click',function(){show(false)});
     })();
-    // live clock — faithful counter-rotation
+    // live clock — fixed dot, rotating ring (crop does the reading), with Time warp
     (function(){
-      var outer=document.getElementById('c-outer'),inner=document.getElementById('c-inner'),
-          dot=document.getElementById('c-dot'),hour=document.getElementById('c-hour'),now=document.getElementById('c-now');
-      function tick(){
-        var d=new Date(), t=d.getMinutes()*6;
-        outer.style.transform='rotate('+t+'deg)';
-        inner.style.transform='rotate('+(-t)+'deg)';
-        dot.style.transform='rotate('+t+'deg)';
-        hour.style.transform='rotate('+(-t)+'deg)';
-        hour.textContent=((d.getHours()%12)||12);
-        now.textContent='live · '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-      }
-      tick(); setInterval(tick,1000);
+      var ring=document.getElementById('c-ring'),hour=document.getElementById('c-hour'),now=document.getElementById('c-now'),
+          watch=document.getElementById('concentric'),liveBtn=document.getElementById('c-live'),warpBtn=document.getElementById('c-warp');
+      var warp=false, e=0, timer=null;
+      function pad(n){return (n<10?'0':'')+n;}
+      function paint(t,h,label){ ring.style.transform='rotate('+t+'deg)'; hour.textContent=h; now.textContent=label; }
+      function tickLive(){ var d=new Date(); paint(d.getMinutes()*6, ((d.getHours()%12)||12),
+        'live · '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})); }
+      function tickWarp(){ var h=(Math.floor(e/60)%12)||12; paint((e%60)*6, h,
+        'time warp · '+pad(Math.floor(e/60)%24)+':'+pad(e%60)); e++; }
+      function setMode(w){ warp=w; watch.classList.toggle('warp',w);
+        liveBtn.classList.toggle('on',!w); warpBtn.classList.toggle('on',w);
+        clearInterval(timer);
+        if(w){ e=0; tickWarp(); timer=setInterval(tickWarp,120); }
+        else { tickLive(); timer=setInterval(tickLive,1000); } }
+      liveBtn.onclick=function(){setMode(false)}; warpBtn.onclick=function(){setMode(true)};
+      setMode(false);
     })();
   </script>
 </body>

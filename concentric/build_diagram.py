@@ -26,7 +26,7 @@ def arc_arrow(cx,cy,r,a0,a1,col,w=4):
 # ---- level drawers (flat 280 box) ----
 def L_window(t): return f'<rect x="22" y="22" width="236" height="236" rx="48" fill="#0a0a0c" stroke="{FAINT}" stroke-width="2"/>'
 def L_outer(t):
-    g=f'<circle cx="140" cy="205" r="150" fill="none" stroke="#5a5a62" stroke-width="24"/>'
+    g=f'<g transform="rotate({t} 140 140)"><circle cx="140" cy="215" r="150" fill="none" stroke="#5a5a62" stroke-width="24"/></g>'
     g+=arc_arrow(140,140,86, -60, -60+min(150,t*0.9), ACC,4)
     return g
 def L_inner(t):
@@ -35,34 +35,27 @@ def L_inner(t):
     return g
 def L_ring(t): return f'<circle cx="140" cy="140" r="112" fill="none" stroke="{WHITE}" stroke-width="22"/>'
 def L_dot(t):
-    a=math.radians(-90 + t)  # orbit from 12 o'clock, +t
-    x=140+112*math.cos(a); y=140+112*math.sin(a)
-    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="26" fill="{RED}"/>'
+    return f'<circle cx="140" cy="140" r="30" fill="{RED}"/>'      # fixed — does not move
 def L_number(t):
-    a=math.radians(-90 + t); x=140+112*math.cos(a); y=140+112*math.sin(a)
-    return (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="26" fill="{RED}"/>'
-            f'<text x="{x:.1f}" y="{y:.1f}" fill="#fff" font-family="-apple-system,sans-serif" font-size="26" font-weight="600" text-anchor="middle" dominant-baseline="central">17</text>')
+    return (f'<circle cx="140" cy="140" r="30" fill="{RED}"/>'
+            f'<text x="140" y="140" fill="#fff" font-family="-apple-system,sans-serif" font-size="28" font-weight="600" text-anchor="middle" dominant-baseline="central">17</text>')
 
 LEVELS=[
  ("window","Window","crops the face", L_window),
- ("outer","Outer  +t","swings the ring’s centre", L_outer),
- ("inner","Inner  −t","un-spins, keeps the ring true", L_inner),
+ ("outer","Outer  +t","the mover · sweeps the crop = minute", L_outer),
+ ("inner","Inner  −t","keeps the ring true", L_inner),
  ("ring","Ring","the track", L_ring),
- ("dot","Hand  +t","sweeps the minutes", L_dot),
- ("number","Number  −t","hour, kept upright", L_number),
+ ("dot","Dot","stays put", L_dot),
+ ("number","Number","the hour, upright", L_number),
 ]
 
 # faithful assembled watch (iso + clip), scale k
 def assembled(t, k):
-    tt=t
-    inner=f'''<g transform="rotate({tt} 140 140)"><g transform="translate(-140 140)"><g transform="rotate({-tt} 280 280)">
-      <circle cx="280" cy="280" r="250" fill="none" stroke="{WHITE}" stroke-width="44"/>
-      <g transform="rotate({tt} 280 30)"><circle cx="280" cy="30" r="45" fill="{RED}"/>
-      <text x="280" y="30" transform="rotate({-tt} 280 30)" fill="#fff" font-family="-apple-system,sans-serif" font-size="40" font-weight="600" text-anchor="middle" dominant-baseline="central">17</text></g>
-    </g></g></g>'''
+    ring=f'<g transform="rotate({t} 140 140)"><g transform="translate(-140 140)"><circle cx="280" cy="280" r="250" fill="none" stroke="{WHITE}" stroke-width="44"/></g></g>'
+    dot=f'<circle cx="140" cy="140" r="46" fill="{RED}"/><text x="140" y="140" fill="#fff" font-family="-apple-system,sans-serif" font-size="42" font-weight="600" text-anchor="middle" dominant-baseline="central">17</text>'
     return (f'<g transform="scale({k})"><defs><clipPath id="win"><rect x="0" y="0" width="280" height="280" rx="56"/></clipPath></defs>'
             f'<rect x="0" y="0" width="280" height="280" rx="56" fill="#000" stroke="{LINE}"/>'
-            f'<g clip-path="url(#win)">{inner}</g></g>')
+            f'<g clip-path="url(#win)">{ring}</g>{dot}</g>')
 
 Wn,Hn=1300,1320
 E0=560; baseY=470; GAP=150
@@ -94,7 +87,7 @@ def frame(p):
         k=1.7; wpx=280*k
         tx=(Wn-wpx)/2; ty=180
         svg.append(f'<g transform="translate({tx:.0f} {ty:.0f})" opacity="{asm:.2f}">{assembled(tt, k)}</g>')
-        svg.append(f'<text x="{Wn/2:.0f}" y="{ty+wpx+54:.0f}" fill="{INK}" font-family="-apple-system,sans-serif" font-size="23" font-weight="600" text-anchor="middle" opacity="{asm:.2f}">The crescent marks the minute; the hour rides up at the top of the hour, kept upright.</text>')
+        svg.append(f'<text x="{Wn/2:.0f}" y="{ty+wpx+54:.0f}" fill="{INK}" font-family="-apple-system,sans-serif" font-size="23" font-weight="600" text-anchor="middle" opacity="{asm:.2f}">The ring’s crop sweeps with the minute; the dot stays put, showing the hour.</text>')
     svg.append('</svg>')
     return "\n".join(svg)
 
