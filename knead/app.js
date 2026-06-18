@@ -39,6 +39,9 @@
   var fillOn = false;
   var history = [];                   // snapshots for undo (current letter)
   var scale = 1;                      // user-units -> screen px (for sizing)
+  var baseVB = [0, 0, 100, 100];      // fit viewBox for current glyph
+  var zoom = 1;                       // 1 = fit; >1 zoomed in
+  var MAXZOOM = 8;
 
   function sk(k) { return fam.id + "/" + k; }   // session/pristine key
 
@@ -91,6 +94,7 @@
     work = session[sk(k)];
     if (sel.c >= work.length) sel = { c: 0, n: 0 };
     history = [];
+    zoom = 1;
     frame();
     syncRail();
     syncSmoothBtn();
@@ -98,7 +102,7 @@
     updateUndo();
   }
 
-  // viewBox sized to the letter (+ metric guides), centred and scaled to fit.
+  // baseVB = the letter framed to fill, with a little breathing room.
   function frame() {
     var xs = [], ys = [];
     work.forEach(function (ct) {
@@ -109,14 +113,29 @@
     });
     var minx = Math.min.apply(null, xs), maxx = Math.max.apply(null, xs);
     var miny = Math.min.apply(null, ys), maxy = Math.max.apply(null, ys);
-    // keep baseline + x-height in view
-    miny = Math.min(miny, A - fam.capHeight);
-    maxy = Math.max(maxy, A - fam.descent);
     var w = maxx - minx, h = maxy - miny;
-    var padU = Math.max(w, h) * 0.16;
-    stage.setAttribute("viewBox",
-      (minx - padU) + " " + (miny - padU) + " " + (w + 2 * padU) + " " + (h + 2 * padU));
+    var padU = Math.max(w, h) * 0.10;          // tight: the letter is the hero
+    baseVB = [minx - padU, miny - padU, w + 2 * padU, h + 2 * padU];
     stage.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    applyView();
+  }
+
+  // apply zoom to baseVB, centring on the selected node when zoomed in.
+  function applyView() {
+    var bx = baseVB[0], by = baseVB[1], bw = baseVB[2], bh = baseVB[3];
+    var vw = bw / zoom, vh = bh / zoom;
+    var cx = bx + bw / 2, cy = by + bh / 2;
+    var nd = work[sel.c] && work[sel.c][sel.n];
+    if (zoom > 1.001 && nd) { cx = nd.x; cy = nd.y; }
+    if (vw < bw) cx = Math.max(bx + vw / 2, Math.min(bx + bw - vw / 2, cx));
+    if (vh < bh) cy = Math.max(by + vh / 2, Math.min(by + bh - vh / 2, cy));
+    stage.setAttribute("viewBox", (cx - vw / 2) + " " + (cy - vh / 2) + " " + vw + " " + vh);
+  }
+
+  function setZoom(z) {
+    zoom = Math.max(1, Math.min(MAXZOOM, z));
+    applyView();
+    render();
   }
 
   function measureScale() {
@@ -280,15 +299,30 @@
     return { x: ctm.a * ux + ctm.c * uy + ctm.e, y: ctm.b * ux + ctm.d * uy + ctm.f };
   }
 
-  // ---- direct moulding on the glyph -------------------------------------
-  var drag = null;   // {kind, offx, offy}
+  // ---- direct moulding (1 finger) + pinch-zoom (2 fingers) --------------
+  var drag = null;     // {kind, offx, offy}
+  var pointers = {};   // active pointers on the stage
+  var pinch = null;    // {d0, z0}
+
+  function pdist() {
+    var ids = Object.keys(pointers);
+    var a = pointers[ids[0]], b = pointers[ids[1]];
+    return Math.hypot(a.x - b.x, a.y - b.y) || 1;
+  }
 
   stage.addEventListener("pointerdown", function (ev) {
     ev.preventDefault();
+    pointers[ev.pointerId] = { x: ev.clientX, y: ev.clientY };
+    stage.setPointerCapture(ev.pointerId);
+
+    if (Object.keys(pointers).length >= 2) {   // second finger -> pinch
+      drag = null;
+      pinch = { d0: pdist(), z0: zoom };
+      return;
+    }
+
     var node = work[sel.c] && work[sel.c][sel.n];
     var best = null, bestD = 28;   // px
-
-    // selected node's handles take priority
     if (node) {
       [["in", node.inX, node.inY], ["out", node.outX, node.outY]].forEach(function (h) {
         var s = userToClient(h[1], h[2]);
@@ -296,7 +330,6 @@
         if (d < bestD) { bestD = d; best = { kind: h[0] }; }
       });
     }
-    // then any anchor
     work.forEach(function (ct, ci) {
       ct.forEach(function (nd, ni) {
         var s = userToClient(nd.x, nd.y);
@@ -308,16 +341,20 @@
 
     if (best.kind === "anchor") { sel = { c: best.c, n: best.n }; target = "anchor"; syncTargetSeg(); syncSmoothBtn(); }
     pushHistory();
-    var nd = work[sel.c][sel.n];
-    var ux = best.kind === "in" ? nd.inX : best.kind === "out" ? nd.outX : nd.x;
-    var uy = best.kind === "in" ? nd.inY : best.kind === "out" ? nd.outY : nd.y;
+    var ndd = work[sel.c][sel.n];
+    var ux = best.kind === "in" ? ndd.inX : best.kind === "out" ? ndd.outX : ndd.x;
+    var uy = best.kind === "in" ? ndd.inY : best.kind === "out" ? ndd.outY : ndd.y;
     var u = clientToUser(ev.clientX, ev.clientY);
     drag = { kind: best.kind, offx: ux - u.x, offy: uy - u.y };
-    stage.setPointerCapture(ev.pointerId);
     render();
   });
 
   stage.addEventListener("pointermove", function (ev) {
+    if (pointers[ev.pointerId]) { pointers[ev.pointerId].x = ev.clientX; pointers[ev.pointerId].y = ev.clientY; }
+    if (pinch) {
+      if (Object.keys(pointers).length >= 2) setZoom(pinch.z0 * pdist() / pinch.d0);
+      return;
+    }
     if (!drag) return;
     var u = clientToUser(ev.clientX, ev.clientY);
     var nd = work[sel.c][sel.n];
@@ -328,9 +365,14 @@
     render();
   });
 
-  function endDrag(ev) { if (drag) { drag = null; try { stage.releasePointerCapture(ev.pointerId); } catch (e) {} } }
-  stage.addEventListener("pointerup", endDrag);
-  stage.addEventListener("pointercancel", endDrag);
+  function ptrEnd(ev) {
+    delete pointers[ev.pointerId];
+    if (Object.keys(pointers).length < 2) pinch = null;
+    drag = null;
+    try { stage.releasePointerCapture(ev.pointerId); } catch (e) {}
+  }
+  stage.addEventListener("pointerup", ptrEnd);
+  stage.addEventListener("pointercancel", ptrEnd);
 
   // ---- trackpad (precise, occlusion-free) --------------------------------
   var padState = null;   // {lastx, lasty}
@@ -385,6 +427,7 @@
     idx = (idx + dir + list.length) % list.length;
     sel = { c: list[idx][0], n: list[idx][1] };
     syncSmoothBtn();
+    if (zoom > 1.001) applyView();   // bring the new point into view
     render();
   }
 
@@ -423,6 +466,44 @@
     famSel.appendChild(o);
   });
   famSel.addEventListener("change", function () { loadFamily(famSel.value); });
+
+  // zoom controls
+  document.getElementById("zoom-in").addEventListener("click", function () { setZoom(zoom * 1.5); });
+  document.getElementById("zoom-out").addEventListener("click", function () { setZoom(zoom / 1.5); });
+  document.getElementById("zoom-fit").addEventListener("click", function () { setZoom(1); });
+
+  // resize gripper — drag the divider to size the trackpad vs the letter
+  (function () {
+    var grip = document.getElementById("gripper");
+    if (!grip) return;
+    var st = null;
+    var stored = parseInt(localStorage.getItem("knead:padH"), 10);
+    setPadH(stored || Math.round(Math.min(320, Math.max(170, window.innerHeight * 0.30))), false);
+    function setPadH(h, persist) {
+      h = Math.max(150, Math.min(window.innerHeight * 0.72, h));
+      document.documentElement.style.setProperty("--pad-h", h + "px");
+      if (persist) localStorage.setItem("knead:padH", Math.round(h));
+      if (typeof work !== "undefined" && work) render();
+    }
+    grip.addEventListener("pointerdown", function (ev) {
+      ev.preventDefault();
+      st = { y: ev.clientY, h: pad.getBoundingClientRect().height };
+      grip.setPointerCapture(ev.pointerId);
+      grip.classList.add("drag");
+    });
+    grip.addEventListener("pointermove", function (ev) {
+      if (!st) return;
+      setPadH(st.h + (st.y - ev.clientY), false);
+    });
+    function end(ev) {
+      if (!st) return;
+      st = null; grip.classList.remove("drag");
+      setPadH(pad.getBoundingClientRect().height, true);
+      try { grip.releasePointerCapture(ev.pointerId); } catch (e) {}
+    }
+    grip.addEventListener("pointerup", end);
+    grip.addEventListener("pointercancel", end);
+  })();
 
   // target segmented control
   document.querySelectorAll(".seg [data-target]").forEach(function (b) {

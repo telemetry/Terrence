@@ -32,9 +32,15 @@
     <svg id="stage" xmlns="http://www.w3.org/2000/svg" aria-label="Letterform editing stage"></svg>
     <div class="readout" id="readout" hidden></div>
     <nav class="rail" id="rail" aria-label="Choose a letter"></nav>
+    <div class="zoom" role="group" aria-label="Zoom">
+      <button class="zbtn" id="zoom-out" type="button" aria-label="Zoom out">−</button>
+      <button class="zbtn" id="zoom-fit" type="button" aria-label="Fit letter">Fit</button>
+      <button class="zbtn" id="zoom-in" type="button" aria-label="Zoom in">+</button>
+    </div>
   </div>
 
   <section class="deck">
+    <div class="gripper" id="gripper" title="Drag to resize" aria-label="Drag to resize the trackpad"><span></span></div>
     <div class="tools">
       <button class="ghost icon" id="prev" type="button" aria-label="Previous point">‹</button>
       <button class="ghost icon" id="next" type="button" aria-label="Next point">›</button>

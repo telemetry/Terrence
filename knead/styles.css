@@ -22,6 +22,7 @@
   --guide:     #ffffff14;
   --radius:    14px;
   --touch:     44px;
+  --pad-h:     300px;   /* trackpad height; set by the gripper + localStorage */
   color-scheme: dark;
 }
 
@@ -130,6 +131,26 @@ body {
 .readout b { color: var(--ink); font-weight: 500; }
 .readout .tgt { color: var(--accent); }
 
+/* zoom control, bottom-left of the stage */
+.zoom {
+  position: absolute;
+  left: 12px; bottom: 12px;
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #00000055;
+  backdrop-filter: blur(6px);
+}
+.zbtn {
+  border: 0; background: transparent; color: var(--ink);
+  height: 34px; min-width: 38px; padding: 0 10px;
+  font-size: 16px; line-height: 1; -webkit-tap-highlight-color: transparent;
+}
+.zbtn#zoom-fit { font-size: 12px; color: var(--muted); }
+.zbtn + .zbtn { border-left: 1px solid var(--line); }
+.zbtn:active { background: #ffffff14; }
+
 /* letter rail down the right edge of the stage */
 .rail {
   position: absolute;
@@ -163,11 +184,28 @@ body {
   flex: 0 0 auto;
   border-top: 1px solid var(--line);
   background: var(--panel);
-  padding: 10px 12px calc(12px + env(safe-area-inset-bottom, 0px));
+  padding: 0 12px calc(12px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
+/* drag handle to resize the trackpad vs the letter */
+.gripper {
+  align-self: stretch;
+  height: 26px;
+  margin: 0 -12px 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: ns-resize;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.gripper span {
+  width: 46px; height: 5px; border-radius: 3px;
+  background: var(--faint);
+  transition: background .12s ease, width .12s ease;
+}
+.gripper:hover span, .gripper.drag span { background: var(--accent); width: 64px; }
 
 .tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .seg {
@@ -229,7 +267,7 @@ button.ghost.icon { padding: 0; width: 34px; font-size: 17px; }
 .pad {
   position: relative;
   flex: 1 1 auto;
-  height: clamp(260px, 46vh, 640px);
+  height: var(--pad-h, 300px);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
