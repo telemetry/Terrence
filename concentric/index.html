@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Concentric — case study · Terry Gillespie</title>
+  <meta name="description" content="Concentric: an ambient watch face you read by intuition, built from counter-rotating layers and a moving crop. A design-engineering case study, SwiftUI → web.">
+  <meta name="theme-color" content="#0d0d0f">
+  <meta property="og:title" content="Concentric — an ambient watch">
+  <meta property="og:description" content="Counter-rotating layers and a sweeping crop. Read the time by intuition.">
+  <meta property="og:image" content="concentric-static.png">
+  <style>
+    :root{
+      --bg:#0d0d0f; --panel:#141417; --line:#26262b; --ink:#f3f1ea;
+      --muted:#8a8a93; --faint:#55555e; --accent:#ff5c38; --red:#ff3b30; --cyan:#5ac8fa;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%}
+    body{margin:0;background:var(--bg);color:var(--ink);
+      font-family:-apple-system,system-ui,"Segoe UI",sans-serif;line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--line);
+      position:sticky;top:0;background:rgba(13,13,15,.82);backdrop-filter:blur(8px);z-index:5}
+    nav .home{color:var(--muted);text-decoration:none;font-size:15px}
+    nav .home:hover{color:var(--ink)}
+    .cta{display:inline-block;text-decoration:none;font-weight:600;font-size:14px;padding:8px 16px;border-radius:999px;background:var(--accent);color:#fff}
+    .cta.ghost{background:#ffffff10;color:var(--ink);border:1px solid var(--line)}
+    header.hero{padding:60px 0 26px;text-align:center}
+    .eyebrow{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
+    h1{font-size:clamp(40px,9vw,66px);line-height:1.02;letter-spacing:-.02em;margin:0 0 16px;font-weight:700}
+    .lead{font-size:clamp(19px,3.4vw,23px);color:#cfcfd6;margin:0 auto 26px;max-width:34ch}
+    .facts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;margin:24px 0 8px}
+    .facts span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+    .facts b{color:var(--ink);font-weight:600}
+    section{padding:40px 0;border-top:1px solid var(--line)}
+    h2{font-size:clamp(24px,4.6vw,32px);letter-spacing:-.01em;margin:0 0 6px;font-weight:700}
+    .kicker{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:0 0 16px}
+    p{margin:0 0 18px;color:#d7d7dd}
+    p .em{color:var(--ink);font-weight:600}
+    .pull{font-size:clamp(22px,4.4vw,30px);line-height:1.25;color:var(--ink);font-weight:600;letter-spacing:-.01em;margin:8px 0}
+    figure{margin:24px 0 8px}
+    .figbox{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0a0a0c}
+    .figbox img{display:block;width:100%;height:auto}
+    .figbox img[hidden]{display:none}
+    .toggle{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:14px 0 0}
+    .toggle button{appearance:none;border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:600;padding:8px 16px;cursor:pointer}
+    .toggle button+button{border-left:1px solid var(--line)}
+    .toggle button.on{background:var(--accent);color:#fff}
+    figcaption{color:var(--faint);font-size:13px;margin-top:10px}
+    .levels{list-style:none;padding:0;margin:18px 0}
+    .levels li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+    .levels .rot{flex:0 0 64px;font-variant-numeric:tabular-nums;font-weight:700}
+    .levels .rot.pos{color:var(--accent)} .levels .rot.neg{color:var(--cyan)} .levels .rot.zero{color:var(--faint)}
+    .levels b{color:var(--ink)} .levels span{color:var(--muted)}
+    .stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin:14px 0 4px}
+    .stat b{display:block;font-size:28px;letter-spacing:-.01em}
+    .stat span{font-size:13px;color:var(--muted)}
+    footer{padding:48px 0 80px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;text-align:center}
+    footer a{color:var(--ink)}
+
+    /* ---- live Concentric clock (faithful port) ---- */
+    .clock-demo{display:flex;flex-direction:column;align-items:center;gap:12px;margin:14px 0 0}
+    .concentric-watch{width:280px;height:280px;border-radius:56px;overflow:hidden;background:#000;position:relative}
+    .concentric-outer{width:560px;height:560px;position:absolute;top:140px;left:-140px;transform-origin:280px 0px;transition:transform .5s ease-out}
+    .concentric-inner{width:560px;height:560px;position:relative;transform-origin:280px 280px;transition:transform .5s ease-out}
+    .concentric-svg{width:560px;height:560px}
+    .concentric-dot{position:absolute;width:90px;height:90px;background:rgba(255,59,48,.95);border-radius:50%;top:-15px;left:235px;
+      display:flex;align-items:center;justify-content:center;transition:transform .5s ease-out}
+    .concentric-hour{color:#fff;font-family:-apple-system,system-ui,sans-serif;font-size:40px;font-weight:600;transition:transform .5s ease-out}
+    .clock-now{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;letter-spacing:.04em}
+    @media(max-width:360px){ .concentric-watch{transform:scale(.86)} }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="home" href="/">← Terry Gillespie</a>
+    <a class="cta ghost" href="/nothing/">More experiments ↗</a>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Case study · Watch face · SwiftUI → web</p>
+      <h1>Concentric</h1>
+      <p class="lead">An ambient watch you read by intuition — built from counter-rotating layers and a moving crop.</p>
+      <div class="clock-demo">
+        <div class="concentric-watch" id="concentric">
+          <div class="concentric-outer" id="c-outer">
+            <div class="concentric-inner" id="c-inner">
+              <svg class="concentric-svg" viewBox="0 0 560 560"><circle cx="280" cy="280" r="250" fill="none" stroke="#e6e6e6" stroke-width="44"/></svg>
+              <div class="concentric-dot" id="c-dot"><span class="concentric-hour" id="c-hour"></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="clock-now" id="c-now">live · your time</p>
+      </div>
+      <div class="facts">
+        <span><b>Role</b> &nbsp;Concept, design &amp; build</span>
+        <span><b>Origin</b> &nbsp;SwiftUI</span>
+        <span><b>Port</b> &nbsp;Vanilla JS · CSS transforms</span>
+        <span><b>Year</b> &nbsp;2026</span>
+      </div>
+    </header>
+
+    <section>
+      <p class="kicker">The idea</p>
+      <h2>A clock you glance at, not read</h2>
+      <p>A normal watch wants you to <span class="em">read</span> it — two hands, twelve numbers, precise. Concentric asks you to <span class="em">intuit</span> it instead. There's one moving crescent and, near the top of each hour, a number. You learn to feel the time from the shape, the way you feel it from daylight.</p>
+      <p>The catch for a designer: that simplicity is produced by something fiddly underneath — a small stack of layers spinning against each other. Easy to feel, hard to explain. So I built a diagram that takes it apart.</p>
+    </section>
+
+    <section id="mechanic">
+      <p class="kicker">How it's built</p>
+      <h2>Counter-rotating layers</h2>
+      <p class="pull">Each layer turns the opposite way to the one above it — +t, −t, +t, −t. The spins cancel where they should and survive where they shouldn't.</p>
+      <p>The <span class="em">Outer</span> layer carries an oversized, off-centre ring and rotates one turn per hour; because the ring's centre is offset, that spin swings the visible crescent — the <span class="em">crop</span> — around the face. The <span class="em">Inner</span> layer counter-rotates to cancel the spin, so the ring stays a clean circle instead of tumbling. The <span class="em">hand</span> rides the ring to mark the minute, and the <span class="em">number</span> counter-rotates again so the hour always sits upright.</p>
+
+      <figure>
+        <div class="figbox">
+          <img id="fig-anim" src="concentric-anim.gif" alt="Animated exploded diagram: the layers fan out, counter-rotate, then resolve into the ticking watch.">
+          <img id="fig-static" src="concentric-static.png" alt="Annotated exploded diagram of the six layers and their rotations." hidden>
+        </div>
+        <div class="toggle" role="group" aria-label="Diagram mode">
+          <button id="t-anim" class="on" type="button">Animated</button>
+          <button id="t-static" type="button">Static</button>
+        </div>
+        <figcaption>Exploded view, generated from the clock's own transform values — so the motion is faithful, not faked.</figcaption>
+      </figure>
+
+      <ul class="levels">
+        <li><span class="rot zero">fixed</span><div><b>Window</b> — <span>the rounded square that crops everything below</span></div></li>
+        <li><span class="rot pos">+t</span><div><b>Outer</b> — <span>swings the offset ring's centre → moves the crop</span></div></li>
+        <li><span class="rot neg">−t</span><div><b>Inner</b> — <span>cancels the spin so the ring stays true</span></div></li>
+        <li><span class="rot zero">—</span><div><b>Ring</b> — <span>the white track</span></div></li>
+        <li><span class="rot pos">+t</span><div><b>Hand</b> — <span>rides the ring to mark the minute</span></div></li>
+        <li><span class="rot neg">−t</span><div><b>Number</b> — <span>the hour, kept upright</span></div></li>
+      </ul>
+    </section>
+
+    <section>
+      <p class="kicker">The craft</p>
+      <h2>SwiftUI idea, honest web port</h2>
+      <div class="stats">
+        <div class="stat"><b>4</b><span>layers that rotate</span></div>
+        <div class="stat"><b>±t</b><span>alternating each level</span></div>
+        <div class="stat"><b>1</b><span>turn per hour</span></div>
+        <div class="stat"><b>0</b><span>libraries</span></div>
+      </div>
+      <p>Concentric began in <span class="em">SwiftUI</span>; the version ticking at the top of this page is a faithful port in plain HTML and nested CSS <code>transform: rotate()</code> — same geometry, same maths. The explainer above is generated by a Python script that reads those exact transform values and rasterises a frame at a time, so the diagram can't drift from the real thing.</p>
+      <p>It's deliberately an ambient object: most of the hour you read the <span class="em">crescent</span>, and the hour digit surfaces as it sweeps past the top. The diagram shows that honestly rather than pretending the number is always there.</p>
+    </section>
+
+    <footer>
+      <p>Concentric — concept, design and build by Terry Gillespie, 2026. &nbsp;<a href="/nothing/">More experiments</a> · <a href="/">Home</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // diagram toggle
+    (function(){
+      var a=document.getElementById('t-anim'),s=document.getElementById('t-static');
+      var fa=document.getElementById('fig-anim'),fs=document.getElementById('fig-static');
+      function show(an){fa.hidden=!an;fs.hidden=an;a.classList.toggle('on',an);s.classList.toggle('on',!an);}
+      a.addEventListener('click',function(){show(true)});
+      s.addEventListener('click',function(){show(false)});
+    })();
+    // live clock — faithful counter-rotation
+    (function(){
+      var outer=document.getElementById('c-outer'),inner=document.getElementById('c-inner'),
+          dot=document.getElementById('c-dot'),hour=document.getElementById('c-hour'),now=document.getElementById('c-now');
+      function tick(){
+        var d=new Date(), t=d.getMinutes()*6;
+        outer.style.transform='rotate('+t+'deg)';
+        inner.style.transform='rotate('+(-t)+'deg)';
+        dot.style.transform='rotate('+t+'deg)';
+        hour.style.transform='rotate('+(-t)+'deg)';
+        hour.textContent=((d.getHours()%12)||12);
+        now.textContent='live · '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      }
+      tick(); setInterval(tick,1000);
+    })();
+  </script>
+</body>
+</html>
