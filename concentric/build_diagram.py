@@ -35,18 +35,20 @@ def L_inner(t):
     return g
 def L_ring(t): return f'<circle cx="140" cy="140" r="112" fill="none" stroke="{WHITE}" stroke-width="22"/>'
 def L_dot(t):
-    return f'<circle cx="140" cy="140" r="30" fill="{RED}"/>'      # fixed — does not move
+    a=math.radians(-90+t); x=140+112*math.cos(a); y=140+112*math.sin(a)
+    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="26" fill="{RED}"/>'
 def L_number(t):
-    return (f'<circle cx="140" cy="140" r="30" fill="{RED}"/>'
-            f'<text x="140" y="140" fill="#fff" font-family="-apple-system,sans-serif" font-size="28" font-weight="600" text-anchor="middle" dominant-baseline="central">17</text>')
+    a=math.radians(-90+t); x=140+112*math.cos(a); y=140+112*math.sin(a)
+    return (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="26" fill="{RED}"/>'
+            f'<text x="{x:.1f}" y="{y:.1f}" fill="#fff" font-family="-apple-system,sans-serif" font-size="26" font-weight="600" text-anchor="middle" dominant-baseline="central">17</text>')
 
 LEVELS=[
  ("window","Window","crops the face", L_window),
- ("outer","Outer  +t","the mover · sweeps the crop = minute", L_outer),
+ ("outer","Outer  +t","sweeps the crop", L_outer),
  ("inner","Inner  −t","keeps the ring true", L_inner),
  ("ring","Ring","the track", L_ring),
- ("dot","Dot","stays put", L_dot),
- ("number","Number","the hour, upright", L_number),
+ ("dot","Dot  +t","rides once an hour = minute", L_dot),
+ ("number","Number  −t","the hour, upright", L_number),
 ]
 
 # faithful assembled watch (iso + clip), scale k
@@ -60,34 +62,21 @@ def assembled(t, k):
 Wn,Hn=1300,1320
 E0=560; baseY=470; GAP=150
 def frame(p):
-    spin = p*720.0                      # 2 full turns over the loop -> seamless
-    if p < 0.45:        spread=1.0; lab=1.0; asm=0.0
-    elif p < 0.60:      u=(p-0.45)/0.15; spread=1-u; lab=1-u; asm=u
-    elif p < 0.82:      spread=0.0; lab=0.0; asm=1.0
-    else:               u=(p-0.82)/0.18; spread=u; lab=u; asm=1-u
-    tt=(max(0.60,min(0.82,p))-0.60)/0.22*300.0   # watch ticks; starts dot-visible
+    spin = p*720.0                       # 2 turns over the loop -> seamless
     svg=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{Wn}" height="{Hn}" viewBox="0 0 {Wn} {Hn}">',
          f'<rect width="100%" height="100%" fill="{BG}"/>']
     svg.append(f'<text x="70" y="86" fill="{INK}" font-family="-apple-system,sans-serif" font-size="38" font-weight="700">Concentric</text>')
-    svg.append(f'<text x="70" y="120" fill="{MUT}" font-family="-apple-system,sans-serif" font-size="19">A stack of layers that counter-rotate — +t, −t, +t, −t — then resolve into the watch.</text>')
+    svg.append(f'<text x="70" y="120" fill="{MUT}" font-family="-apple-system,sans-serif" font-size="19">Six layers, counter-rotating — +t, −t, +t, −t. The spins cancel where they should, survive where they shouldn\'t.</text>')
     n=len(LEVELS)
-    if spread>0.02:
-        for i,(lid,title,sub,fn) in enumerate(LEVELS):
-            z = (i-(n-1)/2)*GAP*spread
-            F = baseY - z
-            svg.append(f'<g transform="{iso(E0,F)}" opacity="{0.18+0.82*spread:.2f}">{fn(spin)}</g>')
-            if lab>0.03:
-                lc = projC(E0,F,252,28)            # right-ish point on the plate
-                ty = lc[1]; tx=980
-                svg.append(f'<line x1="{lc[0]:.0f}" y1="{ty:.0f}" x2="{tx-10:.0f}" y2="{ty:.0f}" stroke="{FAINT}" stroke-width="1" opacity="{lab:.2f}"/>')
-                svg.append(f'<circle cx="{lc[0]:.0f}" cy="{ty:.0f}" r="2.5" fill="{FAINT}" opacity="{lab:.2f}"/>')
-                svg.append(f'<text x="{tx}" y="{ty-3:.0f}" fill="{INK}" font-family="-apple-system,sans-serif" font-size="21" font-weight="600" opacity="{lab:.2f}">{title}</text>')
-                svg.append(f'<text x="{tx}" y="{ty+19:.0f}" fill="{MUT}" font-family="-apple-system,sans-serif" font-size="15" opacity="{lab:.2f}">{sub}</text>')
-    if asm>0.02:
-        k=1.7; wpx=280*k
-        tx=(Wn-wpx)/2; ty=180
-        svg.append(f'<g transform="translate({tx:.0f} {ty:.0f})" opacity="{asm:.2f}">{assembled(tt, k)}</g>')
-        svg.append(f'<text x="{Wn/2:.0f}" y="{ty+wpx+54:.0f}" fill="{INK}" font-family="-apple-system,sans-serif" font-size="23" font-weight="600" text-anchor="middle" opacity="{asm:.2f}">The ring’s crop sweeps with the minute; the dot stays put, showing the hour.</text>')
+    for i,(lid,title,sub,fn) in enumerate(LEVELS):
+        z = (i-(n-1)/2)*GAP
+        F = baseY - z
+        svg.append(f'<g transform="{iso(E0,F)}">{fn(spin)}</g>')
+        lc = projC(E0,F,252,28); tx=980
+        svg.append(f'<line x1="{lc[0]:.0f}" y1="{lc[1]:.0f}" x2="{tx-10:.0f}" y2="{lc[1]:.0f}" stroke="{FAINT}" stroke-width="1"/>')
+        svg.append(f'<circle cx="{lc[0]:.0f}" cy="{lc[1]:.0f}" r="2.5" fill="{FAINT}"/>')
+        svg.append(f'<text x="{tx}" y="{lc[1]-3:.0f}" fill="{INK}" font-family="-apple-system,sans-serif" font-size="21" font-weight="600">{title}</text>')
+        svg.append(f'<text x="{tx}" y="{lc[1]+19:.0f}" fill="{MUT}" font-family="-apple-system,sans-serif" font-size="15">{sub}</text>')
     svg.append('</svg>')
     return "\n".join(svg)
 
