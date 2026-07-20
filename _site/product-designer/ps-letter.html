@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrence Gillespie - Cover Letter</title>
+  <style>
+    :root {
+      --gray1: hsl(0 0% 98%);
+      --gray8: hsl(0 0% 55%);
+      --gray11: hsl(0 0% 32%);
+      --gray12: hsl(0 0% 7%);
+      --bg: #fff;
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --gray1: hsl(0 0% 10%);
+        --gray8: hsl(0 0% 50%);
+        --gray11: hsl(0 0% 72%);
+        --gray12: hsl(0 0% 93%);
+        --bg: hsl(0 0% 7%);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--gray12);
+      background: var(--bg);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 24px 72px;
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .name {
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .meta {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray8);
+      letter-spacing: 0.02em;
+    }
+
+    .recipient {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 24px;
+    }
+
+    .body p {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 20px;
+    }
+
+    .body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sign-off {
+      margin-top: 24px;
+    }
+
+    .sign-off p {
+      font-size: 16px;
+      color: var(--gray11);
+      margin-bottom: 4px;
+    }
+
+    .sign-off .name {
+      font-size: 16px;
+      color: var(--gray12);
+    }
+
+    a {
+      color: var(--gray12);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gray8);
+    }
+
+    /* Print / PDF */
+    @media print {
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: hsl(0 0% 7%);
+        background: white;
+      }
+
+      .page {
+        max-width: none;
+        padding: 32px 64px;
+      }
+
+      .meta, .recipient, .body p, .sign-off p {
+        color: hsl(0 0% 32%);
+      }
+
+      .meta {
+        color: hsl(0 0% 55%);
+      }
+
+      a {
+        color: hsl(0 0% 7%);
+        border-bottom: none;
+      }
+    }
+
+    @page {
+      margin: 16mm;
+      size: A4;
+    }
+
+    @page :first {
+      margin-top: 16mm;
+    }
+
+    .page-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .download-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      background: var(--bg);
+      border: 1px solid hsl(0 0% 85%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.15s ease;
+    }
+
+    .download-btn:hover {
+      color: var(--gray12);
+      border-color: var(--gray8);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .download-btn { border-color: hsl(0 0% 22%); }
+    }
+
+    .doc-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid hsl(0 0% 90%);
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .doc-footer { border-top-color: hsl(0 0% 18%); }
+    }
+
+    .doc-footer a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray8);
+      border-bottom: none;
+      letter-spacing: 0.02em;
+      transition: color 0.15s ease;
+    }
+
+    .doc-footer a:hover { color: var(--gray12); }
+
+    @media print {
+      .download-btn { display: none; }
+      .doc-footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-top">
+    <a class="download-btn" href="Terrence_Gillespie_Cover_Letter_Poolside.pdf" download>Download PDF ↓</a>
+  </div>
+
+  <div class="header">
+    <p class="name">Terrence Gillespie</p>
+    <p class="meta">Principal Design Engineer / Brisbane</p>
+  </div>
+
+  <p class="recipient">Dear Poolside Design Team,</p>
+
+  <div class="body">
+    <p>Poolside is building the models and agentic tools I already design around every day. The Design Engineer role, holding the bar across product, brand, marketing and systems while writing the code that ships, is the work I do now and want to do at frontier scale. I prototype interfaces in HTML, CSS and JS, iterate them against the model, and hand engineering working components instead of static files. That loop is how I think.</p>
+
+    <p>I'm Principal Design Engineer at Westpac, one of Australia's four major banks, where I'm custodian of the native design system across iOS and Android for 4 million daily users, and I lead the team behind GEL, our web system built on Next.js. It's a high-stakes, data-rich domain, payments, identity and fraud, and it ships fast. I led the design of SafeCall and SafeBlock, scam-prevention features that protect customers at the moment they're being defrauded. The app has been rated number one in Australia by Forrester three years running, and number one for access and inclusion by the Australian Disability Network. I treat the design system as product infrastructure: tokens, components and the patterns that let teams move fast without losing craft.</p>
+
+    <p>Building AI and agentic experiences is my daily work. Version control, the command line, local builds and deployment are where I already live, and agentic coding tools are part of how I work, not a curiosity. I take a problem to a coded prototype, refine it against the model, and hand engineering a working reference, proving the interaction in code before a sprint is spent building it.</p>
+
+    <p>I've shipped production work this way for over fifteen years across studio, telco and banking. I came to interface design through type, so the typographic standard in your brief is already instinct, and the same judgment carries whether the surface is product, brand or marketing. I lead a senior design team and drive design and technical decisions across product and engineering, including presenting the annual design review to several thousand engineers.</p>
+
+    <p>My portfolio is at <a href="https://terrygillespie.com/product-designer/">terrygillespie.com/product-designer</a>. Thanks for considering me.</p>
+  </div>
+
+  <div class="sign-off">
+    <p class="name">Terrence Gillespie</p>
+  </div>
+
+  <footer class="doc-footer">
+    <a href="index.html">← Portfolio</a>
+    <a href="resume.html">Resume</a>
+  </footer>
+</div>
+
+<script data-goatcounter="https://terrence.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
