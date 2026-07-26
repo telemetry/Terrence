@@ -1,0 +1,14 @@
+{
+  "name": "small-victories-store",
+  "private": true,
+  "type": "module",
+  "description": "Small Victories print store — framed prints via Format Framing, payments via Stripe.",
+  "scripts": {
+    "stripe:setup": "node scripts/stripe-setup.mjs",
+    "stripe:dry-run": "node scripts/stripe-setup.mjs --dry-run",
+    "dev": "npx --yes serve@14 . -l 4002"
+  },
+  "dependencies": {
+    "stripe": "^16.0.0"
+  }
+}

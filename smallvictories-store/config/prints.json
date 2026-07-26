@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "sample-print-1",
+    "title": "Sample Print I",
+    "description": "Replace with one of your photographs — drop the image in assets/ and update this entry.",
+    "image": "assets/sample-print-1.svg",
+    "orientation": "landscape",
+    "sizes": ["300x250", "400x300", "500x400", "700x500"],
+    "active": true
+  },
+  {
+    "slug": "sample-print-2",
+    "title": "Sample Print II",
+    "description": "Replace with one of your photographs.",
+    "image": "assets/sample-print-2.svg",
+    "orientation": "portrait",
+    "sizes": ["300x250", "400x300", "500x400"],
+    "active": true
+  },
+  {
+    "slug": "sample-print-3",
+    "title": "Sample Print III",
+    "description": "Replace with one of your photographs.",
+    "image": "assets/sample-print-3.svg",
+    "orientation": "landscape",
+    "sizes": ["400x300", "500x400", "700x500", "900x600"],
+    "active": true
+  }
+]

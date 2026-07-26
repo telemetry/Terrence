@@ -1,0 +1,123 @@
+/* Small Victories — Print Store
+   Neutral, photography-first: white ground, quiet type, the prints do the talking.
+   Adjust the tokens below to match smallvictories.com.au exactly. */
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --muted: #f5f4f2;
+  --muted-foreground: #767470;
+  --border: #e4e2de;
+  --card: #ffffff;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", helvetica, "Segoe UI", arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 2.5rem 1.25rem 4rem;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+a:hover { opacity: 0.6; }
+
+.store-header { max-width: 42rem; margin-bottom: 3.5rem; }
+.eyebrow { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground); margin: 0 0 0.5rem; }
+.eyebrow a { text-decoration: none; }
+h1 { font-size: 2rem; line-height: 1.1; margin: 0 0 1rem; font-weight: 500; letter-spacing: -0.01em; }
+.lede { color: var(--muted-foreground); font-size: 1rem; margin: 0; }
+
+.print-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 3rem 2.25rem;
+}
+.loading { color: var(--muted-foreground); }
+
+.print-card { display: flex; flex-direction: column; gap: 0.9rem; }
+
+/* Frame preview — border colour follows the selected frame colour. */
+.frame {
+  --frame-colour: #1c1c1c;
+  background: var(--muted);
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 1.75rem;
+}
+.frame.portrait { aspect-ratio: 1 / 1; }
+.frame-inner {
+  border: 12px solid var(--frame-colour);
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+  background: #fff;
+  padding: 8%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.frame-inner img { display: block; width: 100%; height: auto; }
+
+.print-card h2 { font-size: 1.1rem; margin: 0; font-weight: 500; }
+.print-card .desc { margin: 0; font-size: 0.875rem; color: var(--muted-foreground); }
+
+.controls { display: flex; flex-direction: column; gap: 0.7rem; }
+.control-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.control-row label { font-size: 0.85rem; color: var(--muted-foreground); }
+
+select {
+  font: inherit;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.4rem 0.6rem;
+}
+
+.swatches { display: flex; gap: 0.5rem; }
+.swatch {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 0;
+  outline-offset: 2px;
+}
+.swatch[aria-pressed="true"] { outline: 2px solid var(--foreground); }
+
+.buy-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.2rem; }
+.price { font-size: 1.15rem; font-weight: 600; }
+.price small { font-size: 0.72rem; font-weight: 400; color: var(--muted-foreground); display: block; }
+
+.buy {
+  font: inherit;
+  font-weight: 500;
+  background: var(--foreground);
+  color: var(--background);
+  border: none;
+  border-radius: 2px;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+}
+.buy:hover { opacity: 0.8; }
+.buy:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.notice {
+  grid-column: 1 / -1;
+  border: 1px dashed var(--border);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}
+
+.store-footer { margin-top: 4.5rem; max-width: 42rem; color: var(--muted-foreground); font-size: 0.875rem; }
+.fine { font-size: 0.78rem; }
+
+.success-wrap { max-width: 38rem; margin: 4rem auto; }

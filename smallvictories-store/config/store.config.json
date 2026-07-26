@@ -1,0 +1,10 @@
+{
+  "storeName": "Small Victories — Print Store",
+  "tagline": "Framed photographic prints, handmade in Melbourne",
+  "currency": "aud",
+  "markup": 2.0,
+  "roundUpTo": 5,
+  "checkoutEndpoint": "",
+  "successUrl": "https://smallvictories.com.au/store/success.html",
+  "cancelUrl": "https://smallvictories.com.au/store/"
+}

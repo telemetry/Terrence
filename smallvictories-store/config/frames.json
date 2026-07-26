@@ -1,0 +1,53 @@
+{
+  "supplier": "Format Framing",
+  "supplierUrl": "https://formatframing.com.au/products/online-print-and-frame",
+  "notes": "Handmade in Melbourne from FSC-certified Tasmanian Oak. Prints on 310gsm 100% cotton rag with Epson UltraChrome inks, behind museum-grade UV acrylic. Works over 300mm are framed shadowbox-style with a 15mm internal spacer. Free AU delivery, ships within ~5 days.",
+  "costsAreEstimates": true,
+  "colours": [
+    { "id": "black", "label": "Black", "swatch": "#1c1c1c" },
+    { "id": "white", "label": "White", "swatch": "#f4f2ec" },
+    { "id": "oak", "label": "Natural Oak", "swatch": "#c69f6a" }
+  ],
+  "sizes": [
+    {
+      "id": "300x250",
+      "label": "30 × 25 cm",
+      "widthMm": 300,
+      "heightMm": 250,
+      "costFramedAud": 119,
+      "estimate": true
+    },
+    {
+      "id": "400x300",
+      "label": "40 × 30 cm",
+      "widthMm": 400,
+      "heightMm": 300,
+      "costFramedAud": 149,
+      "estimate": true
+    },
+    {
+      "id": "500x400",
+      "label": "50 × 40 cm",
+      "widthMm": 500,
+      "heightMm": 400,
+      "costFramedAud": 199,
+      "estimate": true
+    },
+    {
+      "id": "700x500",
+      "label": "70 × 50 cm",
+      "widthMm": 700,
+      "heightMm": 500,
+      "costFramedAud": 259,
+      "estimate": true
+    },
+    {
+      "id": "900x600",
+      "label": "90 × 60 cm",
+      "widthMm": 900,
+      "heightMm": 600,
+      "costFramedAud": 329,
+      "estimate": true
+    }
+  ]
+}
